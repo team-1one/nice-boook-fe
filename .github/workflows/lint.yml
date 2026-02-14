@@ -3,11 +3,11 @@ name: Lint
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-      push:
-    branches: [develop]  # Lint on develop pushes too
+  push:
+    branches: [develop] # Lint on develop pushes too
 
 concurrency:
-  group: "lint"  # Prevents overlapping lint runs
+  group: 'lint' # Prevents overlapping lint runs
   cancel-in-progress: true
 
 jobs:
@@ -25,11 +25,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20' # Adjust Node.js version as needed
-          cache: 'npm'  # Cache node_modules
+          cache: 'npm' # Cache node_modules
 
       # Install dependencies
       - name: Install dependencies
-        run: npm ci  # npm install → npm ci (faster, exact versions)
+        run: npm ci # npm install → npm ci (faster, exact versions)
 
       # Run Linter and Prettier
       - name: Run fix-style
