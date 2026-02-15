@@ -37,7 +37,7 @@ export default tseslint.config(
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
         typescript: {
-          project: ['./tsconfig.json'],
+          project: ['./tsconfig.app.json'],
         },
       },
     },
