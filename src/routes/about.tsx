@@ -7,7 +7,7 @@ export const Route = createFileRoute('/about')({
 
 function About() {
   return (
-    <div className="p-2">
+    <div className="p-2 hover:bg-accent">
       Hello from About!
       <TestComponent />
     </div>
