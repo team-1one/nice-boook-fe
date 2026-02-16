@@ -14,7 +14,7 @@ export default defineConfig({
     }),
     react(),
   ],
-  base: '/nice-boook-fe/',
+  base: '/',
 
   resolve: {
     alias: {
