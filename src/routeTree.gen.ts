@@ -9,38 +9,135 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as FavoritesRouteImport } from './routes/favorites'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as TypeRouteImport } from './routes/$type'
+import { Route as BookSlugRouteImport } from './routes/$bookSlug'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
 
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TypeRoute = TypeRouteImport.update({
+  id: '/$type',
+  path: '/$type',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookSlugRoute = BookSlugRouteImport.update({
+  id: '/$bookSlug',
+  path: '/$bookSlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
+  id: '/category/$category',
+  path: '/category/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$bookSlug': typeof BookSlugRoute
+  '/$type': typeof TypeRoute
+  '/cart': typeof CartRoute
+  '/favorites': typeof FavoritesRoute
+  '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$bookSlug': typeof BookSlugRoute
+  '/$type': typeof TypeRoute
+  '/cart': typeof CartRoute
+  '/favorites': typeof FavoritesRoute
+  '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$bookSlug': typeof BookSlugRoute
+  '/$type': typeof TypeRoute
+  '/cart': typeof CartRoute
+  '/favorites': typeof FavoritesRoute
+  '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/$bookSlug'
+    | '/$type'
+    | '/cart'
+    | '/favorites'
+    | '/category/$category'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/$bookSlug'
+    | '/$type'
+    | '/cart'
+    | '/favorites'
+    | '/category/$category'
+  id:
+    | '__root__'
+    | '/'
+    | '/$bookSlug'
+    | '/$type'
+    | '/cart'
+    | '/favorites'
+    | '/category/$category'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookSlugRoute: typeof BookSlugRoute
+  TypeRoute: typeof TypeRoute
+  CartRoute: typeof CartRoute
+  FavoritesRoute: typeof FavoritesRoute
+  CategoryCategoryRoute: typeof CategoryCategoryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$type': {
+      id: '/$type'
+      path: '/$type'
+      fullPath: '/$type'
+      preLoaderRoute: typeof TypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$bookSlug': {
+      id: '/$bookSlug'
+      path: '/$bookSlug'
+      fullPath: '/$bookSlug'
+      preLoaderRoute: typeof BookSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +145,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/category/$category': {
+      id: '/category/$category'
+      path: '/category/$category'
+      fullPath: '/category/$category'
+      preLoaderRoute: typeof CategoryCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookSlugRoute: BookSlugRoute,
+  TypeRoute: TypeRoute,
+  CartRoute: CartRoute,
+  FavoritesRoute: FavoritesRoute,
+  CategoryCategoryRoute: CategoryCategoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
