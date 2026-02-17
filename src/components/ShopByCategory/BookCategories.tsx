@@ -6,7 +6,9 @@ export const BookCategories: React.FC = () => {
   const { categories } = useBookCategories();
 
   return (
-  <section className="flex justify-between">
+  <section className="p-0 flex flex-col mx-[152px] gap-[23px] h-[429px]">
+    <h2 className="font-sans font-bold text-[32px] leading-[41px] tracking-[-0.01em]">Shop by category</h2>
+    <div className="flex flex-row gap-[15px]">      
       {categories.map((category) => (
         <BookCategoryCard
           key={category.title}
@@ -15,5 +17,6 @@ export const BookCategories: React.FC = () => {
           count={category.bookCount}
         />
       ))}
+      </div>
       </section>
 )}

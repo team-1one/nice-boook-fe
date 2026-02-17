@@ -9,15 +9,14 @@ export type Props = {
 
 export const BookCategoryCard: React.FC<Props> = ({ type, imageUrl, count }: Props) => {
   return (
-
-      <Link 
+    <div className="flex-auto hover:shadow-lg transition-shadow duration-300">
+        <Link 
         to={`/`}
-        className="block bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
       >
-        <img src={imageUrl} alt={type} className="w-full h-48 object-cover mt-2 rounded" />
-        <h3 className="text-lg font-semibold text-gray-800">{type}</h3>
-        <p className="text-sm text-gray-600 mt-2">{count} books</p>
+        <img src={imageUrl} alt={type} className="m-0 w-full h-[289px] object-cover rounded-[8.13px] mb-[25px]" /> 
+          <h3 className="font-sans font-semibold text-[20px] text-color-gray-primary leading-[100%] tracking-normal">{type}</h3>
+          <p className="font-sans font-medium text-[14px] text-color-gray-secondary leading-[21px] tracking-normal text-muted-foreground mt-[3px]">{count.toLocaleString('en-US')} books</p>
       </Link>
-
+    </div>
   );
 };
