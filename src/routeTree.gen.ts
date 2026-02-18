@@ -9,12 +9,36 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
+import { Route as PaperRouteImport } from './routes/paper'
+import { Route as KindleRouteImport } from './routes/kindle'
+import { Route as FavoritesRouteImport } from './routes/favorites'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AudiobookRouteImport } from './routes/audiobook'
 import { Route as IndexRouteImport } from './routes/index'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const PaperRoute = PaperRouteImport.update({
+  id: '/paper',
+  path: '/paper',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KindleRoute = KindleRouteImport.update({
+  id: '/kindle',
+  path: '/kindle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AudiobookRoute = AudiobookRouteImport.update({
+  id: '/audiobook',
+  path: '/audiobook',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +49,88 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/audiobook': typeof AudiobookRoute
+  '/cart': typeof CartRoute
+  '/favorites': typeof FavoritesRoute
+  '/kindle': typeof KindleRoute
+  '/paper': typeof PaperRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/audiobook': typeof AudiobookRoute
+  '/cart': typeof CartRoute
+  '/favorites': typeof FavoritesRoute
+  '/kindle': typeof KindleRoute
+  '/paper': typeof PaperRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/audiobook': typeof AudiobookRoute
+  '/cart': typeof CartRoute
+  '/favorites': typeof FavoritesRoute
+  '/kindle': typeof KindleRoute
+  '/paper': typeof PaperRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/audiobook' | '/cart' | '/favorites' | '/kindle' | '/paper'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/audiobook' | '/cart' | '/favorites' | '/kindle' | '/paper'
+  id:
+    | '__root__'
+    | '/'
+    | '/audiobook'
+    | '/cart'
+    | '/favorites'
+    | '/kindle'
+    | '/paper'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  AudiobookRoute: typeof AudiobookRoute
+  CartRoute: typeof CartRoute
+  FavoritesRoute: typeof FavoritesRoute
+  KindleRoute: typeof KindleRoute
+  PaperRoute: typeof PaperRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/paper': {
+      id: '/paper'
+      path: '/paper'
+      fullPath: '/paper'
+      preLoaderRoute: typeof PaperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kindle': {
+      id: '/kindle'
+      path: '/kindle'
+      fullPath: '/kindle'
+      preLoaderRoute: typeof KindleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audiobook': {
+      id: '/audiobook'
+      path: '/audiobook'
+      fullPath: '/audiobook'
+      preLoaderRoute: typeof AudiobookRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +145,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  AudiobookRoute: AudiobookRoute,
+  CartRoute: CartRoute,
+  FavoritesRoute: FavoritesRoute,
+  KindleRoute: KindleRoute,
+  PaperRoute: PaperRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
