@@ -15,7 +15,7 @@ export const CatalogGrid: React.FC<Props> = ({ books }: Props) => {
       ) : (
         <div className="grid grid-cols-4 gap-x-4 gap-y-10 justify-center">
           {books.map((book) => (
-            <CatalogCard key={book.id} book={book} />
+            <CatalogCard key={book.slug} book={book} />
           ))}
         </div>
       )}

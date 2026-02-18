@@ -13,6 +13,7 @@ export const ItemsOnPage: React.FC<Props> = ({ value, onChange }: Props) => {
         Items on page
       </label>
       <select
+        id='items-on-page'
         className='w-[132px] h-[40px] font-manrope font-medium text-[14px] radius-4'
         value={value}
         onChange={event => onChange(event.target.value)}
