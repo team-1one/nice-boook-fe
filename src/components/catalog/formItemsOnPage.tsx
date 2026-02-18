@@ -1,11 +1,9 @@
-import type React from 'react';
-
 export type Props = {
   value: string;
   onChange: (value: string) => void;
 }
 
-export const ItemsOnPage: React.FC<Props> = ({ value, onChange }: Props) => {
+export const ItemsOnPage = ({ value, onChange }: Props) => {
 
   return (
     <form action="" className='w-33 border'>

@@ -1,4 +1,3 @@
-import type React from 'react';
 import type { BaseBook } from '@/types/book';
 import { CatalogCard } from './CatalogCard';
 
@@ -6,7 +5,7 @@ export type Props = {
   books: BaseBook[];
 }
 
-export const CatalogGrid: React.FC<Props> = ({ books }: Props) => {
+export const CatalogGrid = ({ books }: Props) => {
 
   return (
     <div>

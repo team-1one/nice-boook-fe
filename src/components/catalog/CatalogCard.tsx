@@ -1,11 +1,10 @@
-import type React from 'react';
 import type { BaseBook } from '@/types/book';
 
 export type Props = {
   book: BaseBook;
 }
 
-export const CatalogCard: React.FC<Props> = ({ book }: Props) => {
+export const CatalogCard = ({ book }: Props) => {
 
   return (
     <div className="w-[272px] h-[506px] border bg-gray-100">

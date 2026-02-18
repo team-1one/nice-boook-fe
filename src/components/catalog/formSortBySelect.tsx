@@ -1,4 +1,3 @@
-import type React from 'react';
 import type { SortOption } from './typeOfSortOption';
 
 export type Props = {
@@ -6,7 +5,7 @@ export type Props = {
   onChange: (value: SortOption) => void;
 }
 
-export const SortBySelect: React.FC<Props> = ({ value, onChange }: Props) => {
+export const SortBySelect = ({ value, onChange }: Props) => {
 
   return (
     <div className='w-44 border relative opacity-100'>
