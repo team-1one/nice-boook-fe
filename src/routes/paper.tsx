@@ -108,7 +108,7 @@ const totalPages = Math.ceil(sortedBooks.length / perPageNum);
 
   return (
     <main className="my-16 mx-38">
-      <section>
+      <section className='mb-6'>
         <Typography variant="h1" color="primary" className="mb-2">
           Paper books
         </Typography>
@@ -124,11 +124,11 @@ const totalPages = Math.ceil(sortedBooks.length / perPageNum);
         </article>
       </section>
         
-      <section>
+      <section className="mb-10">
         <CatalogGrid books={paginatedBooks} />
       </section>
 
-      <section className="mt-10">
+      <section className="mb-16">
         <Pagination 
           totalPages={totalPages}
           currentPage={currentPage}

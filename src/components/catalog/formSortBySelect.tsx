@@ -1,3 +1,7 @@
+
+import { Field, FieldLabel } from '../ui/field';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Typography } from '../ui/Typography';
 import type { SortOption } from './typeOfSortOption';
 
 export type Props = {
@@ -8,24 +12,31 @@ export type Props = {
 export const SortBySelect = ({ value, onChange }: Props) => {
 
   return (
-    <div className='w-44 border relative opacity-100'>
-      <label htmlFor="sort-by" className="w-full h-full font-manrope font-medium text-[12px]">
-        Sort by
-      </label>
-      <select
-        className='w-[176px] h-[40px] font-manrope font-medium text-[14px] radius-4'
-        id='sort-by'
-        value={value || ""}
-        onChange={event => onChange(event.target.value as SortOption)}
-      >
-        <option value="">Sorting not applied</option>
-        <option value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
-        <option value="cheaper">Cheaper</option>
-        <option value="expensive">Expensive</option>
-        <option value="name-asc">Name (A-Z)</option>
-        <option value="name-desc">Name (Z-A)</option>
-      </select>
+    <div className='w-44 relative opacity-100'>
+      <Field className="flex flex-col gap-[3px]">
+        <FieldLabel htmlFor="sort-by">
+          <Typography variant="small" color="secondary">
+            Sort by
+          </Typography>
+        </FieldLabel>
+
+        <Select defaultValue={value || ""} onValueChange={onChange}>
+          <SelectTrigger id="sort-by">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="newest">Newest</SelectItem>
+              <SelectItem value="oldest">Oldest</SelectItem>
+              <SelectItem value="cheaper">Cheaper</SelectItem>
+              <SelectItem value="expensive">Expensive</SelectItem>
+              <SelectItem value="name-asc">Name (A-Z)</SelectItem>
+              <SelectItem value="name-desc">Name (Z-A)</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </Field>
     </div>
   );
 };
