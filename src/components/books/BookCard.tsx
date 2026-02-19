@@ -7,18 +7,18 @@ import {
 import { ButtonGroup } from '@/components/ui/button-group';
 import { Headphones, Heart, Van } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from '@tanstack/react-router';
 import type { BookData } from '@/types/book';
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Link } from '@tanstack/react-router';
 
 interface BookCardProps {
   cardProps?: ComponentProps<typeof Card>;
   product: BookData;
 }
 
-const handleButtonsClick = (
+const handleButtonClick = (
   e: React.MouseEvent<HTMLButtonElement>,
   cb: () => void,
 ) => {
@@ -76,7 +76,7 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <img
                     src={ebookFrame}
-                    alt=""
+                    alt="Ebook Frame"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -133,7 +133,7 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
                 className={cn('w-full transition-all duration-300', {
                   'text-[#27AE60] hover:text-[#27AE60]/80': isWishlisted,
                 })}
-                onClick={(e) => handleButtonsClick(e, toggleWishlist)}
+                onClick={(e) => handleButtonClick(e, toggleWishlist)}
               >
                 {wishlistButtonLabel}
               </Button>
@@ -143,7 +143,7 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
               <Button
                 variant={'outline'}
                 size={'icon-xl'}
-                onClick={(e) => handleButtonsClick(e, toggleLike)}
+                onClick={(e) => handleButtonClick(e, toggleLike)}
               >
                 <Heart
                   fill={isLiked ? 'red' : 'none'}
