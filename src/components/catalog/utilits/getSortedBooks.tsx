@@ -6,6 +6,9 @@ import type { SortOption } from "../typeOfSortOption";
     if (!sortOption) return books;
 
     const sorted = [...books];
+
+    const getActualPrice = (book: BookData) =>
+      book.priceDiscount ?? book.priceRegular;
     
     switch (sortOption) {
       case "newest":
@@ -17,9 +20,9 @@ import type { SortOption } from "../typeOfSortOption";
       case "name-desc":
         return sorted.sort((a, b) => b.name.localeCompare(a.name));
       case "cheaper":
-        return sorted.sort((a, b) => a.priceRegular - b.priceRegular);
+        return sorted.sort((a, b) => getActualPrice(a) - getActualPrice(b));
       case "expensive":
-        return sorted.sort((a, b) => b.priceRegular - a.priceRegular);
+        return sorted.sort((a, b) => getActualPrice(b) - getActualPrice(a));
       default:
         return books;
     }
