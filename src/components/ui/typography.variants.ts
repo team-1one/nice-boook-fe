@@ -9,19 +9,19 @@ export const typographyVariants = cva(
           // 320px
           "text-[32px] font-bold leading-[41px] tracking-[-0.01em]",
           // 640px - 1200px
-          "sm:text-[48px] sm:leading-[56px] sm:tracking-[-0.02em]"
+          "breakpoint-sm:text-[48px] breakpoint-sm:leading-[56px] breakpoint-sm:tracking-[-0.02em]"
         ],
         h2: [
           "text-[22px] font-bold leading-[31px] tracking-[0]",
-          "sm:text-[32px] sm:leading-[41px] sm:tracking-[-0.01em]"
+          "breakpoint-sm:text-[32px] breakpoint-sm:leading-[41px] breakpoint-sm:tracking-[-0.01em]"
         ],
         h3: [
           "text-[20px] font-semibold leading-[26px] tracking-[0]",
-          "sm:text-[22px] sm:font-bold sm:leading-[31px]"
+          "breakpoint-sm:text-[22px] breakpoint-sm:font-bold sm:leading-[31px]"
         ],
         h4: [
           "text-[16px] font-semibold leading-[20px] tracking-[0]",
-          "sm:text-[20px] sm:leading-[26px]"
+          "breakpoint-sm:text-[20px] breakpoint-sm:leading-[26px]"
         ],
         h5: "text-[16px] font-semibold leading-[24px] tracking-[0]",
         uppercase: "text-[12px] font-bold leading-[11px] tracking-[0.01em] uppercase",
@@ -30,9 +30,9 @@ export const typographyVariants = cva(
         small: "text-[12px] font-semibold leading-[15px] tracking-[0]",
       },
       color: {
-        primary: "text-gray-primary",
-        secondary: "text-gray-secondary",
-        white: "text-white",
+        primary: "text-[var(--color-gray-primary)]",
+        secondary: "text-[var(--color-gray-secondary)]",
+        white: "text-[var(--color-white)]",
       },
     },
     

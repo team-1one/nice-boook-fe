@@ -39,9 +39,9 @@ function SelectTrigger({
         "px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none transition-[color,box-shadow]",
         "data-[size=default]:h-9 data-[size=sm]:h-8",
 
-        "border-input border-[#E2E6E9] bg-transparent",
-        "hover:border-[#89939A]", 
-        "focus-visible:border-[--gray-primary] focus-visible:ring-0",
+        "border-input border-[var(--gray-elements)] bg-transparent",
+        "hover:border-[var(--gray-secondary)]", 
+        "focus-visible:border-[var(--gray-primary)] focus-visible:ring-0",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "data-[placeholder]:text-muted-foreground",
 
@@ -127,9 +127,9 @@ function SelectItem({
       data-slot="select-item"
       className={cn(
         "relative flex w-full cursor-default items-center gap-2 rounded-sm",
-        "py-1.5 pl-2 pr-8 text-sm text-[#89939A] outline-hidden select-none transition-colors",
+        "py-1.5 pl-2 pr-8 text-sm text-[var(--color-gray-secondary)] outline-hidden select-none transition-colors",
 
-        "focus:bg-[--gray-primary] focus:text-[#313237] data-[disabled]:cursor-not-allowed", 
+        "focus:bg-[--gray-primary] focus:text-[var(--color-gray-primary)] data-[disabled]:cursor-not-allowed", 
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
 
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
