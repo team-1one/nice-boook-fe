@@ -1,3 +1,5 @@
+import { Button } from "../ui/button";
+
 type Props = {
   totalPages: number;
   currentPage: number;
@@ -8,30 +10,41 @@ type Props = {
 
 export const Pagination = ({ totalPages, onPageClick, onNextPage, onPreviousPage, currentPage }: Props) => {
   return (
-    <div>
-      <button 
-        disabled={currentPage === 1} 
+    <div className="flex justify-center gap-4">
+      <Button
+        variant="paginarrow"
+        size="icon-sm"
+        disabled={currentPage === 1}
         onClick={onPreviousPage}
       >
-        {'<'}        
-      </button>
-      <div>
-        {[...Array(totalPages)].map((_, index) => (
-          <button 
-            key={index}
-            disabled={currentPage === index + 1}
-            onClick={() => onPageClick?.(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
+        {"<"}
+      </Button>
+      <div className="flex items-center gap-2">
+        {[...Array(totalPages)].map((_, index) => {
+          const pageNumber = index + 1;
+          const isActive = currentPage === pageNumber;
+
+          return (
+            <Button
+              key={index}
+              variant={isActive ? "activ" : "pagination"}
+              size="icon-sm"
+              disabled={isActive}
+              onClick={() => onPageClick?.(pageNumber)}
+            >
+              {pageNumber}
+            </Button>
+          );
+        })}
       </div>
-      <button
+      <Button
+        variant="paginarrow"
+        size="icon-sm"
         disabled={currentPage === totalPages}
         onClick={onNextPage}
       >
         {'>'}        
-      </button>
+      </Button>
     </div>
   )
 }

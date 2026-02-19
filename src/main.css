@@ -7,6 +7,10 @@
 
 @theme {
   --font-sans: 'Manrope';
+
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 640px;
+  --breakpoint-desktop: 1200px;
 }
 
 @theme inline {
@@ -88,7 +92,7 @@
 
   --gray-primary: #313237;
   --gray-secondary: #89939A;
-  font-family: var(--font-sans), system-ui, sans-serif;
+  --font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 .dark {

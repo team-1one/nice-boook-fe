@@ -3,13 +3,14 @@ import { createFileRoute , useNavigate } from '@tanstack/react-router';
 import type { SortOption } from '@/components/catalog/typeOfSortOption';
 
 import { useBookData } from '@/hooks/useBooks';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { CatalogGrid } from '@/components/catalog/CatalogGrid';
 import { ItemsOnPage } from '@/components/catalog/formItemsOnPage';
 import { SortBySelect } from '@/components/catalog/formSortBySelect';
 import { getSortedBooks } from '@/components/catalog/utilits/getSortedBooks';
 import { Pagination } from '@/components/catalog/Pagination';
+import { Typography } from '@/components/ui/Typography';
 
 type BookSearch = {
   sort?: SortOption;
@@ -65,6 +66,7 @@ export function RouteComponent() {
       page: nextPage.toString(),
     }),
   });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const handlePreviousPage = () => {
@@ -86,7 +88,11 @@ export function RouteComponent() {
       page: newPage.toString(),
     }),
   });
-};
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   const sortedBooks = useMemo(() => {
     if (!books) return [];
@@ -103,8 +109,12 @@ const totalPages = Math.ceil(sortedBooks.length / perPageNum);
   return (
     <main className="my-16 mx-38">
       <section>
-        <h1>Paper books</h1>
-        <p>Book counter: {books?.length ?? 0}</p>
+        <Typography variant="h1" color="primary" className="mb-2">
+          Paper books
+        </Typography>
+        <Typography variant="body" color="secondary" className="mb-10">
+          {(books?.length ?? 0).toLocaleString('en-US')} books
+        </Typography>
 
         <article>
           <div className="flex gap-4 mt-10 mb-6">
