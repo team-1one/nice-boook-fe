@@ -1,10 +1,11 @@
 import { cn } from '@/lib/utils';
 
+// TODO: keep path type safe
 export const navLinks = [
-  { to: '/', label: 'Home', exact: true },
-  { to: '/paper', label: 'Paper', exact: false },
-  { to: '/kindle', label: 'Kindle', exact: false },
-  { to: '/audiobook', label: 'Audiobook', exact: false },
+  { to: '/', label: 'Home' },
+  { to: '/type/paper', label: 'Paper' },
+  { to: '/type/kindle', label: 'Kindle' },
+  { to: '/type/audiobook', label: 'Audiobook' },
 ] as const;
 
 export const navBarHeight = 'h-16';

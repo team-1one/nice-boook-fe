@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as CartRouteImport } from './routes/cart'
-import { Route as TypeRouteImport } from './routes/$type'
 import { Route as BookSlugRouteImport } from './routes/$bookSlug'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
+import { Route as BookTypeBookTypeRouteImport } from './routes/bookType/$bookType'
 
 const FavoritesRoute = FavoritesRouteImport.update({
   id: '/favorites',
@@ -24,11 +24,6 @@ const FavoritesRoute = FavoritesRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TypeRoute = TypeRouteImport.update({
-  id: '/$type',
-  path: '/$type',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookSlugRoute = BookSlugRouteImport.update({
@@ -46,30 +41,35 @@ const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
   path: '/category/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookTypeBookTypeRoute = BookTypeBookTypeRouteImport.update({
+  id: '/bookType/$bookType',
+  path: '/bookType/$bookType',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$bookSlug': typeof BookSlugRoute
-  '/$type': typeof TypeRoute
   '/cart': typeof CartRoute
   '/favorites': typeof FavoritesRoute
+  '/bookType/$bookType': typeof BookTypeBookTypeRoute
   '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$bookSlug': typeof BookSlugRoute
-  '/$type': typeof TypeRoute
   '/cart': typeof CartRoute
   '/favorites': typeof FavoritesRoute
+  '/bookType/$bookType': typeof BookTypeBookTypeRoute
   '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$bookSlug': typeof BookSlugRoute
-  '/$type': typeof TypeRoute
   '/cart': typeof CartRoute
   '/favorites': typeof FavoritesRoute
+  '/bookType/$bookType': typeof BookTypeBookTypeRoute
   '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRouteTypes {
@@ -77,34 +77,34 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$bookSlug'
-    | '/$type'
     | '/cart'
     | '/favorites'
+    | '/bookType/$bookType'
     | '/category/$category'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$bookSlug'
-    | '/$type'
     | '/cart'
     | '/favorites'
+    | '/bookType/$bookType'
     | '/category/$category'
   id:
     | '__root__'
     | '/'
     | '/$bookSlug'
-    | '/$type'
     | '/cart'
     | '/favorites'
+    | '/bookType/$bookType'
     | '/category/$category'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookSlugRoute: typeof BookSlugRoute
-  TypeRoute: typeof TypeRoute
   CartRoute: typeof CartRoute
   FavoritesRoute: typeof FavoritesRoute
+  BookTypeBookTypeRoute: typeof BookTypeBookTypeRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
 }
 
@@ -122,13 +122,6 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/$type': {
-      id: '/$type'
-      path: '/$type'
-      fullPath: '/$type'
-      preLoaderRoute: typeof TypeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$bookSlug': {
@@ -152,15 +145,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoryCategoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bookType/$bookType': {
+      id: '/bookType/$bookType'
+      path: '/bookType/$bookType'
+      fullPath: '/bookType/$bookType'
+      preLoaderRoute: typeof BookTypeBookTypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookSlugRoute: BookSlugRoute,
-  TypeRoute: TypeRoute,
   CartRoute: CartRoute,
   FavoritesRoute: FavoritesRoute,
+  BookTypeBookTypeRoute: BookTypeBookTypeRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
 }
 export const routeTree = rootRouteImport
