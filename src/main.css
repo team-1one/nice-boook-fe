@@ -7,10 +7,6 @@
 
 @theme {
   --font-sans: 'Manrope';
-
-  --breakpoint-xs: 320px;
-  --breakpoint-sm: 640px;
-  --breakpoint-desktop: 1200px;
 }
 
 @theme inline {
@@ -144,10 +140,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
     @apply bg-background text-foreground;
   }
 }

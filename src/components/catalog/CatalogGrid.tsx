@@ -12,7 +12,17 @@ export const CatalogGrid = ({ books }: Props) => {
       {books.length === 0 ? (
         <p>No books found</p>
       ) : (
-        <div className="grid grid-cols-4 gap-x-4 gap-y-10 justify-center">
+        <div className="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-4
+          sm:gap-x-4
+          gap-y-6
+          sm:gap-y-10
+          justify-center
+          justify-items-center
+        ">
           {books.map((book) => (
             <CatalogCard key={book.slug} book={book} />
           ))}

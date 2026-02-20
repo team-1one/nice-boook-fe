@@ -104,24 +104,41 @@ export function RouteComponent() {
 const totalPages = Math.ceil(sortedBooks.length / perPageNum);
 
   return (
-    <main className="my-16 mx-38">
-      <section className='mb-6'>
+    <main className="
+      mx-auto
+
+      mt-8
+      sm:mt-16
+
+      px-4
+      sm:px-6
+      lg:px-8
+      xl:px-[152px]
+
+      mb-8
+      sm:mb-14
+      lg:mb-16
+      xl:mb-[152px]
+
+      max-w-[1440px]
+    ">
+      <section className='mt-8 sm:mt-16 mb-6'>
         <Typography variant="h1" color="primary" className="mb-2">
-          Paper books
+          Kindle books
         </Typography>
         <Typography variant="body" color="secondary" className="mb-10">
           {(books?.length ?? 0).toLocaleString('en-US')} books
         </Typography>
 
         <article>
-          <div className="flex gap-4 mt-10 mb-6">
+          <div className="flex gap-4 mt-8 sm:mt-10 mb-6">
             <SortBySelect value={sort} onChange={handleSortChange} />
             <ItemsOnPage value={perPage} onChange={handleItemsPerPageChange}/>
           </div>
         </article>
       </section>
         
-      <section className="mb-10">
+      <section className="mb-6 sm:mb-14 lg:mb-16">
         <CatalogGrid books={paginatedBooks} />
       </section>
 
