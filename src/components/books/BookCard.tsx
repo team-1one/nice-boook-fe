@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from '@tanstack/react-router';
 import type { BookData } from '@/types/book';
 import type { ComponentProps } from 'react';
+import phrases from '@/constants/phrases';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -18,20 +19,13 @@ interface BookCardProps {
   product: BookData;
 }
 
-const handleButtonClick = (
-  e: React.MouseEvent<HTMLButtonElement>,
-  cb: () => void,
+const handleCardActionButtonClick = (
+  event: React.MouseEvent<HTMLButtonElement>,
+  callback: () => void,
 ) => {
-  e.preventDefault();
-  cb();
+  event.preventDefault();
+  callback();
 };
-
-// It's temporally constant until we switch to using i18next
-const ProductPhrases = {
-  inStock: 'In Stock',
-  addToCart: 'Add to cart',
-  addedToCart: 'Added',
-} as const;
 
 const ebookFrame =
   'https://cxqrvyjozjyswjemkfhk.supabase.co/storage/v1/object/public/books/img/audiobook/2.webp';
@@ -56,7 +50,7 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
   };
 
   const wishlistButtonLabel =
-    isWishlisted ? ProductPhrases.addedToCart : ProductPhrases.addToCart;
+    isWishlisted ? phrases.addedToCart : phrases.addToCart;
 
   return (
     // FIXME: Fix hardcoded path type assertion
@@ -118,7 +112,7 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
             <div className="flex items-center gap-1">
               <Van color="#27AE60" />
               <span className="text-sm text-[#27AE60] font-bold">
-                {ProductPhrases.inStock}
+                {phrases.inStock}
               </span>
             </div>
           </div>
@@ -133,7 +127,7 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
                 className={cn('w-full transition-all duration-300', {
                   'text-[#27AE60] hover:text-[#27AE60]/80': isWishlisted,
                 })}
-                onClick={(e) => handleButtonClick(e, toggleWishlist)}
+                onClick={(e) => handleCardActionButtonClick(e, toggleWishlist)}
               >
                 {wishlistButtonLabel}
               </Button>
@@ -143,7 +137,7 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
               <Button
                 variant={'outline'}
                 size={'icon-xl'}
-                onClick={(e) => handleButtonClick(e, toggleLike)}
+                onClick={(e) => handleCardActionButtonClick(e, toggleLike)}
               >
                 <Heart
                   fill={isLiked ? 'red' : 'none'}
