@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
@@ -8,6 +9,7 @@ const RootLayout = () => (
       <Navbar />
     </header>
     <Outlet />
+    <Footer />
     <TanStackRouterDevtools />
   </>
 );
