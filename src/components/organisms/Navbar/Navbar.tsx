@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <NavigationMenu
       viewport={false}
-      className={cn('ps-3 justify-start gap-6 max-w-full', navBarHeight)}
+      className={cn('max-w-full justify-start gap-6 ps-3', navBarHeight)}
     >
       <NavigationMenuList>
         <NavigationMenuItem className="h-full">
@@ -72,7 +72,7 @@ const Navbar = () => {
           </InputGroup>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="border rounded-md">
+        <NavigationMenuItem className="rounded-md border">
           <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
           <NavigationMenuContent className="h-96">
             <ScrollArea className="h-full">
@@ -95,7 +95,7 @@ const Navbar = () => {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <div className="flex ms-4">
+        <div className="ms-4 flex">
           <IconButton to="/favorites">
             <Heart />
           </IconButton>

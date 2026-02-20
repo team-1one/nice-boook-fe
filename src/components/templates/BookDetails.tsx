@@ -1,19 +1,26 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import {
   Breadcrumb,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { BookLangSchema, type BookLang } from '@/lib/schemas/book.schema';
 import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
 import { Heart, Home } from 'lucide-react';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 // TODO: remove later soon
 const book = {
@@ -92,8 +99,7 @@ const randomCategory =
 const images = book.ukr.images;
 const langOptions = BookLangSchema.options;
 
-const breadcrumbs = [
-  { label: <Home />, to: '/', params: {} },
+const midBreadcrumbs = [
   {
     label: book.eng.type,
     to: '/bookType/$bookType',
@@ -111,13 +117,23 @@ const BookDetails = () => {
   const [selectedLang, setSelectedLang] = useState<BookLang>('uk');
 
   return (
-    <div className="flex flex-col items-center-safe">
-      <header className="w-fit">
-        <Breadcrumb>
-          <BreadcrumbList className="text-base text-gray-primary font-bold uppercase">
-            {breadcrumbs.map((crumb) => (
-              <>
-                <BreadcrumbItem className={cn('max-md:hidden')}>
+    <article className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-6 md:px-6 lg:px-8">
+      <header className="w-full">
+        <Breadcrumb className="pb-6">
+          <BreadcrumbList className="text-gray-primary flex-nowrap text-sm font-semibold whitespace-nowrap uppercase md:text-base">
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/">
+                  <Home />
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbSeparator />
+
+            {midBreadcrumbs.map((crumb, index) => (
+              <Fragment key={index}>
+                <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink asChild>
                     <Link
                       to={crumb.to}
@@ -127,146 +143,194 @@ const BookDetails = () => {
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator className="text-gray-secondary" />
-              </>
+                <BreadcrumbSeparator className="text-gray-secondary hidden md:block" />
+              </Fragment>
             ))}
 
-            <BreadcrumbItem className="text-gray-secondary">
-              {book.eng.name}
+            <BreadcrumbItem className="md:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <BreadcrumbEllipsis />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="uppercase">
+                  {midBreadcrumbs.map((crumb, i) => (
+                    <DropdownMenuItem
+                      key={i}
+                      asChild
+                    >
+                      <Link
+                        to={crumb.to}
+                        params={crumb.params}
+                      >
+                        {crumb.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </BreadcrumbItem>
+
+            <BreadcrumbSeparator className="text-gray-secondary md:hidden" />
+
+            <BreadcrumbItem className="text-gray-secondary min-w-0">
+              <span className="truncate">{book.eng.name}</span>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <h1 className="text-5xl font-bold">{book.ukr.name}</h1>
-        <p>{book.ukr.author}</p>
+
+        <h1 className="mb-2 text-4xl leading-tight font-bold wrap-break-word md:text-5xl">
+          {book.ukr.name}
+        </h1>
+        <p className="text-gray-secondary text-lg">{book.ukr.author}</p>
       </header>
-      <div className="flex">
-        <div className="grid grid-cols-[80px_1fr] gap-4    max-w-2xl">
-          <ScrollArea className="h-125 pr-3">
-            <div className="flex flex-col gap-3">
+
+      <main className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+        {/* Image Gallery */}
+        <div className="flex flex-col gap-4 md:flex-row-reverse">
+          <AspectRatio
+            ratio={1.5}
+            className="flex-1 rounded-lg border bg-white p-2 shadow-sm"
+          >
+            <img
+              src={selectedImage}
+              alt="Product"
+              className="h-full w-full rounded object-contain object-top"
+            />
+          </AspectRatio>
+
+          <ScrollArea className="h-24 overflow-x-auto md:h-auto md:max-h-130 md:w-28 md:overflow-y-auto">
+            <div className="flex gap-3 md:flex-col">
               {images.map((img) => (
                 <button
                   key={img}
                   onClick={() => setSelectedImage(img)}
                   className={cn(
-                    'overflow-hidden rounded-md border-2 transition-all',
+                    'h-20 w-16 overflow-hidden rounded-md border-2',
                     selectedImage === img ? 'border-black' : (
-                      'border-transparent hover:border-gray-200'
+                      'border-transparent hover:border-gray-300'
                     ),
                   )}
                 >
-                  <AspectRatio ratio={1 / 1.4}>
-                    <img
-                      src={img}
-                      alt="thumbnail"
-                      className="object-cover w-full h-full"
-                    />
-                  </AspectRatio>
+                  <img
+                    src={img}
+                    alt="thumb"
+                    className="h-full w-full object-cover"
+                  />
                 </button>
               ))}
             </div>
           </ScrollArea>
-
-          <div className="h-4/5 relative rounded-lg border-2 border-blue-400 overflow-hidden">
-            <AspectRatio ratio={1 / 1.4}>
-              <ScrollArea className="h-full">
-                <img
-                  src={selectedImage}
-                  alt="product overview"
-                  className="object-contain"
-                />
-              </ScrollArea>
-            </AspectRatio>
-          </div>
         </div>
 
-        <article className="w-2/5 flex flex-col gap-4">
-          <span>Category</span>
-          <Button
-            variant="outline"
-            className="w-fit"
-          >
-            {randomCategory}
-          </Button>
-          <Separator />
-          <span>Select Language</span>
-          <div className="Lang_Options flex gap-2">
-            {langOptions.map((lang) => (
-              <Button
-                key={lang}
-                variant={selectedLang === lang ? 'default' : 'outline'}
-                className="w-12"
-                onClick={() => setSelectedLang(lang)}
-              >
-                {lang.toUpperCase()}
-              </Button>
-            ))}
+        {/* RIGHT PANEL */}
+        <div className="flex flex-col gap-6">
+          {/* Category */}
+          <div>
+            <p className="text-gray-secondary mb-1 text-sm">Category</p>
+            <Button
+              variant="outline"
+              className="px-3"
+            >
+              {randomCategory}
+            </Button>
           </div>
+
           <Separator />
-          <div className="Prices flex gap-2 text-2xl font-bold">
-            <span>&#xff04;{book.eng.priceDiscount}</span>
-            <span className="line-through text-gray-secondary">
-              &#xff04;{book.eng.priceRegular}
+
+          {/* Language */}
+          <div>
+            <p className="text-gray-secondary mb-2 text-sm">Select language</p>
+            <div className="flex gap-2">
+              {langOptions.map((lang) => (
+                <Button
+                  key={lang}
+                  variant={selectedLang === lang ? 'default' : 'outline'}
+                  className="w-12"
+                  onClick={() => setSelectedLang(lang)}
+                >
+                  {lang.toUpperCase()}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Price Block */}
+          <div className="flex items-baseline gap-4">
+            <span className="text-3xl font-bold text-black">
+              ${book.eng.priceDiscount}
+            </span>
+            <span className="text-gray-secondary text-xl line-through">
+              ${book.eng.priceRegular}
             </span>
           </div>
-          <div className="Purchase_Buttons flex gap-2">
-            <Button className="self-start flex-1">Add to cart</Button>
+
+          {/* Buy + Wish */}
+          <div className="flex gap-4">
+            <Button className="flex-1">Add to cart</Button>
             <Button variant="outline">
               <Heart />
             </Button>
           </div>
-          <div className="Short_Descr flex flex-col capitalize">
-            <div className="flex justify-between">
-              <span>Author</span>
-              <span>{book.ukr.author}</span>
-            </div>
-            <Separator />
-            <div className="flex justify-between">
-              <span>Cover type</span>
-              <span>{book.ukr.coverType}</span>
-            </div>
-            <Separator />
-            <div className="flex justify-between">
-              <span>Number of Pages</span>
-              <span>{book.ukr.numberOfPages}</span>
-            </div>
-            <Separator />
-            <div className="flex justify-between">
-              <span>Year of publication</span>
-              <span>{book.ukr.publicationYear}</span>
-            </div>
+
+          {/* SHORT DESCRIPTION */}
+          <div className="flex flex-col gap-2 text-sm">
+            {[
+              { label: 'Author', value: book.ukr.author },
+              { label: 'Cover type', value: book.ukr.coverType },
+              { label: 'Number of pages', value: book.ukr.numberOfPages },
+              { label: 'Year of publication', value: book.ukr.publicationYear },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <div className="flex justify-between py-1">
+                  <span>{label}</span>
+                  <span>{value}</span>
+                </div>
+                <Separator />
+              </div>
+            ))}
           </div>
+        </div>
+      </main>
+
+      {/* ABOUT + CHARACTERISTICS */}
+      <section className="grid grid-cols-1 gap-16 pt-8 lg:grid-cols-2">
+        <article className="max-w-prose">
+          <h2 className="mb-2 text-3xl font-bold">About</h2>
+          <p className="mb-4 font-semibold">{book.ukr.name}</p>
+          <p className="leading-relaxed text-gray-800">
+            {book.ukr.description}
+          </p>
         </article>
-      </div>
-      <div className="flex justify-around">
-        <article>
-          <h2 className="text-3xl font-bold">About</h2>
-          <p className="font-bold">{book.ukr.name}</p>
-          <p>{book.ukr.description}</p>
+
+        <article className="flex flex-col gap-2 text-sm capitalize">
+          <h2 className="mb-4 text-3xl font-bold">Characteristics</h2>
+
+          {[
+            { label: 'Author', value: book.ukr.author },
+            { label: 'Cover type', value: book.ukr.coverType },
+            { label: 'Number of pages', value: book.ukr.numberOfPages },
+            { label: 'Year of publication', value: book.ukr.publicationYear },
+            { label: 'Publication', value: book.ukr.publication },
+            { label: 'Format', value: book.ukr.format },
+            { label: 'Language', value: book.ukr.lang },
+            {
+              label: 'Illustrations',
+              value: book.ukr.illustrations ? 'Yes' : 'No illustrations',
+            },
+          ].map(({ label, value }) => (
+            <div key={label}>
+              <div className="flex justify-between py-1">
+                <span>{label}</span>
+                <span>{value}</span>
+              </div>
+              <Separator />
+            </div>
+          ))}
         </article>
-        <article className="Descr flex flex-col capitalize">
-          <h2 className="text-3xl font-bold">Characteristics</h2>
-          <div className="flex justify-between">
-            <span>Author</span>
-            <span>{book.ukr.author}</span>
-          </div>
-          <Separator />
-          <div className="flex justify-between">
-            <span>Cover type</span>
-            <span>{book.ukr.coverType}</span>
-          </div>
-          <Separator />
-          <div className="flex justify-between">
-            <span>Number of Pages</span>
-            <span>{book.ukr.numberOfPages}</span>
-          </div>
-          <Separator />
-          <div className="flex justify-between">
-            <span>Year of publication</span>
-            <span>{book.ukr.publicationYear}</span>
-          </div>
-        </article>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 
