@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { BookLangSchema, type BookLang } from '@/lib/schemas/book.schema';
-import { capitalize, cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
 import { Heart, Home } from 'lucide-react';
 import { useState } from 'react';
