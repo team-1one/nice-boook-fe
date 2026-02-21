@@ -15,7 +15,7 @@ const Footer = () => (
     <NavigationMenu
       viewport={false}
       className={cn(
-        'hidden sm:flex ps-4 w-full justify-start gap-6 max-w-full',
+        'hidden sm:flex ps-4 w-full justify-between items-center max-w-full',
         footerHeight,
       )}
     >
@@ -32,9 +32,6 @@ const Footer = () => (
         </NavigationMenuItem>
       </NavigationMenuList>
 
-      {/* kludge for flexing elements */}
-      <div className="flex-1" />
-
       <NavigationMenuList className="gap-x-16">
         {footerLinks.map((link) => (
           <FooterNavItem
@@ -43,9 +40,6 @@ const Footer = () => (
           />
         ))}
       </NavigationMenuList>
-
-      {/* kludge for flexing elements */}
-      <div className="flex-1" />
 
       <NavigationMenuList className="pe-4">
         <NavigationMenuItem>

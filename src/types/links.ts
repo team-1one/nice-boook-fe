@@ -1,8 +1,7 @@
-interface BaseLink {
-  to: string;
-  label: string;
-}
+import type { LinkProps, RegisteredRouter } from '@tanstack/react-router';
 
-export interface FooterLink extends BaseLink {
-  external: boolean;
-}
+type AppPath = Exclude<LinkProps<RegisteredRouter>['to'], undefined>;
+
+export type FooterLink =
+  | { to: AppPath; label: string; external: false }
+  | { to: string; label: string; external: true };

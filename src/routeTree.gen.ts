@@ -9,13 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RightsRouteImport } from './routes/rights'
 import { Route as PaperRouteImport } from './routes/paper'
 import { Route as KindleRouteImport } from './routes/kindle'
 import { Route as FavoritesRouteImport } from './routes/favorites'
+import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AudiobookRouteImport } from './routes/audiobook'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RightsRoute = RightsRouteImport.update({
+  id: '/rights',
+  path: '/rights',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PaperRoute = PaperRouteImport.update({
   id: '/paper',
   path: '/paper',
@@ -29,6 +36,11 @@ const KindleRoute = KindleRouteImport.update({
 const FavoritesRoute = FavoritesRouteImport.update({
   id: '/favorites',
   path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -51,53 +63,86 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
+  '/contacts': typeof ContactsRoute
   '/favorites': typeof FavoritesRoute
   '/kindle': typeof KindleRoute
   '/paper': typeof PaperRoute
+  '/rights': typeof RightsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
+  '/contacts': typeof ContactsRoute
   '/favorites': typeof FavoritesRoute
   '/kindle': typeof KindleRoute
   '/paper': typeof PaperRoute
+  '/rights': typeof RightsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
+  '/contacts': typeof ContactsRoute
   '/favorites': typeof FavoritesRoute
   '/kindle': typeof KindleRoute
   '/paper': typeof PaperRoute
+  '/rights': typeof RightsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/audiobook' | '/cart' | '/favorites' | '/kindle' | '/paper'
+  fullPaths:
+    | '/'
+    | '/audiobook'
+    | '/cart'
+    | '/contacts'
+    | '/favorites'
+    | '/kindle'
+    | '/paper'
+    | '/rights'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/audiobook' | '/cart' | '/favorites' | '/kindle' | '/paper'
+  to:
+    | '/'
+    | '/audiobook'
+    | '/cart'
+    | '/contacts'
+    | '/favorites'
+    | '/kindle'
+    | '/paper'
+    | '/rights'
   id:
     | '__root__'
     | '/'
     | '/audiobook'
     | '/cart'
+    | '/contacts'
     | '/favorites'
     | '/kindle'
     | '/paper'
+    | '/rights'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AudiobookRoute: typeof AudiobookRoute
   CartRoute: typeof CartRoute
+  ContactsRoute: typeof ContactsRoute
   FavoritesRoute: typeof FavoritesRoute
   KindleRoute: typeof KindleRoute
   PaperRoute: typeof PaperRoute
+  RightsRoute: typeof RightsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rights': {
+      id: '/rights'
+      path: '/rights'
+      fullPath: '/rights'
+      preLoaderRoute: typeof RightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/paper': {
       id: '/paper'
       path: '/paper'
@@ -117,6 +162,13 @@ declare module '@tanstack/react-router' {
       path: '/favorites'
       fullPath: '/favorites'
       preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -147,9 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AudiobookRoute: AudiobookRoute,
   CartRoute: CartRoute,
+  ContactsRoute: ContactsRoute,
   FavoritesRoute: FavoritesRoute,
   KindleRoute: KindleRoute,
   PaperRoute: PaperRoute,
+  RightsRoute: RightsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
