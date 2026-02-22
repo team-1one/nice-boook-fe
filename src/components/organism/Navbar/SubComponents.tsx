@@ -9,7 +9,7 @@ import {
   NavigationMenuLink,
 } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
-import { Link } from '@tanstack/react-router';
+import { Link, type LinkOptions } from '@tanstack/react-router';
 
 // Reusable underline component
 const Underline = ({ children }: { children: React.ReactNode }) => (
@@ -22,20 +22,20 @@ const Underline = ({ children }: { children: React.ReactNode }) => (
 );
 
 const UnderlineNavItem = ({
-  to,
+  link,
   className,
   activeProps,
   children,
 }: {
-  to: string;
+  link: LinkOptions;
   className?: string;
   activeProps?: Record<string, unknown>;
   children: React.ReactNode;
 }) => (
-  <NavigationMenuItem className="uppercase font-bold">
+  <NavigationMenuItem className="font-bold uppercase">
     <NavigationMenuLink asChild>
       <Link
-        to={to}
+        {...link}
         className={cn(underlinedClasses, className)}
         activeProps={activeProps}
       >
@@ -46,9 +46,15 @@ const UnderlineNavItem = ({
   </NavigationMenuItem>
 );
 
-export const TextNavItem = ({ to, label }: { to: string; label: string }) => (
+export const TextNavItem = ({
+  link,
+  label,
+}: {
+  link: LinkOptions;
+  label: string;
+}) => (
   <UnderlineNavItem
-    to={to}
+    link={link}
     activeProps={{ className: cn(activeLinkClasses) }}
   >
     <span>{label}</span>
@@ -56,16 +62,16 @@ export const TextNavItem = ({ to, label }: { to: string; label: string }) => (
 );
 
 export const IconButton = ({
-  to,
+  link,
   children,
 }: {
-  to: string;
+  link: LinkOptions;
   children: React.ReactNode;
 }) => (
   <UnderlineNavItem
-    to={to}
+    link={link}
     className={cn(
-      'border-l flex justify-center items-center aspect-square',
+      'flex aspect-square items-center justify-center border-l',
       navBarHeight,
     )}
     activeProps={{ className: activeLinkClasses }}

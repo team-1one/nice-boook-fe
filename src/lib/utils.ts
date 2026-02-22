@@ -1,9 +1,11 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-export const capitalize = (str: string) =>
-  str[0].toLocaleUpperCase() + str.slice(1);
+/**
+ * Picks a random element from an array
+ * @param array The array to pick a random element from
+ */
+export const pickRandom = <T>(array: readonly T[]): T =>
+  array[Math.floor(Math.random() * array.length)];

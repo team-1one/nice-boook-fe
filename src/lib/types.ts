@@ -1,0 +1,8 @@
+import type { LinkProps, RegisteredRouter } from '@tanstack/react-router';
+
+export const TABLES = {
+  booksFlat: 'books_flat',
+  categories: 'categories',
+} as const;
+
+export type AppPath = Exclude<LinkProps<RegisteredRouter>['to'], undefined>;

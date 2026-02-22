@@ -1,4 +1,3 @@
-import { capitalize } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
 
 export type Props = {
@@ -9,17 +8,17 @@ export type Props = {
 
 export const BookCategoryCard = ({ type, imageUrl, count }: Props) => {
   return (
-    <div className="flex-auto hover:shadow-lg transition-shadow duration-300">
+    <div className="flex-auto transition-shadow duration-300 hover:shadow-lg">
       <Link to={`/`}>
         <img
           src={imageUrl}
           alt={type}
-          className="m-0 w-full h-72.25 object-cover rounded-[8.13px] mb-6.25"
+          className="m-0 mb-6.25 h-72.25 w-full rounded-[8.13px] object-cover"
         />
-        <h3 className="font-sans font-semibold text-[20px] text-color-gray-primary leading-[100%] tracking-normal">
-          {capitalize(type)}
+        <h3 className="text-color-gray-primary font-sans text-[20px] leading-[100%] font-semibold tracking-normal capitalize">
+          {type}
         </h3>
-        <p className="font-sans font-medium text-[14px] text-color-gray-secondary leading-5.25 tracking-normal text-muted-foreground mt-0.75">
+        <p className="text-color-gray-secondary text-muted-foreground mt-0.75 font-sans text-[14px] leading-5.25 font-medium tracking-normal">
           {count.toLocaleString('en-US')} books
         </p>
       </Link>

@@ -18,14 +18,14 @@ import {
 
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { getRouteApi, Link } from '@tanstack/react-router';
+import { Link, rootRouteId, useLoaderData } from '@tanstack/react-router';
 
 import { Heart, Search, ShoppingBag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
-  const categories = [...getRouteApi('__root__').useLoaderData()].sort((a, b) =>
-    a.localeCompare(b),
+  const sortedCategories = useLoaderData({ from: rootRouteId }).sort(
+    (prev, next) => prev.localeCompare(next),
   );
 
   return (
@@ -47,11 +47,11 @@ const Navbar = () => {
       </NavigationMenuList>
 
       <NavigationMenuList className="gap-4">
-        {navLinks.map(({ to, label }) => (
+        {navLinks.map(({ label, link }) => (
           <TextNavItem
-            key={to}
-            to={to}
+            key={`${label}-${link.to}`}
             label={label}
+            link={link}
           />
         ))}
       </NavigationMenuList>
@@ -77,7 +77,7 @@ const Navbar = () => {
           <NavigationMenuContent className="h-96">
             <ScrollArea className="h-full">
               <ul>
-                {categories.map((category) => (
+                {sortedCategories.map((category) => (
                   <li key={category}>
                     <NavigationMenuLink asChild>
                       <Link
@@ -96,10 +96,10 @@ const Navbar = () => {
         </NavigationMenuItem>
 
         <div className="ms-4 flex">
-          <IconButton to="/favorites">
+          <IconButton link={{ to: '/favorites' }}>
             <Heart />
           </IconButton>
-          <IconButton to="/cart">
+          <IconButton link={{ to: '/cart' }}>
             <ShoppingBag />
           </IconButton>
         </div>

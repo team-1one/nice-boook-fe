@@ -13,8 +13,8 @@ export const Route = createFileRoute('/')({
       fetchBookCount('paperback'),
       fetchBookCount('audiobook'),
     ]);
-
     return {
+      // TODO: extract to separate file
       bookTypeCounts: [
         {
           name: BookTypeSchema.enum.audiobook,
@@ -43,10 +43,11 @@ function Index() {
   return (
     <div className="p-2">
       <BookCategories />
+      {/* // TODO: replace; just a representation */}
       <Button asChild>
         <Link
           to="/$bookSlug"
-          params={{ bookSlug: 'chip-war-en-paperback' }}
+          params={{ bookSlug: 'dont-make-me-think-uk-paperback' }}
         >
           <BugPlay />
         </Link>
