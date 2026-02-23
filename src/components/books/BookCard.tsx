@@ -8,12 +8,12 @@ import { ButtonGroup } from '@/components/ui/button-group';
 import { cn, withPreventDefault } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from '@tanstack/react-router';
-import type { BookData } from '@/types/book';
 import type { ComponentProps } from 'react';
 import phrases from '@/constants/phrases';
 import { Heart, Van } from 'lucide-react';
 import BookImage from './BookImage';
 import { useState } from 'react';
+import type { Book } from '@/lib/schemas/book.schema';
 
 interface BookCardState {
   isInCart: boolean;
@@ -22,7 +22,7 @@ interface BookCardState {
 
 interface BookCardProps {
   cardProps?: ComponentProps<typeof Card>;
-  product: BookData;
+  product: Book;
 }
 
 // TODO: Implement currency conversion and localization for price display
@@ -48,21 +48,23 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
         <BookImage book={product} />
 
         <CardHeader className="gap-1">
-          <h5 className="font-medium">{product.name}</h5>
-          <span className="text-sm text-[#89939A]">{product.author}</span>
+          <h5 className="truncate font-medium">{product.name}</h5>
+          <span className="truncate text-sm text-[#89939A]">
+            {product.author}
+          </span>
         </CardHeader>
 
         <CardContent>
-          <div className="gap-2 mb-2 flex items-center">
-            <h3 className="font-semibold">{`₴${product.priceDiscount ?? product.priceRegular}`}</h3>
-            {product.priceDiscount && (
-              <h4 className="line-through text-sm text-muted-foreground">{`₴${product.priceRegular}`}</h4>
+          <div className="mb-2 flex items-center gap-2">
+            <h3 className="font-semibold">{`₴${product.price_regular ?? product.price_regular}`}</h3>
+            {product.price_discount && (
+              <h4 className="text-muted-foreground text-sm line-through">{`₴${product.price_regular}`}</h4>
             )}
           </div>
 
           <div className="flex items-center gap-1">
             <Van color="#27AE60" />
-            <span className="text-sm text-[#27AE60] font-bold">
+            <span className="text-sm font-bold text-[#27AE60]">
               {phrases.inStock}
             </span>
           </div>
