@@ -1,5 +1,5 @@
+import { Navbar } from '@/components/organisms/Navbar';
 import { fetchCategories } from '@/api/supabase';
-import { Navbar } from '@/components/organism/Navbar';
 import { Footer } from '@/components/organisms/Footer';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';

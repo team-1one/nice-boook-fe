@@ -1,9 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { BooksPage } from '@/components/catalog/BooksPage';
+import { validateBookSearch } from '@/types/search';
 
 export const Route = createFileRoute('/paper')({
-  component: RouteComponent,
+  validateSearch: validateBookSearch,
+  component: PaperRoute,
 });
 
-function RouteComponent() {
-  return <div>Hello /paper!</div>;
+function PaperRoute() {
+  return (
+    <BooksPage dataFile="paperback.json" title="Paper books" />
+  );
 }
