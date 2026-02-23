@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useSearch } from '@tanstack/react-router';
 
 import { useBookData } from '@/hooks/useBooks';
 import { getSortedBooks } from '@/components/catalog/utilits/getSortedBooks';
@@ -11,6 +11,7 @@ import { Pagination } from '@/components/catalog/Pagination';
 import { Typography } from '@/components/ui/Typography';
 import type { SortOption } from './typeOfSortOption';
 import { CATALOG_LIMITS } from './constants/catalog';
+import { useUpdateSearch } from './hooks/useUpdateSearch';
 
 type BookDataFile =
   | "paperback.json"
@@ -25,8 +26,9 @@ type Props = {
 export function BooksPage({ dataFile, title }: Props) {
   const { data: books } = useBookData(dataFile);
 
-  const search = useSearch({ strict: false }); 
-  const navigator = useNavigate();
+  const updateSearch = useUpdateSearch();
+
+  const search = useSearch({ strict: false });
 
   const sort = search.sort as SortOption | undefined;
   const perPage = (search.perPage as string) || CATALOG_LIMITS.DEFAULT_PER_PAGE;
@@ -48,57 +50,27 @@ export function BooksPage({ dataFile, title }: Props) {
   const totalPages = Math.ceil(sortedBooks.length / perPageNum);
 
   const handleSortChange = (newValue: SortOption) => { 
-  navigator({
-    to: '.',
-    search: {
-    ...search,
-    sort: newValue === '' ? undefined : newValue,
-    page: '1',
-  }});
+  updateSearch({ page: CATALOG_LIMITS.DEFAULT_PAGE, sort: newValue });
  };
 
   const handleItemsPerPageChange = (newValue: string) => { 
-    navigator({ 
-      to: '.',
-      search: { 
-      ...search,
-        perPage: newValue,
-        page: '1',
-      }});
+    updateSearch({ page: CATALOG_LIMITS.DEFAULT_PAGE, perPage: newValue });
   };
   
   const handleNextPage = () => { 
     if (currentPage >= totalPages) return; 
     const nextPage = currentPage + 1; 
-    navigator({ 
-      to: '.',
-      search: {
-        ...search,
-        page: nextPage.toString(),
-      }
-    }); 
+    updateSearch({ page: nextPage.toString() }) 
   } 
     
   const handlePreviousPage = () => { 
     if (currentPage <= 1) return; 
     const nextPage = currentPage - 1; 
-    navigator({ 
-      to: '.',
-      search: {
-        ...search,
-        page: nextPage.toString(),
-      }
-    }); 
+    updateSearch({ page: nextPage.toString() }) 
   } 
         
   const handlePageClick = (newPage: number) => { 
-    navigator({ 
-      to: '.',
-      search: {
-        ...search,
-        page: newPage.toString(),
-      }
-    });
+    updateSearch({ page: newPage.toString() })
   };
 
   useEffect(() => {
