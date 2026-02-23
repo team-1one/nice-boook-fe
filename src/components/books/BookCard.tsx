@@ -48,8 +48,10 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
         <BookImage book={product} />
 
         <CardHeader className="gap-1">
-          <h5 className="font-medium">{product.name}</h5>
-          <span className="text-sm text-[#89939A]">{product.author}</span>
+          <h5 className="font-medium truncate">{product.name}</h5>
+          <span className="text-sm text-[#89939A] truncate">
+            {product.author}
+          </span>
         </CardHeader>
 
         <CardContent>
