@@ -26,6 +26,6 @@ coverage/
 *.sln
 *.sw?
 
-.qodo/*
-.husky/*
-.tanstack/*
+.qodo/
+.husky/
+.tanstack

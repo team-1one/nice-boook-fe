@@ -16,7 +16,10 @@ import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AudiobookRouteImport } from './routes/audiobook'
+import { Route as BookSlugRouteImport } from './routes/$bookSlug'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
+import { Route as BookTypeBookTypeRouteImport } from './routes/bookType/$bookType'
 
 const RightsRoute = RightsRouteImport.update({
   id: '/rights',
@@ -53,14 +56,30 @@ const AudiobookRoute = AudiobookRouteImport.update({
   path: '/audiobook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookSlugRoute = BookSlugRouteImport.update({
+  id: '/$bookSlug',
+  path: '/$bookSlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
+  id: '/category/$category',
+  path: '/category/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookTypeBookTypeRoute = BookTypeBookTypeRouteImport.update({
+  id: '/bookType/$bookType',
+  path: '/bookType/$bookType',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$bookSlug': typeof BookSlugRoute
   '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
   '/contacts': typeof ContactsRoute
@@ -68,9 +87,12 @@ export interface FileRoutesByFullPath {
   '/kindle': typeof KindleRoute
   '/paper': typeof PaperRoute
   '/rights': typeof RightsRoute
+  '/bookType/$bookType': typeof BookTypeBookTypeRoute
+  '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$bookSlug': typeof BookSlugRoute
   '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
   '/contacts': typeof ContactsRoute
@@ -78,10 +100,13 @@ export interface FileRoutesByTo {
   '/kindle': typeof KindleRoute
   '/paper': typeof PaperRoute
   '/rights': typeof RightsRoute
+  '/bookType/$bookType': typeof BookTypeBookTypeRoute
+  '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$bookSlug': typeof BookSlugRoute
   '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
   '/contacts': typeof ContactsRoute
@@ -89,11 +114,14 @@ export interface FileRoutesById {
   '/kindle': typeof KindleRoute
   '/paper': typeof PaperRoute
   '/rights': typeof RightsRoute
+  '/bookType/$bookType': typeof BookTypeBookTypeRoute
+  '/category/$category': typeof CategoryCategoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$bookSlug'
     | '/audiobook'
     | '/cart'
     | '/contacts'
@@ -101,9 +129,12 @@ export interface FileRouteTypes {
     | '/kindle'
     | '/paper'
     | '/rights'
+    | '/bookType/$bookType'
+    | '/category/$category'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$bookSlug'
     | '/audiobook'
     | '/cart'
     | '/contacts'
@@ -111,9 +142,12 @@ export interface FileRouteTypes {
     | '/kindle'
     | '/paper'
     | '/rights'
+    | '/bookType/$bookType'
+    | '/category/$category'
   id:
     | '__root__'
     | '/'
+    | '/$bookSlug'
     | '/audiobook'
     | '/cart'
     | '/contacts'
@@ -121,10 +155,13 @@ export interface FileRouteTypes {
     | '/kindle'
     | '/paper'
     | '/rights'
+    | '/bookType/$bookType'
+    | '/category/$category'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookSlugRoute: typeof BookSlugRoute
   AudiobookRoute: typeof AudiobookRoute
   CartRoute: typeof CartRoute
   ContactsRoute: typeof ContactsRoute
@@ -132,6 +169,8 @@ export interface RootRouteChildren {
   KindleRoute: typeof KindleRoute
   PaperRoute: typeof PaperRoute
   RightsRoute: typeof RightsRoute
+  BookTypeBookTypeRoute: typeof BookTypeBookTypeRoute
+  CategoryCategoryRoute: typeof CategoryCategoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AudiobookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$bookSlug': {
+      id: '/$bookSlug'
+      path: '/$bookSlug'
+      fullPath: '/$bookSlug'
+      preLoaderRoute: typeof BookSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -192,11 +238,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/category/$category': {
+      id: '/category/$category'
+      path: '/category/$category'
+      fullPath: '/category/$category'
+      preLoaderRoute: typeof CategoryCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookType/$bookType': {
+      id: '/bookType/$bookType'
+      path: '/bookType/$bookType'
+      fullPath: '/bookType/$bookType'
+      preLoaderRoute: typeof BookTypeBookTypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookSlugRoute: BookSlugRoute,
   AudiobookRoute: AudiobookRoute,
   CartRoute: CartRoute,
   ContactsRoute: ContactsRoute,
@@ -204,6 +265,8 @@ const rootRouteChildren: RootRouteChildren = {
   KindleRoute: KindleRoute,
   PaperRoute: PaperRoute,
   RightsRoute: RightsRoute,
+  BookTypeBookTypeRoute: BookTypeBookTypeRoute,
+  CategoryCategoryRoute: CategoryCategoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

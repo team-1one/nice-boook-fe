@@ -3,7 +3,6 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 
 const router = createRouter({
   routeTree,
-  basepath: '/nice-boook-fe/',
 });
 
 declare module '@tanstack/react-router' {
