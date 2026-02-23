@@ -9,3 +9,9 @@ export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
  */
 export const pickRandom = <T>(array: readonly T[]): T =>
   array[Math.floor(Math.random() * array.length)];
+
+export const withPreventDefault =
+  (fn: () => void) => (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    fn();
+  };
