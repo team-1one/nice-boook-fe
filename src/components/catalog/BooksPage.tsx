@@ -37,10 +37,9 @@ export function BooksPage({ dataFile, title }: Props) {
   const perPageNum = +perPage;
   const currentPage = +page;
 
-  const sortedBooks = useMemo(() => {
-    if (!books) return [];
-    return sort ? getSortedBooks(books, sort) : books;
-  }, [books, sort]);
+  const sortedBooks = useMemo(() => 
+    getSortedBooks(books, sort as SortOption), 
+  [books, sort]);
 
   const paginatedBooks = useMemo(() => {
     const start = (currentPage - 1) * perPageNum;
