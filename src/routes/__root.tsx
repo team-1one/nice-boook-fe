@@ -1,15 +1,23 @@
 import { Navbar } from '@/components/organisms/Navbar';
+import { fetchCategories } from '@/api/supabase';
+import { Footer } from '@/components/organisms/Footer';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 const RootLayout = () => (
-  <>
+  <div className="min-h-screen flex flex-col">
     <header className="sticky top-0 z-50 w-full backdrop-blur border-b-2 mb-3">
       <Navbar />
     </header>
-    <Outlet />
+    <main className="flex-1">
+      <Outlet />
+    </main>
+    <Footer />
     <TanStackRouterDevtools />
-  </>
+  </div>
 );
 
-export const Route = createRootRoute({ component: RootLayout });
+export const Route = createRootRoute({
+  component: RootLayout,
+  loader: () => fetchCategories(),
+});

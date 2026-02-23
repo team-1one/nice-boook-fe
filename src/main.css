@@ -93,14 +93,15 @@
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
-  --gray-primary: #313237;
-  --gray-secondary: #89939A;
+  --gray-primary: oklch(31.809% 0.00899 276.84);
+  --gray-secondary: oklch(65.739% 0.01566 238.296);
   --gray-icons: #B4BDC3;
   --gray-elements: #E2E6E9;
   --gray-hover-bg: #FAFBFC;
   --white: #FFFFFF;
   --green: #27AE60;
   --red: #EB5757;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 .dark {
