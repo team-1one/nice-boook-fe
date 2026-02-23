@@ -10,6 +10,7 @@ import { SortBySelect } from '@/components/catalog/formSortBySelect';
 import { Pagination } from '@/components/catalog/Pagination';
 import { Typography } from '@/components/ui/Typography';
 import type { SortOption } from './typeOfSortOption';
+import { CATALOG_LIMITS } from './constants/catalog';
 
 type BookDataFile =
   | "paperback.json"
@@ -28,8 +29,8 @@ export function BooksPage({ dataFile, title }: Props) {
   const navigator = useNavigate();
 
   const sort = search.sort as SortOption | undefined;
-  const perPage = (search.perPage as string) || '16';
-  const page = (search.page as string) || '1';
+  const perPage = (search.perPage as string) || CATALOG_LIMITS.DEFAULT_PER_PAGE;
+  const page = (search.page as string) || CATALOG_LIMITS.DEFAULT_PAGE;
 
   const perPageNum = +perPage;
   const currentPage = +page;

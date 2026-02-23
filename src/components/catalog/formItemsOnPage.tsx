@@ -1,13 +1,12 @@
 import { Field, FieldLabel } from "../ui/field";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { CATALOG_LIMITS } from './constants/catalog';
 import { Typography } from "../ui/Typography";
 
 export type Props = {
   value: string;
   onChange: (value: string) => void;
 }
-
-const ITEMS_PER_PAGE = [16, 32, 64, 100];
 
 export const ItemsOnPage = ({ value, onChange }: Props) => {
 
@@ -27,7 +26,7 @@ export const ItemsOnPage = ({ value, onChange }: Props) => {
 
           <SelectContent>
             <SelectGroup>
-              {ITEMS_PER_PAGE.map((item) => (
+              {CATALOG_LIMITS.PER_PAGE_OPTIONS.map((item) => (
                 <SelectItem key={item} value={item.toString()}>{item}</SelectItem>
               ))}
             </SelectGroup>

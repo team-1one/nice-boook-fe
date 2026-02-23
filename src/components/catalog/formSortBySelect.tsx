@@ -2,6 +2,7 @@
 import { Field, FieldLabel } from '../ui/field';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Typography } from '../ui/Typography';
+import { SORT_OPTIONS } from './constants/catalog';
 import type { SortOption } from './typeOfSortOption';
 
 export type Props = {
@@ -27,12 +28,11 @@ export const SortBySelect = ({ value, onChange }: Props) => {
 
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="newest">Newest</SelectItem>
-              <SelectItem value="oldest">Oldest</SelectItem>
-              <SelectItem value="cheaper">Cheaper</SelectItem>
-              <SelectItem value="expensive">Expensive</SelectItem>
-              <SelectItem value="name-asc">Name (A-Z)</SelectItem>
-              <SelectItem value="name-desc">Name (Z-A)</SelectItem>
+              {SORT_OPTIONS.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
