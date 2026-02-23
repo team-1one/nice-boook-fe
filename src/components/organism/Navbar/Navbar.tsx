@@ -1,116 +1,185 @@
-import { navBarHeight, navLinks } from './constants';
-import { IconButton, TextNavItem } from './SubComponents';
-
+import { navBarHeight } from './constants';
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/ui/input-group';
+  ActionIconButton,
+  ActionIconLink,
+  CategoriesDropdown,
+  LogoLink,
+  MobileNavLinks,
+  SearchInputControl,
+  SearchMenuAction,
+  TextNavItems,
+} from './SubComponents';
 
+import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Link, rootRouteId, useLoaderData } from '@tanstack/react-router';
 
-import { Heart, Search, ShoppingBag } from 'lucide-react';
+import { Heart, Menu, ShoppingBag, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
 import { CATALOG_LIMITS } from '@/components/catalog/constants/catalog';
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const sortedCategories = useLoaderData({ from: rootRouteId }).sort(
     (prev, next) => prev.localeCompare(next),
   );
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 right-0 left-0 z-50 w-full border-b-2 backdrop-blur-xl">
+    <header className="bg-background/80 sticky top-0 z-50 mb-3 w-full border-b backdrop-blur-md">
+      <div className={cn('flex items-stretch sm:hidden', navBarHeight)}>
+        <div className="flex flex-1 items-center px-5">
+          <LogoLink />
+        </div>
+
+        <Sheet
+          open={isMobileMenuOpen}
+          onOpenChange={setIsMobileMenuOpen}
+        >
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              className="h-full w-16 rounded-none border-l"
+              aria-label="Open navigation menu"
+            >
+              <Menu />
+            </Button>
+          </SheetTrigger>
+
+          <SheetContent
+            side="right"
+            showCloseButton={false}
+            className="w-full max-w-full gap-0 p-0 sm:max-w-full"
+          >
+            <div className="flex h-full flex-col">
+              <div
+                className={cn(
+                  'flex items-center justify-between border-b',
+                  navBarHeight,
+                )}
+              >
+                <SheetClose asChild>
+                  <LogoLink
+                    className="px-4"
+                    onClick={closeMobileMenu}
+                  />
+                </SheetClose>
+
+                <SheetClose asChild>
+                  <ActionIconButton
+                    className="w-14 border-l-0"
+                    aria-label="Close navigation menu"
+                    onClick={closeMobileMenu}
+                  >
+                    <X />
+                  </ActionIconButton>
+                </SheetClose>
+              </div>
+
+              <ScrollArea className="flex-1">
+                <div className="flex min-h-full flex-col px-4 py-8">
+                  <MobileNavLinks onNavigate={closeMobileMenu} />
+
+                  <div className="mt-8 space-y-3">
+                    <SearchInputControl />
+                    <CategoriesDropdown
+                      categories={sortedCategories}
+                      onCategorySelect={closeMobileMenu}
+                    />
+                  </div>
+                </div>
+              </ScrollArea>
+
+              <div className="grid grid-cols-2 border-t">
+                <Link
+                  to="/favorites"
+                  aria-label="Favorites"
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    'hover:bg-accent/60 flex items-center justify-center transition-colors',
+                    navBarHeight,
+                  )}
+                >
+                  <Heart />
+                </Link>
+                <Link
+                  to="/cart"
+                  aria-label="Cart"
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    'hover:bg-accent/60 flex items-center justify-center border-l transition-colors',
+                    navBarHeight,
+                  )}
+                >
+                  <ShoppingBag />
+                </Link>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+
       <NavigationMenu
         viewport={false}
-        className={cn('max-w-full justify-start gap-6 ps-3', navBarHeight)}
+        className={cn(
+          'hidden w-full max-w-full justify-start sm:flex [&>div]:w-full',
+          navBarHeight,
+        )}
       >
-        <NavigationMenuList>
-          <NavigationMenuItem className="h-full">
+        <NavigationMenuList className="w-full min-w-0 gap-0">
+          <NavigationMenuItem className="shrink-0">
             <NavigationMenuLink asChild>
-              <Link to="/">
-                <img
-                  src="/logo.svg"
-                  alt="logo"
-                />
-              </Link>
+              <LogoLink className="px-4 lg:px-5" />
             </NavigationMenuLink>
           </NavigationMenuItem>
-        </NavigationMenuList>
 
-        <NavigationMenuList className="gap-4">
-          {navLinks.map(({ label, link }) => (
-            <TextNavItem
-              key={`${label}-${link.to}`}
-              label={label}
-              link={link}
+          <TextNavItems />
+
+          <NavigationMenuItem className="ml-auto hidden min-w-0 flex-1 items-center px-3 2xl:flex">
+            <SearchInputControl className="max-w-md" />
+          </NavigationMenuItem>
+
+          <NavigationMenuItem className="hidden px-3 2xl:block">
+            <CategoriesDropdown
+              categories={sortedCategories}
+              triggerClassName="min-w-56"
             />
-          ))}
-        </NavigationMenuList>
+          </NavigationMenuItem>
 
-        {/* HACK: kludge to flex elements correctly */}
-        <div className="flex-1" />
+          <NavigationMenuItem className="2xl:hidden">
+            <SearchMenuAction />
+          </NavigationMenuItem>
 
-        <NavigationMenuList className={navBarHeight}>
           <NavigationMenuItem>
-            <InputGroup>
-              <InputGroupAddon align="inline-start">
-                <Search />
-              </InputGroupAddon>
-              <InputGroupInput
-                type="search"
-                placeholder="Find a book or author"
-              />
-            </InputGroup>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem className="rounded-md border">
-            <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
-            <NavigationMenuContent className="h-96">
-              <ScrollArea className="h-full">
-                <ul>
-                  {sortedCategories.map((category) => (
-                    <li key={category}>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/category/$category"
-                          params={{ category }}
-                          search={{
-                            order: 'desc',
-                            sortBy: 'newest',
-                            page: CATALOG_LIMITS.DEFAULT_PAGE,
-                            pageSize: CATALOG_LIMITS.DEFAULT_PER_PAGE,
-                          }}
-                        >
-                          {category}
-                        </Link>
-                      </NavigationMenuLink>
-                      <Separator />
-                    </li>
-                  ))}
-                </ul>
-              </ScrollArea>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          <div className="ms-4 flex">
-            <IconButton link={{ to: '/favorites' }}>
+            <ActionIconLink
+              link={{ to: '/favorites' }}
+              ariaLabel="Favorites"
+            >
               <Heart />
-            </IconButton>
-            <IconButton link={{ to: '/cart' }}>
+            </ActionIconLink>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <ActionIconLink
+              link={{ to: '/cart' }}
+              ariaLabel="Cart"
+            >
               <ShoppingBag />
-            </IconButton>
-          </div>
+            </ActionIconLink>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </header>

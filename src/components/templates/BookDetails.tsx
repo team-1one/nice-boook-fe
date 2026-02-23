@@ -26,7 +26,7 @@ const BookDetails = () => {
   ];
 
   return (
-    <article className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-6 md:px-6 lg:px-8">
+    <article className="mx-auto flex w-full max-w-full flex-col gap-16 overflow-x-hidden px-4 py-6 md:px-6 lg:px-8">
       <BookHeader
         title={book.name}
         author={book.author}
