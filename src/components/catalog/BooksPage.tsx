@@ -11,14 +11,28 @@ import { Pagination } from '@/components/catalog/Pagination';
 import { Typography } from '@/components/ui/Typography';
 import type { SortOption } from './typeOfSortOption';
 
-export function PaperPage() {
-  const { data: books } = useBookData('paperback.json');
+type BookDataFile =
+  | "paperback.json"
+  | "kindle.json"
+  | "audiobook.json";
 
-  const { sort, perPage, page } = useSearch({from: '/paper'});
-  const navigator = useNavigate({ from: '/paper' });
+type Props = {
+  dataFile: BookDataFile;
+  title: string;
+};
 
-  const perPageNum = +perPage || 16;
-  const currentPage = +page || 1;
+export function BooksPage({ dataFile, title }: Props) {
+  const { data: books } = useBookData(dataFile);
+
+  const search = useSearch({ strict: false }); 
+  const navigator = useNavigate();
+
+  const sort = search.sort as SortOption | undefined;
+  const perPage = (search.perPage as string) || '16';
+  const page = (search.page as string) || '1';
+
+  const perPageNum = +perPage;
+  const currentPage = +page;
 
   const sortedBooks = useMemo(() => {
     if (!books) return [];
@@ -33,47 +47,56 @@ export function PaperPage() {
   const totalPages = Math.ceil(sortedBooks.length / perPageNum);
 
   const handleSortChange = (newValue: SortOption) => { 
-  navigator({ search: (prev) => ({
-    ...prev,
+  navigator({
+    to: '.',
+    search: {
+    ...search,
     sort: newValue === '' ? undefined : newValue,
     page: '1',
-  })});
+  }});
  };
 
   const handleItemsPerPageChange = (newValue: string) => { 
-    navigator({ search: (prev) => (
-      { ...prev, 
+    navigator({ 
+      to: '.',
+      search: { 
+      ...search,
         perPage: newValue,
         page: '1',
-      }), 
-    }); 
+      }});
   };
   
   const handleNextPage = () => { 
     if (currentPage >= totalPages) return; 
     const nextPage = currentPage + 1; 
-    navigator({ search: (prev) => (
-      { ...prev, 
+    navigator({ 
+      to: '.',
+      search: {
+        ...search,
         page: nextPage.toString(),
-      }),
+      }
     }); 
   } 
     
   const handlePreviousPage = () => { 
     if (currentPage <= 1) return; 
     const nextPage = currentPage - 1; 
-    navigator({ search: (prev) => (
-      { ...prev, 
+    navigator({ 
+      to: '.',
+      search: {
+        ...search,
         page: nextPage.toString(),
-      }),
+      }
     }); 
   } 
         
   const handlePageClick = (newPage: number) => { 
-    navigator({ search: (prev) => (
-      { ...prev, 
+    navigator({ 
+      to: '.',
+      search: {
+        ...search,
         page: newPage.toString(),
-      }),
+      }
     });
   };
 
@@ -94,7 +117,7 @@ export function PaperPage() {
     ">
       <section className="mt-8 sm:mt-16 mb-6">
         <Typography variant="h1" className="mb-2">
-          Paper books
+          {title}
         </Typography>
 
         <Typography variant="body" color="secondary" className="mb-10">

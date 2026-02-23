@@ -7,8 +7,11 @@ import type { SortOption } from "../typeOfSortOption";
 
     const sorted = [...books];
 
-    const getActualPrice = (book: BookData) =>
-      book.priceDiscount ?? book.priceRegular;
+    const getActualPrice = (book: BookData) => {
+      return book.priceDiscount != null
+        ? book.priceDiscount
+        : book.priceRegular;
+    };
     
     switch (sortOption) {
       case "newest":
