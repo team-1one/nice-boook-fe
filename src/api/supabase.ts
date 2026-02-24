@@ -148,6 +148,8 @@ const bookFetchers: Record<BookFetchType, (limit: number) => Promise<Book[]>> =
  */
 export const getBooks = (type: BookFetchType, limit = 8): Promise<Book[]> => {
   return bookFetchers[type](limit);
+};
+
 interface FetchBookArgs {
   filterOption: Extract<BookFields, 'categories' | 'type'>;
   value: string;
