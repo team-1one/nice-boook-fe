@@ -24,6 +24,7 @@ export const BaseBookSchema = z.object({
   lang_available: z.array(BookLangSchema),
   price_regular: z.number().nonnegative(),
   price_discount: z.number().nonnegative().nullable(),
+  effective_price: z.number().nonnegative(),
   publication: z.string(),
   publication_year: z.int(),
   description: z.array(z.string()),

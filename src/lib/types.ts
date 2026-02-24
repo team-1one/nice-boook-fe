@@ -1,4 +1,4 @@
-import type { LinkProps, RegisteredRouter } from '@tanstack/react-router';
+import type { LinkOptions } from '@tanstack/react-router';
 
 export const TABLES = {
   booksFlat: 'books_flat',
@@ -6,6 +6,6 @@ export const TABLES = {
   banners: 'banners',
 } as const;
 
-export type AppPath = Exclude<LinkProps<RegisteredRouter>['to'], undefined>;
+export type AppPath = LinkOptions['to'];
 
 export type BookFetchType = 'new' | 'random';

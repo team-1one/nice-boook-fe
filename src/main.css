@@ -57,7 +57,7 @@
   --color-white: var(--white);
   --color-green: var(--green);
   --color-red: var(--red);
-  }
+}
 
 :root {
   --radius: 0.625rem;
@@ -95,12 +95,12 @@
 
   --gray-primary: oklch(31.809% 0.00899 276.84);
   --gray-secondary: oklch(65.739% 0.01566 238.296);
-  --gray-icons: #B4BDC3;
-  --gray-elements: #E2E6E9;
-  --gray-hover-bg: #FAFBFC;
-  --white: #FFFFFF;
-  --green: #27AE60;
-  --red: #EB5757;
+  --gray-icons: #b4bdc3;
+  --gray-elements: #e2e6e9;
+  --gray-hover-bg: #fafbfc;
+  --white: #ffffff;
+  --green: #27ae60;
+  --red: #eb5757;
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 

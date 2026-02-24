@@ -43,9 +43,7 @@ const BookImage = ({ book }: BookImageProps) => {
   const isEbook = book.type === 'kindle' || book.type === 'audiobook';
   const isAudioBook = book.type === 'audiobook';
 
-  // FIXME: Remove these consts, they must be in props
-  const bookImageUrl = book.images[0] ?? 'https://placehold.co/320x320';
-  const imgProps = { src: bookImageUrl, alt: book.name };
+  const imgProps = { src: book.images[0], alt: book.name };
 
   return (
     <div className="relative shrink-0 overflow-hidden">

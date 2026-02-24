@@ -1,7 +1,8 @@
+import type { BookType } from '@/lib/schemas/book.schema';
 import { Link } from '@tanstack/react-router';
 
 export type Props = {
-  type: string;
+  type: BookType;
   imageUrl: string;
   count: number;
 };
@@ -9,7 +10,11 @@ export type Props = {
 export const BookCategoryCard = ({ type, imageUrl, count }: Props) => {
   return (
     <div className="flex-auto transition-shadow duration-300 hover:shadow-lg">
-      <Link to={`/`}>
+      <Link
+        to={`/bookType/$bookType`}
+        search={{ sortBy: 'newest', order: 'desc', page: 1, pageSize: 16 }}
+        params={{ bookType: type }}
+      >
         <img
           src={imageUrl}
           alt={type}

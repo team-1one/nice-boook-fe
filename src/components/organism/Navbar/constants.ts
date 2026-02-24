@@ -1,3 +1,4 @@
+import { CATALOG_LIMITS } from '@/components/catalog/constants/catalog';
 import { BookTypeSchema } from '@/lib/schemas/book.schema';
 import { cn } from '@/lib/utils';
 import { linkOptions } from '@tanstack/react-router';
@@ -12,11 +13,19 @@ export const underlineClasses =
 
 export const activeLinkClasses = '[&>div]:opacity-100';
 
+const defaultCatalogSearch = {
+  page: CATALOG_LIMITS.DEFAULT_PAGE,
+  pageSize: CATALOG_LIMITS.DEFAULT_PER_PAGE,
+  sortBy: 'newest' as const,
+  order: 'desc' as const,
+};
+
 const bookTypeLinks = BookTypeSchema.options.map((bookType) => ({
   label: bookType,
   link: linkOptions({
     to: '/bookType/$bookType',
     params: { bookType },
+    search: defaultCatalogSearch,
   }),
 }));
 

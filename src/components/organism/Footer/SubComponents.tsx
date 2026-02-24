@@ -38,7 +38,7 @@ export const BackToTop = () => (
   <button
     type="button"
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-    className="flex cursor-pointer items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+    className="text-muted-foreground hover:text-foreground flex cursor-pointer items-center gap-1 text-sm transition-colors"
   >
     <span>Back to top</span>
     <ChevronUp className="h-4 w-4" />

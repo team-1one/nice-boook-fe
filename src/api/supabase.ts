@@ -70,7 +70,7 @@ export const fetchBookBySlug = async (id: string): Promise<Book> => {
 };
 
 export const fetchBooksByEdition = async (
-  id: string,
+  namespaceId: string,
   bookType: BookType,
 ): Promise<Book[]> => {
   const idColumn: BookFields = 'namespace_id';
@@ -79,7 +79,7 @@ export const fetchBooksByEdition = async (
   const { data, error } = await supabase
     .from(TABLES.booksFlat)
     .select('*')
-    .eq(idColumn, id)
+    .eq(idColumn, namespaceId)
     .eq(typeColumn, bookType);
 
   if (error) throw new Error(error.message);
@@ -148,4 +148,50 @@ const bookFetchers: Record<BookFetchType, (limit: number) => Promise<Book[]>> =
  */
 export const getBooks = (type: BookFetchType, limit = 8): Promise<Book[]> => {
   return bookFetchers[type](limit);
+interface FetchBookArgs {
+  filterOption: Extract<BookFields, 'categories' | 'type'>;
+  value: string;
+  sortBy: BookFields;
+  sortOrder: 'asc' | 'desc';
+  page: number;
+  pageSize: number;
+}
+
+export const fetchBooks = async ({
+  filterOption,
+  value,
+  sortBy,
+  sortOrder,
+  page,
+  pageSize,
+}: FetchBookArgs) => {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const getBaseQuery = () =>
+    supabase.from(TABLES.booksFlat).select('*', { count: 'exact' });
+
+  const scenario = {
+    categories: () =>
+      getBaseQuery()
+        .contains('categories', [value])
+        .order(sortBy, { ascending: sortOrder === 'asc' })
+        .range(from, to),
+
+    type: () =>
+      getBaseQuery()
+        .eq('type', value)
+        .order(sortBy, { ascending: sortOrder === 'asc' })
+        .range(from, to),
+  };
+
+  const { data, count, error } = await scenario[filterOption]();
+
+  if (error) throw new Error(error.message);
+
+  const parsed = await z.array(BookSchema).safeParseAsync(data);
+
+  if (!parsed.success) throw new Error(parsed.error.message);
+
+  return { data: parsed.data, total: count ?? 0 };
 };

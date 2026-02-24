@@ -1,21 +1,24 @@
-import type { SortOption } from '@/components/catalog/typeOfSortOption';
+import type { BookFields } from '@/lib/schemas/book.schema';
 
-export type BookSearch = {
-  sort?: SortOption;
-  perPage: string;
-  page: string;
-};
+export const SORT_SEARCH_KEYS = [
+  'newest',
+  'oldest',
+  'cheaper',
+  'expensive',
+  'name-asc',
+  'name-desc',
+] as const;
 
-const defaultSearch: BookSearch = {
-  sort: undefined,
-  perPage: '16',
-  page: '1',
-};
+export type SortSearchKey = (typeof SORT_SEARCH_KEYS)[number];
 
-export const validateBookSearch = (search: Record<string, unknown>): BookSearch => {
-  return {
-    sort: (search.sort as SortOption) || defaultSearch.sort,
-    perPage: (search.perPage as string) || defaultSearch.perPage,
-    page: (search.page as string) || defaultSearch.page,
-  };
-};
+export const sortSearchProps: Record<
+  SortSearchKey,
+  { sort: BookFields; order: 'asc' | 'desc' }
+> = {
+  'newest': { sort: 'publication_year', order: 'desc' },
+  'oldest': { sort: 'publication_year', order: 'asc' },
+  'cheaper': { sort: 'effective_price', order: 'asc' },
+  'expensive': { sort: 'effective_price', order: 'desc' },
+  'name-asc': { sort: 'name', order: 'asc' },
+  'name-desc': { sort: 'name', order: 'desc' },
+} as const;
