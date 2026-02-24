@@ -6,18 +6,18 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { BookCard } from '@/components/books/BookCard';
-import type { BookData } from '@/types/book';
+import type { Book } from '@/lib/schemas/book.schema';
 
 interface BookSliderProps {
-  books: BookData[];
+  books: Book[];
   title?: string;
 }
 
 export const BookSlider = ({ books, title }: BookSliderProps) => {
   return (
-    <section className="w-full max-w-270 mx-auto py-8">
+    <section className="mx-auto w-full max-w-270 py-8">
       <Carousel opts={{ align: 'start', loop: false }}>
-        <div className="flex items-center justify-between mb-6">
+        <div className="mb-6 flex items-center justify-between">
           {title && <h2 className="text-2xl font-bold">{title}</h2>}
           <div className="flex items-center gap-2">
             <CarouselPrevious className="static translate-x-0 translate-y-0" />
@@ -29,9 +29,9 @@ export const BookSlider = ({ books, title }: BookSliderProps) => {
           {books.map((book) => (
             <CarouselItem
               key={book.id}
-              className="pl-4 basis-1/2 sm:basis-1/3 lg:basis-1/4"
+              className="basis-1/2 pl-4 sm:basis-1/3 lg:basis-1/4"
             >
-              <BookCard product={book} />
+              <BookCard book={book} />
             </CarouselItem>
           ))}
         </CarouselContent>

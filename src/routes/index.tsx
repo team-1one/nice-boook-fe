@@ -65,15 +65,6 @@ function Index() {
       />
       <div className="p-2">
         <BookCategories />
-        {/* // TODO: replace; just a representation */}
-        <Button asChild>
-          <Link
-            to="/$bookSlug"
-            params={{ bookSlug: 'dont-make-me-think-uk-paperback' }}
-          >
-            <BugPlay />
-          </Link>
-        </Button>
       </div>
       <BookSlider
         books={mightLikeBooks}

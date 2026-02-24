@@ -28,7 +28,7 @@ interface BookCardProps {
 // TODO: Implement currency conversion and localization for price display
 // TODO: Remove hardcoded colors, sizes etc. from classnames
 
-export const BookCard = ({ cardProps, book: product }: BookCardProps) => {
+export const BookCard = ({ cardProps, book }: BookCardProps) => {
   // TODO: use global state management for cart and wishlist status instead of local state in component
   const [{ isInCart, isWishlisted }, setState] = useState<BookCardState>({
     isInCart: false,
@@ -44,23 +44,21 @@ export const BookCard = ({ cardProps, book: product }: BookCardProps) => {
   return (
     <Link
       to="/$bookSlug"
-      params={{ bookSlug: product.slug }}
+      params={{ bookSlug: book.slug }}
     >
       <Card {...cardProps}>
-        <BookImage book={product} />
+        <BookImage book={book} />
 
         <CardHeader className="gap-1">
-          <h5 className="truncate font-medium">{product.name}</h5>
-          <span className="truncate text-sm text-[#89939A]">
-            {product.author}
-          </span>
+          <h5 className="truncate font-medium">{book.name}</h5>
+          <span className="truncate text-sm text-[#89939A]">{book.author}</span>
         </CardHeader>
 
         <CardContent>
           <div className="mb-2 flex items-center gap-2">
-            <h3 className="font-semibold">{`₴${product.price_regular ?? product.price_regular}`}</h3>
-            {product.price_discount && (
-              <h4 className="text-muted-foreground text-sm line-through">{`₴${product.price_regular}`}</h4>
+            <h3 className="font-semibold">{`₴${book.price_discount ?? book.price_regular}`}</h3>
+            {book.price_discount && (
+              <h4 className="text-muted-foreground text-sm line-through">{`₴${book.price_regular}`}</h4>
             )}
           </div>
 
