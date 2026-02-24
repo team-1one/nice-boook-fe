@@ -51,6 +51,12 @@
 
   --color-gray-primary: var(--gray-primary);
   --color-gray-secondary: var(--gray-secondary);
+  --color-gray-icons: var(--gray-icons);
+  --color-gray-elements: var(--gray-elements);
+  --color-gray-hover-bg: var(--gray-hover-bg);
+  --color-white: var(--white);
+  --color-green: var(--green);
+  --color-red: var(--red);
 }
 
 :root {
@@ -89,6 +95,12 @@
 
   --gray-primary: oklch(31.809% 0.00899 276.84);
   --gray-secondary: oklch(65.739% 0.01566 238.296);
+  --gray-icons: #b4bdc3;
+  --gray-elements: #e2e6e9;
+  --gray-hover-bg: #fafbfc;
+  --white: #ffffff;
+  --green: #27ae60;
+  --red: #eb5757;
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
@@ -129,10 +141,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
     @apply bg-background text-foreground;
   }
 }

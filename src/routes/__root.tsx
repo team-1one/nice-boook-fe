@@ -1,19 +1,28 @@
 import { fetchCategories } from '@/api/supabase';
+import { Footer } from '@/components/organism/Footer';
 import { Navbar } from '@/components/organism/Navbar';
-import { Footer } from '@/components/organisms/Footer';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { Suspense, lazy } from 'react';
+
+const TanStackRouterDevtools =
+  import.meta.env.DEV ?
+    lazy(() =>
+      import('@tanstack/react-router-devtools').then((module) => ({
+        default: module.TanStackRouterDevtools,
+      })),
+    )
+  : () => null;
 
 const RootLayout = () => (
-  <div className="min-h-screen flex flex-col">
-    <header className="sticky top-0 z-50 w-full backdrop-blur border-b-2 mb-3">
-      <Navbar />
-    </header>
+  <div className="flex min-h-screen flex-col">
+    <Navbar />
     <main className="flex-1">
       <Outlet />
     </main>
     <Footer />
-    <TanStackRouterDevtools />
+    <Suspense fallback={null}>
+      <TanStackRouterDevtools />
+    </Suspense>
   </div>
 );
 

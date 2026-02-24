@@ -10,12 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RightsRouteImport } from './routes/rights'
-import { Route as PaperRouteImport } from './routes/paper'
-import { Route as KindleRouteImport } from './routes/kindle'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as CartRouteImport } from './routes/cart'
-import { Route as AudiobookRouteImport } from './routes/audiobook'
 import { Route as BookSlugRouteImport } from './routes/$bookSlug'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
@@ -24,16 +21,6 @@ import { Route as BookTypeBookTypeRouteImport } from './routes/bookType/$bookTyp
 const RightsRoute = RightsRouteImport.update({
   id: '/rights',
   path: '/rights',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PaperRoute = PaperRouteImport.update({
-  id: '/paper',
-  path: '/paper',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KindleRoute = KindleRouteImport.update({
-  id: '/kindle',
-  path: '/kindle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FavoritesRoute = FavoritesRouteImport.update({
@@ -49,11 +36,6 @@ const ContactsRoute = ContactsRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AudiobookRoute = AudiobookRouteImport.update({
-  id: '/audiobook',
-  path: '/audiobook',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookSlugRoute = BookSlugRouteImport.update({
@@ -80,12 +62,9 @@ const BookTypeBookTypeRoute = BookTypeBookTypeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$bookSlug': typeof BookSlugRoute
-  '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
   '/contacts': typeof ContactsRoute
   '/favorites': typeof FavoritesRoute
-  '/kindle': typeof KindleRoute
-  '/paper': typeof PaperRoute
   '/rights': typeof RightsRoute
   '/bookType/$bookType': typeof BookTypeBookTypeRoute
   '/category/$category': typeof CategoryCategoryRoute
@@ -93,12 +72,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$bookSlug': typeof BookSlugRoute
-  '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
   '/contacts': typeof ContactsRoute
   '/favorites': typeof FavoritesRoute
-  '/kindle': typeof KindleRoute
-  '/paper': typeof PaperRoute
   '/rights': typeof RightsRoute
   '/bookType/$bookType': typeof BookTypeBookTypeRoute
   '/category/$category': typeof CategoryCategoryRoute
@@ -107,12 +83,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$bookSlug': typeof BookSlugRoute
-  '/audiobook': typeof AudiobookRoute
   '/cart': typeof CartRoute
   '/contacts': typeof ContactsRoute
   '/favorites': typeof FavoritesRoute
-  '/kindle': typeof KindleRoute
-  '/paper': typeof PaperRoute
   '/rights': typeof RightsRoute
   '/bookType/$bookType': typeof BookTypeBookTypeRoute
   '/category/$category': typeof CategoryCategoryRoute
@@ -122,12 +95,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$bookSlug'
-    | '/audiobook'
     | '/cart'
     | '/contacts'
     | '/favorites'
-    | '/kindle'
-    | '/paper'
     | '/rights'
     | '/bookType/$bookType'
     | '/category/$category'
@@ -135,12 +105,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$bookSlug'
-    | '/audiobook'
     | '/cart'
     | '/contacts'
     | '/favorites'
-    | '/kindle'
-    | '/paper'
     | '/rights'
     | '/bookType/$bookType'
     | '/category/$category'
@@ -148,12 +115,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$bookSlug'
-    | '/audiobook'
     | '/cart'
     | '/contacts'
     | '/favorites'
-    | '/kindle'
-    | '/paper'
     | '/rights'
     | '/bookType/$bookType'
     | '/category/$category'
@@ -162,12 +126,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookSlugRoute: typeof BookSlugRoute
-  AudiobookRoute: typeof AudiobookRoute
   CartRoute: typeof CartRoute
   ContactsRoute: typeof ContactsRoute
   FavoritesRoute: typeof FavoritesRoute
-  KindleRoute: typeof KindleRoute
-  PaperRoute: typeof PaperRoute
   RightsRoute: typeof RightsRoute
   BookTypeBookTypeRoute: typeof BookTypeBookTypeRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
@@ -180,20 +141,6 @@ declare module '@tanstack/react-router' {
       path: '/rights'
       fullPath: '/rights'
       preLoaderRoute: typeof RightsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/paper': {
-      id: '/paper'
-      path: '/paper'
-      fullPath: '/paper'
-      preLoaderRoute: typeof PaperRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kindle': {
-      id: '/kindle'
-      path: '/kindle'
-      fullPath: '/kindle'
-      preLoaderRoute: typeof KindleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/favorites': {
@@ -215,13 +162,6 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/audiobook': {
-      id: '/audiobook'
-      path: '/audiobook'
-      fullPath: '/audiobook'
-      preLoaderRoute: typeof AudiobookRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$bookSlug': {
@@ -258,12 +198,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookSlugRoute: BookSlugRoute,
-  AudiobookRoute: AudiobookRoute,
   CartRoute: CartRoute,
   ContactsRoute: ContactsRoute,
   FavoritesRoute: FavoritesRoute,
-  KindleRoute: KindleRoute,
-  PaperRoute: PaperRoute,
   RightsRoute: RightsRoute,
   BookTypeBookTypeRoute: BookTypeBookTypeRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
