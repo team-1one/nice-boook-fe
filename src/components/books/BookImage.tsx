@@ -44,7 +44,7 @@ const BookImage = ({ book }: BookImageProps) => {
   const isAudioBook = book.type === 'audiobook';
 
   // FIXME: Remove these consts, they must be in props
-  const bookImageUrl = 'https://placehold.co/320x320';
+  const bookImageUrl = book.images[0] ?? 'https://placehold.co/320x320';
   const imgProps = { src: bookImageUrl, alt: book.name };
 
   return (

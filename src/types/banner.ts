@@ -7,5 +7,5 @@ export interface BannerImages {
 export interface BannerData {
   id: string;
   images: BannerImages;
-  linkUrl: string;
+  target_url: string;
 }

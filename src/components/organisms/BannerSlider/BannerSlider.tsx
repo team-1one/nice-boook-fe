@@ -7,9 +7,9 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import type { BannerData } from '@/types/banner';
+import { Link } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { Link } from '@tanstack/react-router';
 
 interface BannerSliderProps {
   items: BannerData[];
@@ -32,24 +32,24 @@ export const BannerSlider = ({ items }: BannerSliderProps) => {
   }, [api]);
 
   return (
-    <section className="w-full max-w-270 mx-auto px-16">
+    <section className="mx-auto w-full max-w-270 px-16">
       <Carousel
         opts={{ align: 'start', loop: true }}
         setApi={setApi}
         className="relative"
       >
         {/* Side arrows — vertically centered on the banner */}
-        <CarouselPrevious className="absolute -left-14 top-1/2 -translate-y-1/2 z-10" />
-        <CarouselNext className="absolute -right-14 top-1/2 -translate-y-1/2 z-10" />
+        <CarouselPrevious className="absolute top-1/2 -left-14 z-10 -translate-y-1/2" />
+        <CarouselNext className="absolute top-1/2 -right-14 z-10 -translate-y-1/2" />
 
         <div className="overflow-hidden rounded-2xl">
           <CarouselContent className="ml-0">
             {items.map((item) => (
               <CarouselItem
                 key={item.id}
-                className="pl-0 relative"
+                className="relative pl-0"
               >
-                <Link to={item.linkUrl}>
+                <Link to={item.target_url}>
                   <picture>
                     {item.images.mobile && (
                       <source
@@ -66,7 +66,7 @@ export const BannerSlider = ({ items }: BannerSliderProps) => {
                     <img
                       src={item.images.desktop}
                       alt={`Banner ${item.id}`}
-                      className="w-full h-auto object-cover block"
+                      className="block h-auto w-full object-cover"
                     />
                   </picture>
                 </Link>
@@ -76,7 +76,7 @@ export const BannerSlider = ({ items }: BannerSliderProps) => {
         </div>
 
         {/* Dots — inside the banner at the bottom center */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+        <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
           {Array.from({ length: count }).map((_, index) => (
             <button
               key={index}

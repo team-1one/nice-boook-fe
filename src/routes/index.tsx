@@ -1,24 +1,25 @@
 import { BannerSlider } from '@/components/organisms/BannerSlider/BannerSlider';
-import { BookSlider } from '@/components/organisms/Books/BookSlider';
-import phrases from '@/constants/phrases';
-import { useBookData } from '@/hooks/useBooks';
-import type { BannerData } from '@/types/banner';
-import { createFileRoute } from '@tanstack/react-router';
-import { fetchBookCount } from '@/api/supabase';
 import { BookCategories } from '@/components/ShopByCategory/BookCategories';
-import { Button } from '@/components/ui/button';
+import { createFileRoute, getRouteApi, Link } from '@tanstack/react-router';
+import { fetchBookCount, getBanners, getBooks } from '@/api/supabase';
+import { BookSlider } from '@/components/organisms/Books/BookSlider';
 import { BookTypeSchema } from '@/lib/schemas/book.schema';
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { Button } from '@/components/ui/button';
+import phrases from '@/constants/phrases';
 import { BugPlay } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: Index,
   loader: async () => {
-    const [kindle, paperback, audiobook] = await Promise.all([
-      fetchBookCount('kindle'),
-      fetchBookCount('paperback'),
-      fetchBookCount('audiobook'),
-    ]);
+    const [kindle, paperback, audiobook, banners, newBooks, randomBooks] =
+      await Promise.all([
+        fetchBookCount('kindle'),
+        fetchBookCount('paperback'),
+        fetchBookCount('audiobook'),
+        getBanners(),
+        getBooks('new'),
+        getBooks('random', 16),
+      ]);
     return {
       // TODO: extract to separate file
       bookTypeCounts: [
@@ -41,27 +42,25 @@ export const Route = createFileRoute('/')({
             'https://cxqrvyjozjyswjemkfhk.supabase.co/storage/v1/object/public/books/img/category/paper_books.svg',
         },
       ],
+      // New books for home page
+      newBooks,
+      // Random books for "You might like" section
+      mightLikeBooks: randomBooks,
+      // Banners for home page
+      banners,
     };
   },
 });
 
 function Index() {
-  const { data: books, loading, error } = useBookData('paperback.json');
-
-  if (loading) return <div className="flex justify-center p-8">Loading...</div>;
-  if (error)
-    return (
-      <div className="flex justify-center p-8 text-destructive">{error}</div>
-    );
-  if (!books) return null;
-
-  const slicedBooks = books.slice(0, 8);
+  const { newBooks, banners, mightLikeBooks } =
+    getRouteApi('/').useLoaderData();
 
   return (
     <>
       <BannerSlider items={banners} />
       <BookSlider
-        books={slicedBooks}
+        books={newBooks}
         title={phrases.newBooks}
       />
       <div className="p-2">
@@ -77,43 +76,9 @@ function Index() {
         </Button>
       </div>
       <BookSlider
-        books={slicedBooks}
+        books={mightLikeBooks}
         title={phrases.mightLike}
       />
     </>
   );
 }
-
-// Temporarily hardcoded data till database usage is implemented.
-const BASE_BANNER_URL =
-  'https://cxqrvyjozjyswjemkfhk.supabase.co/storage/v1/object/public/books/img/banner';
-
-const banners: BannerData[] = [
-  {
-    id: '1',
-    images: {
-      desktop: `${BASE_BANNER_URL}/desktopBanner1.webp`,
-      tablet: `${BASE_BANNER_URL}/tabletBanner1.webp`,
-      mobile: `${BASE_BANNER_URL}/mobileBanner1.webp`,
-    },
-    linkUrl: '/books/dont-make-me-think-en-paperback',
-  },
-  {
-    id: '2',
-    images: {
-      desktop: `${BASE_BANNER_URL}/desktopBanner2.webp`,
-      tablet: `${BASE_BANNER_URL}/tabletBanner2.webp`,
-      mobile: `${BASE_BANNER_URL}/mobileBanner2.webp`,
-    },
-    linkUrl: '/books/dont-make-me-think-en-paperback',
-  },
-  {
-    id: '3',
-    images: {
-      desktop: `${BASE_BANNER_URL}/desktopBanner3.webp`,
-      tablet: `${BASE_BANNER_URL}/tabletBanner3.webp`,
-      mobile: `${BASE_BANNER_URL}/mobileBanner3.webp`,
-    },
-    linkUrl: '/books/dont-make-me-think-en-paperback',
-  },
-];
