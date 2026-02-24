@@ -13,7 +13,7 @@ import { TABLES } from '@/lib/types';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 
-const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY);
+export const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY);
 supabase.storage.from('books');
 
 export function getImageUrl(path: string) {
@@ -81,6 +81,6 @@ export const fetchBooksByEdition = async (
   const parsed = z.array(BookSchema).safeParse(data);
 
   if (!parsed.success) throw new Error(parsed.error.message);
-
+  console.log(data);
   return parsed.data;
 };

@@ -1,32 +1,56 @@
-import type { BookData } from "@/types/book";
 import type { SortOption } from "../typeOfSortOption";
+import type { Book } from "@/lib/schemas/book.schema";
 
-const getActualPrice = (book: BookData) => {
-  return book.priceDiscount != null
-    ? book.priceDiscount
-    : book.priceRegular;
+const getActualPrice = (book: Book): number => {
+  return book.price_discount != null
+    ? book.price_discount
+    : book.price_regular;
 };
 
-export const getSortedBooks = (books: BookData[] | null, sortOption: SortOption): BookData[] => {
+export const getSortedBooks = (
+  books: Book[] | null,
+  sortOption: SortOption
+): Book[] => {
   if (!books) return [];
-  if (!sortOption) return books;
 
   const sorted = [...books];
-  
+
   switch (sortOption) {
     case "newest":
-      return sorted.sort((a, b) => Number(b.publicationYear) - Number(a.publicationYear));
+      return sorted.sort(
+        (a, b) =>
+          Number(b.publication_year) - Number(a.publication_year)
+      );
+
     case "oldest":
-      return sorted.sort((a, b) => Number(a.publicationYear) - Number(b.publicationYear));
+      return sorted.sort(
+        (a, b) =>
+          Number(a.publication_year) - Number(b.publication_year)
+      );
+
     case "name-asc":
-      return sorted.sort((a, b) => a.name.localeCompare(b.name));
+      return sorted.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+
     case "name-desc":
-      return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      return sorted.sort((a, b) =>
+        b.name.localeCompare(a.name)
+      );
+
     case "cheaper":
-      return sorted.sort((a, b) => getActualPrice(a) - getActualPrice(b));
+      return sorted.sort(
+        (a, b) =>
+          getActualPrice(a) - getActualPrice(b)
+      );
+
     case "expensive":
-      return sorted.sort((a, b) => getActualPrice(b) - getActualPrice(a));
+      return sorted.sort(
+        (a, b) =>
+          getActualPrice(b) - getActualPrice(a)
+      );
+
     default:
-      return books;
+      return sorted;
   }
 };

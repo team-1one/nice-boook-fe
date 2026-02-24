@@ -1,7 +1,5 @@
 import { useEffect, useMemo } from 'react';
 import { useSearch } from '@tanstack/react-router';
-
-import { useBookData } from '@/hooks/useBooks';
 import { getSortedBooks } from '@/components/catalog/utilits/getSortedBooks';
 
 import { CatalogGrid } from '@/components/catalog/CatalogGrid';
@@ -12,20 +10,14 @@ import { Typography } from '@/components/ui/Typography';
 import type { SortOption } from './typeOfSortOption';
 import { CATALOG_LIMITS } from './constants/catalog';
 import { useUpdateSearch } from './hooks/useUpdateSearch';
-
-type BookDataFile =
-  | "paperback.json"
-  | "kindle.json"
-  | "audiobook.json";
+import type { Book } from '@/lib/schemas/book.schema';
 
 type Props = {
-  dataFile: BookDataFile;
+  books: Book[];
   title: string;
 };
 
-export function BooksPage({ dataFile, title }: Props) {
-  const { data: books } = useBookData(dataFile);
-
+export function BooksPage({ books, title }: Props) {
   const updateSearch = useUpdateSearch();
 
   const search = useSearch({ strict: false });
