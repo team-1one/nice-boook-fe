@@ -30,7 +30,7 @@ export default tseslint.config(
     },
     settings: {
       'react': {
-        version: 'detect',
+        version: '19.2.4',
       },
       'import/resolver': {
         node: {
@@ -54,6 +54,13 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+    },
+  },
+  {
+    files: ['src/routes/**/*.tsx'],
+    rules: {
+      'react/no-multi-comp': 'off',
+      'react-refresh/only-export-components': 'off',
     },
   },
 );

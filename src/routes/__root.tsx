@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/organisms/Navbar';
+import { fetchCategories } from '@/api/supabase';
 import { Footer } from '@/components/organisms/Footer';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
@@ -16,4 +17,7 @@ const RootLayout = () => (
   </div>
 );
 
-export const Route = createRootRoute({ component: RootLayout });
+export const Route = createRootRoute({
+  component: RootLayout,
+  loader: () => fetchCategories(),
+});

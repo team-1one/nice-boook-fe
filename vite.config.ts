@@ -14,7 +14,6 @@ export default defineConfig({
     }),
     react(),
   ],
-  base: '/',
 
   resolve: {
     alias: {
