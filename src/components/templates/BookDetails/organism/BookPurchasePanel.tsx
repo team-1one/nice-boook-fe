@@ -27,7 +27,13 @@ export function BookPurchasePanel({
         <Button
           variant="outline"
           className="px-3"
-          onClick={() => navigate({ to: '/' })}
+          onClick={() =>
+            navigate({
+              to: '/category/$category',
+              params: { category },
+              search: { order: 'asc', page: 1, pageSize: 10, sortBy: 'newest' },
+            })
+          }
         >
           {category}
         </Button>

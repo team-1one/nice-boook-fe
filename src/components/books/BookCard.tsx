@@ -22,13 +22,13 @@ interface BookCardState {
 
 interface BookCardProps {
   cardProps?: ComponentProps<typeof Card>;
-  product: Book;
+  book: Book;
 }
 
 // TODO: Implement currency conversion and localization for price display
 // TODO: Remove hardcoded colors, sizes etc. from classnames
 
-export const BookCard = ({ cardProps, product }: BookCardProps) => {
+export const BookCard = ({ cardProps, book: product }: BookCardProps) => {
   // TODO: use global state management for cart and wishlist status instead of local state in component
   const [{ isInCart, isWishlisted }, setState] = useState<BookCardState>({
     isInCart: false,
@@ -42,7 +42,6 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
   const cartButtonLabel = isInCart ? phrases.addedToCart : phrases.addToCart;
 
   return (
-    // FIXME: Fix hardcoded path type assertion
     <Link
       to="/$bookSlug"
       params={{ bookSlug: product.slug }}

@@ -1,9 +1,7 @@
 import { fetchBookCount } from '@/api/supabase';
 import { BookCategories } from '@/components/ShopByCategory/BookCategories';
-import { Button } from '@/components/ui/button';
 import { BookTypeSchema } from '@/lib/schemas/book.schema';
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { BugPlay } from 'lucide-react';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -43,15 +41,6 @@ function Index() {
   return (
     <div className="p-2">
       <BookCategories />
-      {/* // TODO: replace; just a representation */}
-      <Button asChild>
-        <Link
-          to="/$bookSlug"
-          params={{ bookSlug: 'dont-make-me-think-uk-paperback' }}
-        >
-          <BugPlay />
-        </Link>
-      </Button>
     </div>
   );
 }

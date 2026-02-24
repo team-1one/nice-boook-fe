@@ -2,17 +2,17 @@ import * as React from 'react';
 import { Slot } from 'radix-ui';
 import { type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import {typographyVariants} from './typography.variants';
+import { typographyVariants } from './typography.variants';
 
 interface TypographyProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'color'>,
+  extends
+    Omit<React.HTMLAttributes<HTMLElement>, 'color'>,
     VariantProps<typeof typographyVariants> {
   asChild?: boolean;
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant, color, asChild = false, ...props }, ref) => {
-
     const components = {
       h1: 'h1',
       h2: 'h2',
@@ -25,7 +25,10 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
       small: 'small',
     };
 
-    const DefaultTag = (variant ? components[variant] : 'p') as React.ElementType;    
+    const DefaultTag = (
+      variant ?
+        components[variant]
+      : 'p') as React.ElementType;
     const Comp = asChild ? Slot.Root : DefaultTag;
 
     return (
@@ -35,7 +38,7 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Typography.displayName = 'Typography';

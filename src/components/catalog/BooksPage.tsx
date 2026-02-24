@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { CatalogHeader } from '@/components/catalog/organisms/CatalogHeader';
-import { CatalogPagination } from '@/components/catalog/organisms/CatalogPagination';
 import { CatalogGrid } from '@/components/catalog/CatalogGrid';
 import { sortSearchProps, type SortSearchKey } from '@/types/search';
 import { getCatalogTitle } from './constants/catalog';
 import type { CatalogSearch } from '@/lib/schemas/route.schema';
 import type { Book } from '@/lib/schemas/book.schema';
+import { CatalogHeader } from '@/components/catalog/organisms/CatalogHeader';
+import { CatalogPagination } from '@/components/catalog/organisms/CatalogPagination';
 
 interface Props {
   catalogKey: string;

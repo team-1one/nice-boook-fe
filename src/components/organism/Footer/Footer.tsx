@@ -15,7 +15,7 @@ const Footer = () => (
     <NavigationMenu
       viewport={false}
       className={cn(
-        'hidden sm:flex ps-4 w-full justify-between items-center max-w-full',
+        'hidden w-full max-w-full items-center justify-between ps-4 sm:flex',
         footerHeight,
       )}
     >
@@ -49,7 +49,7 @@ const Footer = () => (
     </NavigationMenu>
 
     {/* Mobile */}
-    <div className="flex sm:hidden flex-col gap-y-4 px-4 py-6">
+    <div className="flex flex-col gap-y-4 px-4 py-6 sm:hidden">
       <Link to="/">
         <img
           src="/logo.svg"

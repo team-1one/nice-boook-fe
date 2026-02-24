@@ -67,10 +67,11 @@ export function CatalogPagination({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href="#"
             aria-disabled={currentPage === 1}
             tabIndex={currentPage === 1 ? -1 : undefined}
-            className={cn(currentPage === 1 && 'pointer-events-none opacity-50')}
+            className={cn(
+              currentPage === 1 && 'pointer-events-none opacity-50',
+            )}
             onClick={(event) => {
               event.preventDefault();
               onPageChange(currentPage - 1);
@@ -80,7 +81,7 @@ export function CatalogPagination({
 
         {pages.map((item) => (
           <PaginationItem key={typeof item === 'number' ? item : item}>
-            {typeof item === 'number' ? (
+            {typeof item === 'number' ?
               <PaginationLink
                 href="#"
                 isActive={currentPage === item}
@@ -91,15 +92,12 @@ export function CatalogPagination({
               >
                 {item}
               </PaginationLink>
-            ) : (
-              <PaginationEllipsis />
-            )}
+            : <PaginationEllipsis />}
           </PaginationItem>
         ))}
 
         <PaginationItem>
           <PaginationNext
-            href="#"
             aria-disabled={currentPage === totalPages}
             tabIndex={currentPage === totalPages ? -1 : undefined}
             className={cn(
