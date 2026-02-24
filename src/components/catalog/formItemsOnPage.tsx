@@ -1,17 +1,16 @@
-import { Field, FieldLabel } from "../ui/field";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Field, FieldLabel } from '../ui/field';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { CATALOG_LIMITS } from './constants/catalog';
-import { Typography } from "../ui/Typography";
+import { Typography } from '../ui/Typography';
 
 export type Props = {
   value: string;
   onChange: (value: string) => void;
-}
+};
 
 export const ItemsOnPage = ({ value, onChange }: Props) => {
-
   return (
-    <div className='w-33 relative opacity-100'>
+    <div className="relative w-33 opacity-100">
       <Field className="flex flex-col gap-[3px]">
         <FieldLabel htmlFor="items-on-page">
           <Typography variant="small" color="secondary">
@@ -19,7 +18,7 @@ export const ItemsOnPage = ({ value, onChange }: Props) => {
           </Typography>
         </FieldLabel>
 
-        <Select defaultValue={value} onValueChange={onChange}>
+        <Select value={value} onValueChange={onChange}>
           <SelectTrigger id="items-on-page">
             <SelectValue placeholder="Items on page" />
           </SelectTrigger>
@@ -27,7 +26,9 @@ export const ItemsOnPage = ({ value, onChange }: Props) => {
           <SelectContent>
             <SelectGroup>
               {CATALOG_LIMITS.PER_PAGE_OPTIONS.map((item) => (
-                <SelectItem key={item} value={item.toString()}>{item}</SelectItem>
+                <SelectItem key={item} value={item.toString()}>
+                  {item}
+                </SelectItem>
               ))}
             </SelectGroup>
           </SelectContent>

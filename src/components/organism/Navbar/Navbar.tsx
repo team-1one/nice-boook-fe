@@ -22,6 +22,7 @@ import { Link, rootRouteId, useLoaderData } from '@tanstack/react-router';
 
 import { Heart, Search, ShoppingBag } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { CATALOG_LIMITS } from '@/components/catalog/constants/catalog';
 
 const Navbar = () => {
   const sortedCategories = useLoaderData({ from: rootRouteId }).sort(
@@ -83,6 +84,12 @@ const Navbar = () => {
                       <Link
                         to="/category/$category"
                         params={{ category }}
+                        search={{
+                          order: 'desc',
+                          sortBy: 'newest',
+                          page: CATALOG_LIMITS.DEFAULT_PAGE,
+                          pageSize: CATALOG_LIMITS.DEFAULT_PER_PAGE,
+                        }}
                       >
                         {category}
                       </Link>

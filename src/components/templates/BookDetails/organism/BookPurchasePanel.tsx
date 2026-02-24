@@ -23,13 +23,11 @@ export function BookPurchasePanel({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-gray-secondary mb-1 text-sm">Category</p>
+        <p className="text-gray-secondary bg mb-1 text-sm">Category</p>
         <Button
           variant="outline"
           className="px-3"
-          onClick={() =>
-            navigate({ to: '/category/$category', params: { category } })
-          }
+          onClick={() => navigate({ to: '/' })}
         >
           {category}
         </Button>

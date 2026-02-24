@@ -43,7 +43,10 @@ export const BookCard = ({ cardProps, product }: BookCardProps) => {
 
   return (
     // FIXME: Fix hardcoded path type assertion
-    <Link to={`/books/${product.slug}` as '/paper'}>
+    <Link
+      to="/$bookSlug"
+      params={{ bookSlug: product.slug }}
+    >
       <Card {...cardProps}>
         <BookImage book={product} />
 
