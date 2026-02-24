@@ -1,12 +1,10 @@
 import { BannerSlider } from '@/components/organisms/BannerSlider/BannerSlider';
 import { BookCategories } from '@/components/ShopByCategory/BookCategories';
-import { createFileRoute, getRouteApi, Link } from '@tanstack/react-router';
+import { createFileRoute, getRouteApi } from '@tanstack/react-router';
 import { fetchBookCount, getBanners, getBooks } from '@/api/supabase';
 import { BookSlider } from '@/components/organisms/Books/BookSlider';
 import { BookTypeSchema } from '@/lib/schemas/book.schema';
-import { Button } from '@/components/ui/button';
 import phrases from '@/constants/phrases';
-import { BugPlay } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: Index,
