@@ -1,7 +1,18 @@
+import { useCartStore } from "@/components/cart/cart.store"
+import type { CartItem as CartItemType } from "@/components/cart/cart.store"
+
 import { Minus, Plus, X } from "lucide-react";
 import { Typography } from "../ui/Typography";
 
-export function CartItem() {
+type Props = {
+  item: CartItemType
+}
+
+export function CartItem({ item }: Props) {
+  const increase = useCartStore((s) => s.increaseItem)
+  const decrease = useCartStore((s) => s.decreaseItem)
+  const removeItem = useCartStore((s) => s.removeItem)
+
   return (
     <div
       className="
@@ -16,6 +27,7 @@ export function CartItem() {
       <div className="flex items-center gap-4 sm:contents">
         <button
           type="button"
+          onClick={() => removeItem(item.slug)}
           className="
             p-2
             text-gray-icons
@@ -28,33 +40,41 @@ export function CartItem() {
         </button>
         <div className="w-20 h-20 flex items-center justify-center">
           <img 
-            src="https://cxqrvyjozjyswjemkfhk.supabase.co/storage/v1/object/public/books/img/paperback/1984/en/01.webp" 
-            alt="Don't Make Me Think, Revisited" 
+            src={item.image} 
+            alt={item.name} 
             className="w-auto max-h-full object-contain" />
         </div>
         <div className="w-32 sm:w-44 lg:w-84 min-w-0">
           <Typography variant="h5" className="truncate">
-            Don&apos;t Make Me Think, Revisited
+            {item.name}
           </Typography>
           <Typography variant="body" color="secondary">
-            Steve Krug
+            {item.author}
           </Typography>
         </div>
       </div>
 
       <div className="flex w-full items-center justify-between sm:justify-end sm:gap-6">
         <div className="flex items-center gap-3">
-          <button className="text-gray-icons hover:text-gray-primary">
+          <button 
+            onClick={() => decrease(item.slug)}
+            className="text-gray-icons hover:text-gray-primary"
+          >
             <Minus size={16} strokeWidth={1.5} />
           </button>
-          <Typography variant="body" className="w-6 text-center font-semibold tabular-nums">12</Typography>
-          <button className="text-gray-icons hover:text-gray-primary">
+          <Typography variant="body" className="w-6 text-center font-semibold tabular-nums">
+            {item.quantity}
+          </Typography>
+          <button 
+            onClick={() => increase(item.slug)} 
+            className="text-gray-icons hover:text-gray-primary"
+            >
             <Plus size={16} strokeWidth={1.5} />
           </button>
         </div>
         <div className="text-right tabular-nums">
           <Typography variant="h3">
-            ₴ 28.79
+            ₴ {(item.price * item.quantity).toFixed(2)}
           </Typography>
         </div>
       </div>
