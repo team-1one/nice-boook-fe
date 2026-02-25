@@ -1,116 +1,78 @@
-import { navBarHeight, navLinks } from './constants';
-import { IconButton, TextNavItem } from './SubComponents';
-
+import { navbarIconItems, navBarHeight } from './constants';
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/ui/input-group';
+  CategoriesDropdown,
+  LogoLink,
+  SearchInputControl,
+  TextNavItems,
+  IconLink,
+  SearchbarMenu,
+} from './atom';
 
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { Link, rootRouteId, useLoaderData } from '@tanstack/react-router';
-
-import { Heart, Search, ShoppingBag } from 'lucide-react';
+import { rootRouteId, useLoaderData } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
-import { CATALOG_LIMITS } from '@/components/catalog/constants/catalog';
+import BurgerMenu from '@/components/organism/Navbar/BurgerMenu';
 
 const Navbar = () => {
-  const sortedCategories = useLoaderData({ from: rootRouteId }).sort(
+  const sortedCategories = [...useLoaderData({ from: rootRouteId })].sort(
     (prev, next) => prev.localeCompare(next),
   );
 
   return (
-    <header className="sticky top-0 right-0 left-0 z-50 w-full border-b-2 backdrop-blur-xl">
+    <header className="bg-background/80 sticky top-0 z-50 mb-3 w-full border-b backdrop-blur-md">
+      <div className={cn('flex items-stretch sm:hidden', navBarHeight)}>
+        <div className="flex flex-1 items-center px-5">
+          <LogoLink />
+        </div>
+        <BurgerMenu sortedCategories={sortedCategories} />
+      </div>
+
       <NavigationMenu
         viewport={false}
-        className={cn('max-w-full justify-start gap-6 ps-3', navBarHeight)}
+        className={cn(
+          'hidden w-full max-w-full justify-start sm:flex [&>div]:w-full',
+          navBarHeight,
+        )}
       >
-        <NavigationMenuList>
-          <NavigationMenuItem className="h-full">
-            <NavigationMenuLink asChild>
-              <Link to="/">
-                <img
-                  src="/logo.svg"
-                  alt="logo"
-                />
-              </Link>
+        <NavigationMenuList className="w-full min-w-0 justify-between gap-0">
+          <NavigationMenuItem className="shrink-0">
+            <NavigationMenuLink
+              asChild
+              className="p-0"
+            >
+              <LogoLink className="hidden h-full px-4 sm:inline-flex sm:pr-2 lg:px-6" />
             </NavigationMenuLink>
           </NavigationMenuItem>
-        </NavigationMenuList>
 
-        <NavigationMenuList className="gap-4">
-          {navLinks.map(({ label, link }) => (
-            <TextNavItem
-              key={`${label}-${link.to}`}
-              label={label}
-              link={link}
-            />
+          <TextNavItems />
+
+          <NavigationMenuItem className="ml-auto hidden min-w-0 flex-1 items-center px-3 lg:flex lg:justify-end-safe">
+            <SearchInputControl className="max-w-md" />
+          </NavigationMenuItem>
+
+          <NavigationMenuItem className="hidden pr-4 lg:block">
+            <CategoriesDropdown categories={sortedCategories} />
+          </NavigationMenuItem>
+
+          <NavigationMenuItem className="md:ml-auto lg:ml-0">
+            <SearchbarMenu className="lg:hidden" />
+          </NavigationMenuItem>
+
+          {navbarIconItems.map(({ to, ariaLabel, Icon }) => (
+            <NavigationMenuItem key={to}>
+              <IconLink
+                link={{ to }}
+                ariaLabel={ariaLabel}
+              >
+                <Icon />
+              </IconLink>
+            </NavigationMenuItem>
           ))}
-        </NavigationMenuList>
-
-        {/* HACK: kludge to flex elements correctly */}
-        <div className="flex-1" />
-
-        <NavigationMenuList className={navBarHeight}>
-          <NavigationMenuItem>
-            <InputGroup>
-              <InputGroupAddon align="inline-start">
-                <Search />
-              </InputGroupAddon>
-              <InputGroupInput
-                type="search"
-                placeholder="Find a book or author"
-              />
-            </InputGroup>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem className="rounded-md border">
-            <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
-            <NavigationMenuContent className="h-96">
-              <ScrollArea className="h-full">
-                <ul>
-                  {sortedCategories.map((category) => (
-                    <li key={category}>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/category/$category"
-                          params={{ category }}
-                          search={{
-                            order: 'desc',
-                            sortBy: 'newest',
-                            page: CATALOG_LIMITS.DEFAULT_PAGE,
-                            pageSize: CATALOG_LIMITS.DEFAULT_PER_PAGE,
-                          }}
-                        >
-                          {category}
-                        </Link>
-                      </NavigationMenuLink>
-                      <Separator />
-                    </li>
-                  ))}
-                </ul>
-              </ScrollArea>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          <div className="ms-4 flex">
-            <IconButton link={{ to: '/favorites' }}>
-              <Heart />
-            </IconButton>
-            <IconButton link={{ to: '/cart' }}>
-              <ShoppingBag />
-            </IconButton>
-          </div>
         </NavigationMenuList>
       </NavigationMenu>
     </header>

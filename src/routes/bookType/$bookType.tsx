@@ -1,7 +1,7 @@
 import { fetchBooks } from '@/api/supabase';
 import { BooksPage } from '@/components/catalog/BooksPage';
 import { BookTypeSchema } from '@/lib/schemas/book.schema';
-import { catalogSearchSchema } from '@/lib/schemas/route.schema';
+import { CatalogSearchSchema } from '@/lib/schemas/route.schema';
 import { sortSearchProps } from '@/types/search';
 import {
   createFileRoute,
@@ -13,7 +13,7 @@ import {
 
 export const Route = createFileRoute('/bookType/$bookType')({
   component: RouteComponent,
-  validateSearch: catalogSearchSchema.parse,
+  validateSearch: CatalogSearchSchema.parse,
   loaderDeps: ({ search }) => ({
     page: search.page,
     pageSize: search.pageSize,
