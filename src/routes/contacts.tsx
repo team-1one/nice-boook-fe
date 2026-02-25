@@ -6,7 +6,7 @@ import { fetchContacts } from '@/api/supabase';
 export const Route = createFileRoute('/contacts')({
   component: RouteComponent,
   loader: async () => {
-    const [contacts] = await Promise.all([fetchContacts()]);
+    const contacts = await fetchContacts();
 
     return {
       contacts,

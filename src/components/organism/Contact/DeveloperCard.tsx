@@ -16,15 +16,13 @@ interface DeveloperCardProps {
   developer: Developer;
 }
 
-function DeveloperAvatar({
-  name,
-  surname,
-  avatarUrl,
-}: {
-  name: string;
-  surname: string;
-  avatarUrl?: string | null;
-}) {
+interface DeveloperAvatarProps {
+  readonly name: string;
+  readonly surname: string;
+  readonly avatarUrl?: string | null;
+}
+
+function DeveloperAvatar({ name, surname, avatarUrl }: DeveloperAvatarProps) {
   const [imgError, setImgError] = useState(false);
   const initials = `${name[0] ?? '?'}${surname[0] ?? '?'}`.toUpperCase();
   const showImage = avatarUrl && !imgError;
@@ -44,10 +42,10 @@ function DeveloperAvatar({
 }
 
 interface SocialLinkProps {
-  href: string;
-  icon: LucideIcon;
-  label: string;
-  ariaLabel: string;
+  readonly href: string;
+  readonly icon: LucideIcon;
+  readonly label: string;
+  readonly ariaLabel: string;
 }
 
 function SocialLink({ href, icon: Icon, label, ariaLabel }: SocialLinkProps) {

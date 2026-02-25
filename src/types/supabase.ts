@@ -219,6 +219,7 @@ export type Database = {
       }
       contacts: {
         Row: {
+          avatar_url: string | null
           contributions: string[] | null
           created_at: string
           github: string | null
@@ -230,6 +231,7 @@ export type Database = {
           tagline: string | null
         }
         Insert: {
+          avatar_url?: string | null
           contributions?: string[] | null
           created_at?: string
           github?: string | null
@@ -241,6 +243,7 @@ export type Database = {
           tagline?: string | null
         }
         Update: {
+          avatar_url?: string | null
           contributions?: string[] | null
           created_at?: string
           github?: string | null
