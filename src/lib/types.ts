@@ -4,6 +4,7 @@ export const TABLES = {
   booksFlat: 'books_flat',
   categories: 'categories',
   banners: 'banners',
+  contacts: 'contacts',
 } as const;
 
 export type AppPath = LinkOptions['to'];

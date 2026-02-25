@@ -217,6 +217,42 @@ export type Database = {
         }
         Relationships: []
       }
+      contacts: {
+        Row: {
+          contributions: string[] | null
+          created_at: string
+          github: string | null
+          id: number
+          linkedin: string | null
+          name: string
+          role: string | null
+          surname: string
+          tagline: string | null
+        }
+        Insert: {
+          contributions?: string[] | null
+          created_at?: string
+          github?: string | null
+          id?: number
+          linkedin?: string | null
+          name: string
+          role?: string | null
+          surname: string
+          tagline?: string | null
+        }
+        Update: {
+          contributions?: string[] | null
+          created_at?: string
+          github?: string | null
+          id?: number
+          linkedin?: string | null
+          name?: string
+          role?: string | null
+          surname?: string
+          tagline?: string | null
+        }
+        Relationships: []
+      }
       readable_book: {
         Row: {
           book_id: string
