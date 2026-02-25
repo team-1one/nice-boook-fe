@@ -83,7 +83,6 @@ export function CatalogPagination({
           <PaginationItem key={typeof item === 'number' ? item : item}>
             {typeof item === 'number' ?
               <PaginationLink
-                href="#"
                 isActive={currentPage === item}
                 onClick={(event) => {
                   event.preventDefault();
