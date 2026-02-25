@@ -7,6 +7,8 @@ function formatNullable(value: string | number | null | undefined): string {
 }
 
 export function getSummaryDetails(book: Book, isBrief = true): DetailItem[] {
+  const fromMsToHours = (ms: number) => ms / 36e5;
+
   const details: DetailItem[] =
     book.type === 'audiobook' ?
       [
@@ -14,7 +16,7 @@ export function getSummaryDetails(book: Book, isBrief = true): DetailItem[] {
         { label: 'Narrator', value: book.narrator },
         {
           label: 'Listening Length',
-          value: `${book.listening_length / 36e5} hours`,
+          value: `${fromMsToHours(book.listening_length).toFixed(1)} hours`,
         },
         { label: 'Year of Publication', value: String(book.publication_year) },
         { label: 'Publication', value: book.publication },
