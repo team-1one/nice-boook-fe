@@ -22,6 +22,13 @@ const defaultCatalogSearch = {
   order: 'desc' as const,
 };
 
+const defaultCatalogSearch = {
+  page: CATALOG_LIMITS.DEFAULT_PAGE,
+  pageSize: CATALOG_LIMITS.DEFAULT_PER_PAGE,
+  sortBy: 'newest' as const,
+  order: 'desc' as const,
+};
+
 const bookTypeLinks = BookTypeSchema.options.map((bookType) => ({
   label: bookType,
   link: linkOptions({

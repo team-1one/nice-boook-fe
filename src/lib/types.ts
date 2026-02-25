@@ -7,5 +7,4 @@ export const TABLES = {
 } as const;
 
 export type AppPath = LinkOptions['to'];
-
 export type BookFetchType = 'new' | 'random';
