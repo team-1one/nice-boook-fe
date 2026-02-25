@@ -6,7 +6,7 @@ export const BookCategories = () => {
 
   return (
     <section className="mx-38 flex h-107.25 flex-col gap-5.75 p-0">
-      <h2 className="font-sans text-[32px] leading-10.25 font-bold tracking-[-0.01em]">
+      <h2 className="font-sans text-3xl leading-10.25 font-bold tracking-[-0.01em]">
         Shop by Category
       </h2>
       <div className="flex flex-row gap-3.75">

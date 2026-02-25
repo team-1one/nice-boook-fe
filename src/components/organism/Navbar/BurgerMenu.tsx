@@ -86,7 +86,7 @@ const BurgerMenu = ({ sortedCategories }: Props) => {
             </SheetClose>
           </div>
 
-          <div className="flex min-h-full flex-col px-4 py-8">
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 py-8">
             <MobileNavLinks onNavigate={closeMobileMenu} />
 
             <div className="mt-8 space-y-3">
@@ -98,7 +98,7 @@ const BurgerMenu = ({ sortedCategories }: Props) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 border-t">
+          <div className="grid shrink-0 grid-cols-2 border-t">
             {navbarActionItems.map(({ to, ariaLabel, Icon }) => (
               <IconLink
                 key={to}

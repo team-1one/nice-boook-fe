@@ -31,6 +31,14 @@ export function BooksPage({
   const sort: SortSearchKey = search.sortBy;
   const perPage = String(search.pageSize);
 
+  const scrollToTop = () => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   useEffect(() => {
     if (search.page === currentPage) {
       return;
@@ -42,19 +50,23 @@ export function BooksPage({
         page: currentPage,
       }),
     });
+
+    scrollToTop();
   }, [currentPage, navigate, search.page]);
 
   const handlePageChange = (nextPage: number) => {
-    if (nextPage < 1 || nextPage > totalPages || nextPage === currentPage) {
+    if (nextPage === currentPage) {
       return;
     }
 
     navigate({
       search: (prev) => ({
         ...prev,
-        page: nextPage,
+        page: Math.min(Math.max(nextPage, 1), totalPages),
       }),
     });
+
+    scrollToTop();
   };
 
   const handleSortChange = (nextSort: SortSearchKey) => {
@@ -70,6 +82,8 @@ export function BooksPage({
         page: 1,
       }),
     });
+
+    scrollToTop();
   };
 
   const handleItemsPerPageChange = (value: string) => {
@@ -89,6 +103,8 @@ export function BooksPage({
         page: 1,
       }),
     });
+
+    scrollToTop();
   };
 
   return (

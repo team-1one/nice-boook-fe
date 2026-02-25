@@ -1,3 +1,4 @@
+import { navBarHeight } from '@/components/organism/Navbar/constants';
 import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
 
@@ -16,7 +17,11 @@ const BrandLogoLink = ({
 }: BrandLogoLinkProps) => (
   <Link
     to="/"
-    className={cn('inline-flex shrink-0 items-center leading-none', className)}
+    className={cn(
+      'inline-flex shrink-0 items-center justify-center',
+      className,
+      navBarHeight,
+    )}
     onClick={onClick}
   >
     <img
