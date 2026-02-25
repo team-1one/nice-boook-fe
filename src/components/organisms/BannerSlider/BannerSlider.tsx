@@ -26,9 +26,15 @@ export const BannerSlider = ({ items }: BannerSliderProps) => {
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
 
-    api.on('select', () => {
+    const handleSelect = () => {
       setCurrent(api.selectedScrollSnap());
-    });
+    };
+
+    api.on('select', handleSelect);
+
+    return () => {
+      api.off('select', handleSelect);
+    };
   }, [api]);
 
   return (
@@ -83,11 +89,10 @@ export const BannerSlider = ({ items }: BannerSliderProps) => {
               aria-label={`Go to slide ${index + 1}`}
               onClick={() => api?.scrollTo(index)}
               className={cn(
-                `h-2.5 w-2.5 rounded-full transition-colors ${
-                  current === index ? 'bg-white' : (
-                    'bg-white/40 hover:bg-white/70'
-                  )
-                }`,
+                'h-2.5 w-2.5 rounded-full transition-colors',
+                current === index ? 'bg-white' : (
+                  'bg-white/40 hover:bg-white/70'
+                ),
               )}
             />
           ))}
