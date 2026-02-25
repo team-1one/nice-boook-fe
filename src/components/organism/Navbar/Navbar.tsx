@@ -1,4 +1,4 @@
-import { navbarActionItems, navBarHeight } from './constants';
+import { navbarIconItems, navBarHeight } from './constants';
 import {
   CategoriesDropdown,
   LogoLink,
@@ -63,7 +63,7 @@ const Navbar = () => {
             <SearchbarMenu className="lg:hidden" />
           </NavigationMenuItem>
 
-          {navbarActionItems.map(({ to, ariaLabel, Icon }) => (
+          {navbarIconItems.map(({ to, ariaLabel, Icon }) => (
             <NavigationMenuItem key={to}>
               <IconLink
                 link={{ to }}
