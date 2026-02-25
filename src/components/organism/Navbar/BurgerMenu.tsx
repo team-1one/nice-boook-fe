@@ -7,7 +7,7 @@ import {
   SearchInputControl,
 } from '@/components/organism/Navbar/atom';
 import {
-  navbarActionItems,
+  navbarIconItems,
   navBarHeight,
 } from '@/components/organism/Navbar/constants';
 import { Button } from '@/components/ui/button';
@@ -99,7 +99,7 @@ const BurgerMenu = ({ sortedCategories }: Props) => {
           </div>
 
           <div className="grid shrink-0 grid-cols-2 border-t">
-            {navbarActionItems.map(({ to, ariaLabel, Icon }) => (
+            {navbarIconItems.map(({ to, ariaLabel, Icon }) => (
               <IconLink
                 key={to}
                 link={{ to }}

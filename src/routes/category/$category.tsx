@@ -12,7 +12,7 @@ import {
 
 export const Route = createFileRoute('/category/$category')({
   component: RouteComponent,
-  validateSearch: (search) => CatalogSearchSchema.parse(search ?? {}),
+  validateSearch: CatalogSearchSchema.parse,
   loaderDeps: ({ search }) => ({
     page: search.page,
     pageSize: search.pageSize,

@@ -11,8 +11,9 @@ export type Props = {
 
 export const BookCategoryCard = ({ type, imageUrl, count }: Props) => {
   return (
-    <Card className="border-transparent pt-0 shadow-none hover:border hover:shadow-md">
+    <Card className="overflow-hidden border-transparent pt-0 shadow-none hover:border hover:shadow-md">
       <Link
+        className="block h-full"
         to={`/bookType/$bookType`}
         search={CatalogSearchSchema.parse({})}
         params={{ bookType: type }}
@@ -20,8 +21,9 @@ export const BookCategoryCard = ({ type, imageUrl, count }: Props) => {
         <img
           src={imageUrl}
           alt={type}
-          className="m-0 mb-6.25 h-72.25 w-full object-cover"
+          className="m-0 mb-6.25 aspect-square w-full rounded-t-xl object-cover"
         />
+
         <CardContent>
           <h3 className="text-color-gray-primary font-sans text-lg leading-[100%] font-semibold tracking-normal capitalize">
             {type}
