@@ -1,8 +1,14 @@
 import { CATALOG_LIMITS } from '@/components/catalog/constants/catalog';
 import { BookTypeSchema } from '@/lib/schemas/book.schema';
 import { cn } from '@/lib/utils';
-import { linkOptions } from '@tanstack/react-router';
+import { linkOptions, type LinkOptions } from '@tanstack/react-router';
 import { Heart, ShoppingBag } from 'lucide-react';
+
+interface NavIconItems {
+  to: LinkOptions['to'];
+  ariaLabel: string;
+  Icon: typeof Heart;
+}
 
 export const navBarHeight = 'h-16';
 export const underlineEffectClasses =
@@ -14,13 +20,6 @@ export const actionCellClasses = cn(
 );
 
 export const activeLinkClasses = '[&_[data-nav-underline]]:opacity-100';
-
-const defaultCatalogSearch = {
-  page: CATALOG_LIMITS.DEFAULT_PAGE,
-  pageSize: CATALOG_LIMITS.DEFAULT_PER_PAGE,
-  sortBy: 'newest' as const,
-  order: 'desc' as const,
-};
 
 const defaultCatalogSearch = {
   page: CATALOG_LIMITS.DEFAULT_PAGE,
@@ -43,7 +42,15 @@ export const navLinks = [
   ...bookTypeLinks,
 ] as const;
 
-export const navbarActionItems = [
-  { to: '/favorites', ariaLabel: 'Favorites', Icon: Heart },
-  { to: '/cart', ariaLabel: 'Cart', Icon: ShoppingBag },
+export const navbarIconItems: NavIconItems[] = [
+  {
+    to: '/favorites',
+    ariaLabel: 'Favorites',
+    Icon: Heart,
+  },
+  {
+    to: '/cart',
+    ariaLabel: 'Cart',
+    Icon: ShoppingBag,
+  },
 ] as const;
