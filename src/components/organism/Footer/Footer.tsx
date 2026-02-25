@@ -4,9 +4,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
+import BrandLogoLink from '@/components/atom/BrandLogoLink';
 import { BackToTop, FooterNavItem, FooterNavLink } from './SubComponents';
 import { footerLinks, footerHeight } from '@/constants';
-import { Link } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
 
 const Footer = () => (
@@ -21,13 +21,11 @@ const Footer = () => (
     >
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link to="/">
-              <img
-                src="/logo.svg"
-                alt="logo"
-              />
-            </Link>
+          <NavigationMenuLink
+            asChild
+            className="h-full p-0"
+          >
+            <BrandLogoLink className="h-full px-2" />
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
@@ -50,13 +48,7 @@ const Footer = () => (
 
     {/* Mobile */}
     <div className="flex flex-col gap-y-4 px-4 py-6 sm:hidden">
-      <Link to="/">
-        <img
-          src="/logo.svg"
-          alt="logo"
-          className="py-2"
-        />
-      </Link>
+      <BrandLogoLink className="py-2" />
 
       <nav className="flex flex-col gap-y-3">
         {footerLinks.map((link) => (
