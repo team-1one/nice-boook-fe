@@ -1,12 +1,12 @@
 import { Button } from "../ui/button";
 import { Typography } from "../ui/Typography";
+import { useCartStore } from "@/components/cart/cart.store"
 
-type Props = {
-  total: number;
-  count: number;
-};
 
-export function CartSummary({ total, count }: Props) {
+export function CartSummary() {
+  const total = useCartStore((state) => state.totalPrice());
+  const count = useCartStore((state) => state.totalItems());
+
   return (
     <div className="p-8 border border-color-gray-secondary rounded-2xl bg-white">
       <div className="text-center mb-4">
