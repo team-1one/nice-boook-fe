@@ -2,8 +2,9 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
 export type CartItem = {
-  id: string
+  slug: string
   name: string
+  author: string 
   price: number
   image: string
   quantity: number
@@ -12,9 +13,9 @@ export type CartItem = {
 export type CartState = {
   items: CartItem[]
   addItem: (item: Omit<CartItem, "quantity">) => void
-  increeseItem: (id: string) => void
-  decreaseItem: (id: string) => void
-  removeItem: (id: string) => void
+  increaseItem: (slug: string) => void
+  decreaseItem: (slug: string) => void
+  removeItem: (slug: string) => void
   totalPrice: () => number
   totalItems: () => number
 }
@@ -24,12 +25,12 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       addItem(item) {
-        const existingItem = get().items.find((i) => i.id === item.id)
+        const existingItem = get().items.find((i) => i.slug === item.slug)
 
         if (existingItem) {
           set((state) => ({
             items: state.items.map((i) =>
-              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+              i.slug === item.slug ? { ...i, quantity: i.quantity + 1 } : i
             ),
           }))
         } else {
@@ -38,24 +39,24 @@ export const useCartStore = create<CartState>()(
           }))
         }
       },
-      increeseItem(id) {
+      increaseItem(slug) {
         set((state) => ({
           items: state.items.map((i) =>
-            i.id === id ? { ...i, quantity: i.quantity + 1 } : i
+            i.slug === slug ? { ...i, quantity: i.quantity + 1 } : i
           ),
         }))
       },
-      decreaseItem(id) {
+      decreaseItem(slug) {
         set((state) => ({
           items: state.items.map((i) =>
-              i.id === id ? { ...i, quantity: i.quantity - 1 } : i
+              i.slug === slug ? { ...i, quantity: i.quantity - 1 } : i
             )
             .filter((i) => i.quantity > 0),
         }))
       },
-      removeItem(id) {
+      removeItem(slug) {
         set((state) => ({
-          items: state.items.filter((i) => i.id !== id),
+          items: state.items.filter((i) => i.slug !== slug),
         }))
       },
       totalPrice() {
