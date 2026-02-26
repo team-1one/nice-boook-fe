@@ -10,6 +10,7 @@ import type { BannerData } from '@/types/banner';
 import { Link } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { CatalogSearchSchema } from '@/lib/schemas/route.schema';
 
 interface BannerSliderProps {
   items: BannerData[];
@@ -55,7 +56,11 @@ export const BannerSlider = ({ items }: BannerSliderProps) => {
                 key={item.id}
                 className="relative pl-0"
               >
-                <Link to={item.target_url}>
+                <Link
+                  to={'/bookType/$bookType'}
+                  search={CatalogSearchSchema.parse({ sortBy: 'cheaper' })}
+                  params={{ bookType: 'paperback' }}
+                >
                   <picture>
                     {item.images.mobile && (
                       <source
