@@ -6,7 +6,7 @@ const modules = import.meta.glob('./locales/**/*.json', { eager: true });
 
 const resources = Object.entries(modules).reduce<Resource>(
   (acc, [path, module]) => {
-    const match = path.match(/\.\/locales\/(\w+)\/(\w+)\.json$/);
+    const match = /\.\/locales\/(\w+)\/(\w+)\.json$/.exec(path);
     if (match) {
       const [, lang, ns] = match;
       if (!acc[lang]) acc[lang] = {};
