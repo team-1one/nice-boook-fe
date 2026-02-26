@@ -37,7 +37,7 @@ const BookDetails = () => {
         breadcrumbs={breadcrumbs}
       />
 
-      <main className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+      <main className="grid grid-cols-1 gap-12 lg:grid-cols-[3fr_2fr]">
         <BookImageGallery
           images={book.images}
           title={book.name}
@@ -46,7 +46,7 @@ const BookDetails = () => {
         <BookPurchasePanel
           book={book}
           editions={editions}
-          category={randomCategory}
+          categories={book.categories}
         />
       </main>
 
