@@ -55,15 +55,13 @@ function Index() {
     getRouteApi('/').useLoaderData();
 
   return (
-    <div className="px-4">
+    <div className="flex flex-col">
       <BannerSlider items={banners} />
       <BookSlider
         books={newBooks}
         title={phrases.newBooks}
       />
-      <div>
-        <BookCategories />
-      </div>
+      <BookCategories />
       <BookSlider
         books={mightLikeBooks}
         title={phrases.mightLike}

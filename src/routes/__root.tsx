@@ -14,7 +14,7 @@ const TanStackRouterDevtools =
   : () => null;
 
 const RootLayout = () => (
-  <div className="flex min-h-screen flex-col">
+  <div className="mx-4 flex min-h-screen flex-col">
     <Navbar />
     <main className="flex-1">
       <Outlet />
