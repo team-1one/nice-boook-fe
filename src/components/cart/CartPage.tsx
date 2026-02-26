@@ -2,7 +2,7 @@ import { Typography } from "@/components/ui/Typography";
 import { CartItem } from "./CartItem";
 import { CartSummary } from "./CartSummary";
 import { BackButton } from "./BackButton";
-import { useCartStore } from "./cart.store";
+import { useCartStore } from "../../stores/cart.store";
 import { EmptyCart } from "./EmptyCart";
 
 const CONTAINER_STYLES = "mx-auto max-w-[1440px] mt-6 sm:mt-16 px-4 sm:px-6 lg:px-8 xl:px-[152px] mb-20";

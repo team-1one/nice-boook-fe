@@ -1,5 +1,5 @@
-import { useCartStore } from "@/components/cart/cart.store"
-import type { CartItem as CartItemType } from "@/components/cart/cart.store"
+import { useCartStore } from "@/stores/cart.store"
+import type { CartItem as CartItemType } from "@/stores/cart.store"
 
 import { Minus, Plus, X } from "lucide-react";
 import { Typography } from "../ui/Typography";

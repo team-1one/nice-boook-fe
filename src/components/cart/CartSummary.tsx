@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import { Typography } from "../ui/Typography";
-import { useCartStore } from "@/components/cart/cart.store"
+import { useCartStore } from "@/stores/cart.store"
 
 
 export function CartSummary() {
