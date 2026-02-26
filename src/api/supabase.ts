@@ -9,6 +9,7 @@ import {
   VITE_SUPABASE_PUBLISHABLE_KEY,
   VITE_SUPABASE_URL,
 } from '@/lib/schemas/env.local';
+import { DeveloperSchema, type Developer } from '@/lib/schemas/contact.schema';
 import { BannerSchema } from '@/lib/schemas/banner.schema';
 import { TABLES, type BookFetchType } from '@/lib/types';
 import { createClient } from '@supabase/supabase-js';
@@ -298,4 +299,28 @@ export const fetchBooks = async ({
   }
 
   return { data: parsed.data, total: count ?? 0 };
+};
+
+export const fetchContacts = async (): Promise<Developer[]> => {
+  const { data, error } = await supabase.from(TABLES.contacts).select('*');
+
+  if (error) {
+    throw new AppError(
+      'fetchContacts',
+      'Failed to load contacts. Please try again.',
+      error,
+    );
+  }
+
+  const parsed = z.array(DeveloperSchema).safeParse(data);
+
+  if (!parsed.success) {
+    throw new AppError(
+      'fetchContacts.parse',
+      'Failed to load contacts. Please try again.',
+      new Error(parsed.error.message),
+    );
+  }
+
+  return parsed.data;
 };
