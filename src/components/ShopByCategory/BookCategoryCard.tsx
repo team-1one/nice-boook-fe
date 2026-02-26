@@ -14,7 +14,7 @@ export const BookCategoryCard = ({ type, imageUrl, count }: Props) => {
   const { t } = useTranslation('catalog');
 
   return (
-    <Card className="overflow-hidden border-transparent pt-0 shadow-none hover:border hover:shadow-md">
+    <Card className="overflow-hidden border pt-0 shadow-none transition-shadow hover:border hover:shadow-lg">
       <Link
         className="block h-full"
         to={`/bookType/$bookType`}

@@ -57,15 +57,13 @@ function Index() {
   const { t } = useTranslation('nav');
 
   return (
-    <div className="px-4">
+    <div className="flex flex-col">
       <BannerSlider items={banners} />
       <BookSlider
         books={newBooks}
         title={t('newBooks')}
       />
-      <div>
-        <BookCategories />
-      </div>
+      <BookCategories />
       <BookSlider
         books={mightLikeBooks}
         title={t('mightLike')}

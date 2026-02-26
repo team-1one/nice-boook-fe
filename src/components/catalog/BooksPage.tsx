@@ -38,14 +38,6 @@ export function BooksPage({
   const sort: SortSearchKey = search.sortBy;
   const perPage = String(search.pageSize);
 
-  const scrollToTop = () => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   useEffect(() => {
     if (search.page === currentPage) {
       return;
@@ -57,8 +49,6 @@ export function BooksPage({
         page: currentPage,
       }),
     });
-
-    scrollToTop();
   }, [currentPage, navigate, search.page]);
 
   const handlePageChange = (nextPage: number) => {
@@ -72,8 +62,6 @@ export function BooksPage({
         page: Math.min(Math.max(nextPage, 1), totalPages),
       }),
     });
-
-    scrollToTop();
   };
 
   const handleSortChange = (nextSort: SortSearchKey) => {
@@ -89,8 +77,6 @@ export function BooksPage({
         page: 1,
       }),
     });
-
-    scrollToTop();
   };
 
   const handleItemsPerPageChange = (value: string) => {
@@ -110,12 +96,10 @@ export function BooksPage({
         page: 1,
       }),
     });
-
-    scrollToTop();
   };
 
   return (
-    <main className="mx-auto mt-8 mb-8 max-w-360 px-4 sm:mt-16 sm:mb-14 sm:px-6 lg:mb-16 lg:px-8 xl:mb-38 xl:px-38">
+    <div className="mx-auto mt-8 mb-8 max-w-360 px-4 sm:mt-16 sm:mb-14 sm:px-6 lg:mb-16 lg:px-8 xl:mb-38 xl:px-38">
       <CatalogHeader
         title={title}
         total={total}
@@ -136,6 +120,6 @@ export function BooksPage({
           onPageChange={handlePageChange}
         />
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,14 +1,20 @@
 import { Button } from "../ui/button";
 import { Typography } from "../ui/Typography";
 import { useTranslation } from 'react-i18next';
+import { useCartStore } from "@/components/cart/cart.store"
 
-type Props = {
-  total: number;
-  count: number;
-};
 
-export function CartSummary({ total, count }: Props) {
+export function CartSummary() {
   const { t } = useTranslation('cart');
+  
+  const total = useCartStore((state) => state.totalPrice());
+  const count = useCartStore((state) => state.totalItems());
+  const clear = useCartStore((state) => state.clearCart);
+
+  const handleCheckout = () => {
+    clear()
+    alert("Order placed successfully!")
+  }
 
   return (
     <div className="p-8 border border-color-gray-secondary rounded-2xl bg-white">
@@ -21,8 +27,8 @@ export function CartSummary({ total, count }: Props) {
         </Typography>
       </div>
 
-      <Button className="w-full py-5">
-        {t('checkout')}
+      <Button className="w-full py-5" onClick={handleCheckout}>
+        Checkout
       </Button>
     </div>
   );

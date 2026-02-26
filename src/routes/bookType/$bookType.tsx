@@ -10,9 +10,11 @@ import {
   useParams,
   useSearch,
 } from '@tanstack/react-router';
+import { z } from 'zod';
 
 export const Route = createFileRoute('/bookType/$bookType')({
   component: RouteComponent,
+  params: z.object({ bookType: BookTypeSchema }),
   validateSearch: CatalogSearchSchema.parse,
   loaderDeps: ({ search }) => ({
     page: search.page,

@@ -16,7 +16,7 @@ interface BookSliderProps {
 
 export const BookSlider = ({ books, title }: BookSliderProps) => {
   return (
-    <section className="mx-auto w-full max-w-270 py-8">
+    <section className="mx-auto w-full max-w-270 overflow-x-visible py-8">
       <Carousel opts={{ align: 'start', loop: false }}>
         <div
           className={cn(
@@ -35,7 +35,7 @@ export const BookSlider = ({ books, title }: BookSliderProps) => {
           {books.map((book) => (
             <CarouselItem
               key={book.id}
-              className="basis-1/2 pl-4 sm:basis-1/3 lg:basis-1/4"
+              className="basis-3xs pl-4 sm:basis-1/3 lg:basis-1/4"
             >
               <BookCard book={book} />
             </CarouselItem>
