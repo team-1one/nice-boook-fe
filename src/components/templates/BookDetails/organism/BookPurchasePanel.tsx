@@ -63,7 +63,7 @@ export function BookPurchasePanel({
 
       <div className="flex items-baseline gap-4">
         <span className="text-3xl font-bold text-black">
-          ${book.price_discount ?? book.price_regular}
+          &#x20b4;{book.price_discount ?? book.price_regular}
         </span>
         {book.price_discount && (
           <span className="text-gray-secondary text-xl line-through">

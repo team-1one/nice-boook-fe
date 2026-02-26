@@ -108,7 +108,7 @@ export function BooksPage({
   };
 
   return (
-    <main className="mx-auto mt-8 mb-8 max-w-360 px-4 sm:mt-16 sm:mb-14 sm:px-6 lg:mb-16 lg:px-8 xl:mb-38 xl:px-38">
+    <div className="mx-auto mt-8 mb-8 max-w-360 px-4 sm:mt-16 sm:mb-14 sm:px-6 lg:mb-16 lg:px-8 xl:mb-38 xl:px-38">
       <CatalogHeader
         title={title}
         total={total}
@@ -129,6 +129,6 @@ export function BooksPage({
           onPageChange={handlePageChange}
         />
       </section>
-    </main>
+    </div>
   );
 }
