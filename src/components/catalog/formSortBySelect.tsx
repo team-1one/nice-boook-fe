@@ -10,6 +10,7 @@ import {
 } from '../ui/select';
 import { Typography } from '../ui/Typography';
 import { SORT_OPTIONS } from './constants/catalog';
+import { useTranslation } from 'react-i18next';
 
 export type Props = {
   value?: SortSearchKey;
@@ -17,6 +18,8 @@ export type Props = {
 };
 
 export const SortBySelect = ({ value, onChange }: Props) => {
+  const { t } = useTranslation('catalog');
+
   return (
     <div className="relative w-44 opacity-100">
       <Field className="flex flex-col gap-0.75">
@@ -25,7 +28,7 @@ export const SortBySelect = ({ value, onChange }: Props) => {
             variant="small"
             color="secondary"
           >
-            Sort by
+            {t('sortBy')}
           </Typography>
         </FieldLabel>
 
@@ -34,7 +37,7 @@ export const SortBySelect = ({ value, onChange }: Props) => {
           onValueChange={(nextValue) => onChange(nextValue as SortSearchKey)}
         >
           <SelectTrigger id="sort-by">
-            <SelectValue placeholder="Sort by" />
+            <SelectValue placeholder={t('sortBy')} />
           </SelectTrigger>
 
           <SelectContent>
@@ -44,7 +47,7 @@ export const SortBySelect = ({ value, onChange }: Props) => {
                   key={option.value}
                   value={option.value}
                 >
-                  {option.label}
+                  {t(`sortOptions.${option.key}`)}
                 </SelectItem>
               ))}
             </SelectGroup>

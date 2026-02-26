@@ -9,11 +9,11 @@ import { cn, withPreventDefault } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from '@tanstack/react-router';
 import type { ComponentProps } from 'react';
-import phrases from '@/constants/phrases';
 import { Heart, Van } from 'lucide-react';
 import BookImage from './BookImage';
 import { useState } from 'react';
 import type { Book } from '@/lib/schemas/book.schema';
+import { useTranslation } from 'react-i18next';
 
 interface BookCardState {
   isInCart: boolean;
@@ -29,6 +29,8 @@ interface BookCardProps {
 // TODO: Remove hardcoded colors, sizes etc. from classnames
 
 export const BookCard = ({ cardProps, book }: BookCardProps) => {
+  const { t } = useTranslation('book');
+
   // TODO: use global state management for cart and wishlist status instead of local state in component
   const [{ isInCart, isWishlisted }, setState] = useState<BookCardState>({
     isInCart: false,
@@ -39,7 +41,7 @@ export const BookCard = ({ cardProps, book }: BookCardProps) => {
     setState((prev) => ({ ...prev, [statusKey]: !prev[statusKey] }));
   };
 
-  const cartButtonLabel = isInCart ? phrases.addedToCart : phrases.addToCart;
+  const cartButtonLabel = isInCart ? t('addedToCart') : t('addToCart');
 
   return (
     <Link
@@ -65,7 +67,7 @@ export const BookCard = ({ cardProps, book }: BookCardProps) => {
           <div className="flex items-center gap-1">
             <Van color="#27AE60" />
             <span className="text-sm font-bold text-[#27AE60]">
-              {phrases.inStock}
+              {t('inStock')}
             </span>
           </div>
         </CardContent>

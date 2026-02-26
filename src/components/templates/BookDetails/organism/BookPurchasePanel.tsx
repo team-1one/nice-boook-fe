@@ -5,6 +5,7 @@ import { Heart } from 'lucide-react';
 import type { Book } from '@/lib/schemas/book.schema';
 import { DetailList } from '../molecule/DetailList';
 import { getSummaryDetails } from '../lib/helpers';
+import { useTranslation } from 'react-i18next';
 
 type BookPurchasePanelProps = {
   book: Book;
@@ -18,12 +19,14 @@ export function BookPurchasePanel({
   category,
 }: BookPurchasePanelProps) {
   const navigate = useNavigate();
-  const summaryDetails = getSummaryDetails(book);
+  const { t } = useTranslation('book');
+
+  const summaryDetails = getSummaryDetails(book, t);
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-gray-secondary bg mb-1 text-sm">Category</p>
+        <p className="text-gray-secondary bg mb-1 text-sm">{t('category')}</p>
         <Button
           variant="outline"
           className="px-3"
@@ -42,7 +45,9 @@ export function BookPurchasePanel({
       <Separator />
 
       <div>
-        <p className="text-gray-secondary mb-2 text-sm">Select language</p>
+        <p className="text-gray-secondary mb-2 text-sm">
+          {t('selectLanguage')}
+        </p>
         <div className="flex gap-2">
           {editions.map(({ lang, slug }) => (
             <Button
@@ -73,7 +78,7 @@ export function BookPurchasePanel({
       </div>
 
       <div className="flex h-10 gap-2">
-        <Button className="h-full flex-1">Add to cart</Button>
+        <Button className="h-full flex-1">{t('addToCart')}</Button>
         <Button
           className="aspect-square h-full"
           variant="outline"

@@ -1,0 +1,26 @@
+{
+  "heading": "Rights & Legal",
+  "updated": "Last updated: {{year}}",
+  "sections": [
+    {
+      "title": "Copyright Notice",
+      "body": "© {{year}} {{company}}. All rights reserved. All content on this website — including text, images, graphics, logos, and book cover art — is the property of {{company}} or its content suppliers and is protected by applicable copyright law."
+    },
+    {
+      "title": "Intellectual Property",
+      "body": "Book titles, authors, cover images, and descriptions are the intellectual property of their respective publishers and authors. {{company}} displays this content under license or for informational purposes only. Unauthorized reproduction or distribution of any materials from this site is strictly prohibited."
+    },
+    {
+      "title": "Terms of Use",
+      "body": "By accessing and using this website, you agree not to reproduce, duplicate, copy, sell, or exploit any portion of the service or its content for commercial purposes without the express written permission of {{company}}. Personal, non-commercial use is permitted provided all copyright and proprietary notices are retained."
+    },
+    {
+      "title": "Disclaimer",
+      "body": "{{company}} makes no warranties, expressed or implied, regarding the accuracy, completeness, or fitness for a particular purpose of the information on this site. Prices and availability are subject to change without notice."
+    },
+    {
+      "title": "Contact",
+      "body": "If you believe any content on this site infringes your copyright or intellectual property rights, or if you have questions about permitted use, please reach out via the Contacts page."
+    }
+  ]
+}

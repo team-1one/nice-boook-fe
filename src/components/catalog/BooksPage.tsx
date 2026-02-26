@@ -4,9 +4,11 @@ import { CatalogGrid } from '@/components/catalog/CatalogGrid';
 import { sortSearchProps, type SortSearchKey } from '@/types/search';
 import { getCatalogTitle } from './constants/catalog';
 import type { CatalogSearch } from '@/lib/schemas/route.schema';
+import { BookTypeSchema } from '@/lib/schemas/book.schema';
 import type { Book } from '@/lib/schemas/book.schema';
 import { CatalogHeader } from '@/components/catalog/organisms/CatalogHeader';
 import { CatalogPagination } from '@/components/catalog/organisms/CatalogPagination';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   catalogKey: string;
@@ -25,7 +27,12 @@ export function BooksPage({
   books,
   total,
 }: Props) {
-  const title = getCatalogTitle(catalogKey);
+  const { t } = useTranslation('catalog');
+
+  const parsedBookType = BookTypeSchema.safeParse(catalogKey);
+  const title = parsedBookType.success
+    ? t(getCatalogTitle(parsedBookType.data))
+    : catalogKey;
   const totalPages = Math.max(1, Math.ceil(total / search.pageSize));
   const currentPage = Math.min(Math.max(search.page, 1), totalPages);
   const sort: SortSearchKey = search.sortBy;

@@ -1,0 +1,6 @@
+{
+  "title": "Cart",
+  "totalFor": "Total for {{count}} items",
+  "checkout": "Checkout",
+  "back": "Back"
+}

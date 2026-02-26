@@ -1,5 +1,6 @@
 import { Button } from "../ui/button";
 import { Typography } from "../ui/Typography";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   total: number;
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export function CartSummary({ total, count }: Props) {
+  const { t } = useTranslation('cart');
+
   return (
     <div className="p-8 border border-color-gray-secondary rounded-2xl bg-white">
       <div className="text-center mb-4">
@@ -14,12 +17,12 @@ export function CartSummary({ total, count }: Props) {
           ₴{total.toLocaleString('uk-UA')}
         </Typography>
         <Typography variant="body" color="secondary">
-          Total for {count} items
+          {t('totalFor', { count })}
         </Typography>
       </div>
 
       <Button className="w-full py-5">
-        Checkout
+        {t('checkout')}
       </Button>
     </div>
   );
