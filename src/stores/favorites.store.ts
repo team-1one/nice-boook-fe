@@ -6,7 +6,6 @@ interface FavoriteBooksState {
   favorites: Record<string, Book>;
   isFavorite: (bookSlug: string) => boolean;
   toggleFavorite: (book: Book) => void;
-  totalFavorites: number;
 }
 
 export const useFavoriteBooksStore = create<FavoriteBooksState>()(
@@ -25,9 +24,6 @@ export const useFavoriteBooksStore = create<FavoriteBooksState>()(
               { ...other }
             : { ...get().favorites, [book.slug]: book },
         });
-      },
-      get totalFavorites() {
-        return Object.keys(get().favorites).length;
       },
     }),
     {

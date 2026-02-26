@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t">
+    <footer className="mt-8 w-full border-t">
       {/* Desktop */}
       <NavigationMenu
         viewport={false}

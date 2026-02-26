@@ -1,4 +1,4 @@
-import { useCartStore } from '@/components/cart/cart.store';
+import { useCartStore } from '@/stores/cart.store';
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
 import type { Book } from '@/lib/schemas/book.schema';

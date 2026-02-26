@@ -17,11 +17,17 @@ import {
 import { rootRouteId, useLoaderData } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
 import BurgerMenu from '@/components/organism/Navbar/BurgerMenu';
+import { useCartStore } from "@/stores/cart.store"
+import { CartBadge } from './molecule/cart-badge';
+import { useFavoriteBooksStore } from '@/stores/favorites.store';
 
 const Navbar = () => {
   const sortedCategories = [...useLoaderData({ from: rootRouteId })].sort(
     (prev, next) => prev.localeCompare(next),
   );
+  const totalItems = useCartStore((state) => state.totalItems())
+  const favoritesCount = useFavoriteBooksStore((state) => Object.keys(state.favorites).length
+)
 
   return (
     <header className="bg-background/80 sticky top-0 z-50 mb-3 w-full border-b backdrop-blur-md">
@@ -64,15 +70,27 @@ const Navbar = () => {
           </NavigationMenuItem>
 
           {navbarIconItems.map(({ to, ariaLabel, Icon }) => (
-            <NavigationMenuItem key={to}>
-              <IconLink
-                link={{ to }}
-                ariaLabel={ariaLabel}
-              >
-                <Icon />
-              </IconLink>
-            </NavigationMenuItem>
-          ))}
+              <NavigationMenuItem key={to}>
+                <IconLink
+                  link={{ to }}
+                  ariaLabel={ariaLabel}
+                  className="relative"
+                >
+                  <Icon />
+                  {to === "/favorites" && favoritesCount > 0 && (
+                    <CartBadge
+                      count={favoritesCount}
+                    />
+                  )}
+                  {to === "/cart" && totalItems > 0 && (
+                    <CartBadge
+                      count={totalItems}
+                    />
+                  )}
+                </IconLink>
+              </NavigationMenuItem>
+            )
+          )}
         </NavigationMenuList>
       </NavigationMenu>
     </header>

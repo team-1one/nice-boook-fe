@@ -1,5 +1,6 @@
-import { useCartStore } from "@/components/cart/cart.store"
-import type { CartItem as CartItemType } from "@/components/cart/cart.store"
+import { useCartStore } from "@/stores/cart.store"
+import type { CartItem as CartItemType } from "@/stores/cart.store"
+import { Link } from "@tanstack/react-router"
 
 import { Minus, Plus, X } from "lucide-react";
 import { Typography } from "../ui/Typography";
@@ -38,21 +39,28 @@ export function CartItem({ item }: Props) {
         >
           <X size={16} strokeWidth={1.5} />
         </button>
-        <div className="w-20 h-20 flex items-center justify-center">
-          <img 
-            src={item.image} 
-            alt={item.name} 
-            className="w-auto max-h-full object-contain" />
+
+          <Link
+            to="/$bookSlug"
+            params={{ bookSlug: item.slug }}
+            className="flex items-center gap-6 min-w-0"
+          >
+            <div className="w-20 h-20 flex items-center justify-center">
+              <img 
+                src={item.image} 
+                alt={item.name} 
+                className="w-auto max-h-full object-contain" />
+            </div>
+            <div className="w-32 sm:w-44 lg:w-84 min-w-0">
+              <Typography variant="h5" className="truncate">
+                {item.name}
+              </Typography>
+              <Typography variant="body" color="secondary">
+                {item.author}
+              </Typography>
+            </div>
+          </Link>
         </div>
-        <div className="w-32 sm:w-44 lg:w-84 min-w-0">
-          <Typography variant="h5" className="truncate">
-            {item.name}
-          </Typography>
-          <Typography variant="body" color="secondary">
-            {item.author}
-          </Typography>
-        </div>
-      </div>
 
       <div className="flex w-full items-center justify-between sm:justify-end sm:gap-6">
         <div className="flex items-center gap-3">

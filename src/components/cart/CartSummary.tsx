@@ -1,7 +1,7 @@
 import { Button } from '../ui/button';
 import { Typography } from '../ui/Typography';
 import { useTranslation } from 'react-i18next';
-import { useCartStore } from '@/components/cart/cart.store';
+import { useCartStore } from '@/stores/cart.store';
 
 export function CartSummary() {
   const { t } = useTranslation('cart');

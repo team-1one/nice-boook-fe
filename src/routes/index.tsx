@@ -57,7 +57,7 @@ function Index() {
   const { t } = useTranslation('nav');
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-14 xl:gap-22">
       <BannerSlider items={banners} />
       <BookSlider
         books={newBooks}
