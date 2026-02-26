@@ -7,9 +7,13 @@ import { pickRandom } from '@/lib/utils';
 import { Route as BookRoute } from '@/routes/$bookSlug';
 import { useLoaderData } from '@tanstack/react-router';
 import { useState } from 'react';
+import { BookSlider } from '@/components/organisms/Books/BookSlider';
+import phrases from '@/constants/phrases';
 
 const BookDetails = () => {
-  const { book, editions } = useLoaderData({ from: BookRoute.id });
+  const { book, editions, mightLikeBooks } = useLoaderData({
+    from: BookRoute.id,
+  });
   const [randomCategory] = useState(pickRandom(book.categories));
 
   const breadcrumbs: BreadcrumbLinkItem[] = [
@@ -47,6 +51,11 @@ const BookDetails = () => {
       </main>
 
       <BookContentSections book={book} />
+
+      <BookSlider
+        books={mightLikeBooks}
+        title={phrases.mightLike}
+      />
     </article>
   );
 };

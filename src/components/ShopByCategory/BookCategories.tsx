@@ -5,7 +5,7 @@ export const BookCategories = () => {
   const { bookTypeCounts } = getRouteApi('/').useLoaderData();
 
   return (
-    <section className="flex justify-center p-0">
+    <section className="mx-auto flex max-w-270 justify-center p-0">
       <div className="flex flex-col gap-4">
         <h2 className="font-sans text-3xl leading-10.25 font-bold tracking-[-0.01em]">
           Shop by Category
