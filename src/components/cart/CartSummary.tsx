@@ -1,12 +1,18 @@
 import { Button } from "../ui/button";
 import { Typography } from "../ui/Typography";
+import { useCartStore } from "@/components/cart/cart.store"
 
-type Props = {
-  total: number;
-  count: number;
-};
 
-export function CartSummary({ total, count }: Props) {
+export function CartSummary() {
+  const total = useCartStore((state) => state.totalPrice());
+  const count = useCartStore((state) => state.totalItems());
+  const clear = useCartStore((state) => state.clearCart);
+
+  const handleCheckout = () => {
+    clear()
+    alert("Order placed successfully!")
+  }
+
   return (
     <div className="p-8 border border-color-gray-secondary rounded-2xl bg-white">
       <div className="text-center mb-4">
@@ -18,7 +24,7 @@ export function CartSummary({ total, count }: Props) {
         </Typography>
       </div>
 
-      <Button className="w-full py-5">
+      <Button className="w-full py-5" onClick={handleCheckout}>
         Checkout
       </Button>
     </div>
