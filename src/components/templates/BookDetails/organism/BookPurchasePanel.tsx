@@ -9,13 +9,13 @@ import PurchaseButtons from '@/components/molecule/PurchaseButtons';
 type BookPurchasePanelProps = {
   book: Book;
   editions: Book[];
-  category: string;
+  categories: string[];
 };
 
 export function BookPurchasePanel({
   book,
   editions,
-  category,
+  categories,
 }: BookPurchasePanelProps) {
   const navigate = useNavigate();
   const summaryDetails = getSummaryDetails(book);
@@ -23,20 +23,28 @@ export function BookPurchasePanel({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-gray-secondary bg mb-1 text-sm">Category</p>
-        <Button
-          variant="outline"
-          className="px-3"
-          onClick={() =>
-            navigate({
-              to: '/category/$category',
-              params: { category },
-              search: { order: 'asc', page: 1, pageSize: 10, sortBy: 'newest' },
-            })
-          }
-        >
-          {category}
-        </Button>
+        <p className="text-gray-secondary bg mb-5 text-sm">Category</p>
+        {categories.map((ctg, i) => (
+          <Button
+            key={ctg + i}
+            variant="outline"
+            className="me-1.5 mb-3 px-3"
+            onClick={() =>
+              navigate({
+                to: '/category/$category',
+                params: { category: ctg },
+                search: {
+                  order: 'asc',
+                  page: 1,
+                  pageSize: 10,
+                  sortBy: 'newest',
+                },
+              })
+            }
+          >
+            {ctg}
+          </Button>
+        ))}
       </div>
 
       <Separator />
@@ -62,22 +70,19 @@ export function BookPurchasePanel({
       <Separator />
 
       <div className="flex items-baseline gap-4">
-        <span className="text-3xl font-bold text-black">
+        <span className="text-gray-primary text-3xl font-bold">
           &#x20b4;{book.price_discount ?? book.price_regular}
         </span>
         {book.price_discount && (
           <span className="text-gray-secondary text-xl line-through">
-            ${book.price_regular}
+            &#x20b4;{book.price_regular}
           </span>
         )}
       </div>
 
       <PurchaseButtons book={book} />
 
-      <DetailList
-        items={summaryDetails}
-        className="flex flex-col gap-2 text-sm"
-      />
+      <DetailList items={summaryDetails} />
     </div>
   );
 }

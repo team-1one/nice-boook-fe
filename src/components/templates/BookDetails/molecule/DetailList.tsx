@@ -1,23 +1,19 @@
-import { Separator } from '@/components/ui/separator';
 import type { DetailItem } from '../lib/types';
+import { Table, TableCell, TableRow } from '@/components/ui/table';
 
 interface DetailListProps {
   items: DetailItem[];
-  className?: string;
 }
 
-export function DetailList({ items, className }: DetailListProps) {
+export function DetailList({ items }: DetailListProps) {
   return (
-    <div className={className}>
+    <Table>
       {items.map(({ label, value }) => (
-        <div key={label}>
-          <div className="flex justify-between py-1 capitalize">
-            <span>{label}</span>
-            <span>{value}</span>
-          </div>
-          <Separator />
-        </div>
+        <TableRow key={`${label}:${value}`}>
+          <TableCell className="text-left">{label}</TableCell>
+          <TableCell className="text-right">{value}</TableCell>
+        </TableRow>
       ))}
-    </div>
+    </Table>
   );
 }
