@@ -10,7 +10,7 @@ import { footerLinks, footerHeight } from '@/constants';
 import { cn } from '@/lib/utils';
 
 const Footer = () => (
-  <footer className="w-full border-t">
+  <footer className="w-full border-t mt-8">
     {/* Desktop */}
     <NavigationMenu
       viewport={false}
