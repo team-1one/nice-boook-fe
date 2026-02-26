@@ -4,6 +4,7 @@ import { ButtonGroup } from '@/components/ui/button-group';
 import phrases from '@/constants/phrases';
 import type { Book } from '@/lib/schemas/book.schema';
 import { cn, withPreventDefault } from '@/lib/utils';
+import { useFavoriteBooksStore } from '@/stores/favorites.store';
 import { Heart } from 'lucide-react';
 
 interface Props {
@@ -27,6 +28,8 @@ const PurchaseButtons = ({ book }: Props) => {
     });
   };
 
+  const { isFavorite, toggleFavorite } = useFavoriteBooksStore();
+
   return (
     <ButtonGroup className="w-full">
       <ButtonGroup className="flex-1">
@@ -46,11 +49,11 @@ const PurchaseButtons = ({ book }: Props) => {
         <Button
           variant="outline"
           size="icon-xl"
-          // onClick={withPreventDefault(() => toggleStatus('isWishlisted'))}
+          onClick={withPreventDefault(() => toggleFavorite(book))}
         >
           <Heart
-          // fill={isWishlisted ? 'red' : 'none'}
-          // strokeWidth={isWishlisted ? 0 : 2}
+            fill={isFavorite(book.slug) ? 'red' : 'none'}
+            strokeWidth={isFavorite(book.slug) ? 0 : 2}
           />
         </Button>
       </ButtonGroup>

@@ -1,16 +1,10 @@
 import { CatalogGrid } from '@/components/catalog/CatalogGrid';
 import { Typography } from '@/components/ui/Typography';
-import type { Book } from '@/lib/schemas/book.schema';
+import { useFavoriteBooksStore } from '@/stores/favorites.store';
 
-interface FavoritesProps {
-  favoriteCount?: number;
-  favoriteBooks?: Book[];
-}
+const Favorites = () => {
+  const { favorites, totalFavorites } = useFavoriteBooksStore();
 
-const Favorites = ({
-  favoriteCount = 0,
-  favoriteBooks = [],
-}: FavoritesProps) => {
   return (
     <div className="mx-auto mt-8 mb-8 flex max-w-360 flex-col px-4 sm:mt-16 sm:mb-14 sm:px-6 lg:mb-16 lg:px-8 xl:mb-38 xl:px-38">
       <div className="mb-6">
@@ -24,10 +18,10 @@ const Favorites = ({
           variant="body"
           color="secondary"
         >
-          {favoriteCount} items
+          {totalFavorites} items
         </Typography>
       </div>
-      <CatalogGrid books={favoriteBooks} />
+      <CatalogGrid books={Object.values(favorites)} />
     </div>
   );
 };

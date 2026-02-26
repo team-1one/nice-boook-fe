@@ -1,6 +1,6 @@
 import { getBooks } from '@/api/supabase';
 import Favorites from '@/components/templates/Favorites/Favorites';
-import { createFileRoute, useLoaderData } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/favorites')({
   component: RouteComponent,
@@ -8,7 +8,5 @@ export const Route = createFileRoute('/favorites')({
 });
 
 function RouteComponent() {
-  //TODO: temp/delete
-  const newBooks = useLoaderData({ from: Route.id });
-  return <Favorites favoriteBooks={newBooks} />;
+  return <Favorites />;
 }
