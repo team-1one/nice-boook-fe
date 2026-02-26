@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useNavigate } from '@tanstack/react-router';
-import { Heart } from 'lucide-react';
 import type { Book } from '@/lib/schemas/book.schema';
 import { DetailList } from '../molecule/DetailList';
 import { getSummaryDetails } from '../lib/helpers';
+import PurchaseButtons from '@/components/molecule/PurchaseButtons';
 
 type BookPurchasePanelProps = {
   book: Book;
@@ -72,15 +72,7 @@ export function BookPurchasePanel({
         )}
       </div>
 
-      <div className="flex h-10 gap-2">
-        <Button className="h-full flex-1">Add to cart</Button>
-        <Button
-          className="aspect-square h-full"
-          variant="outline"
-        >
-          <Heart />
-        </Button>
-      </div>
+      <PurchaseButtons book={book} />
 
       <DetailList
         items={summaryDetails}
