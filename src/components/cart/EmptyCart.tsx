@@ -10,7 +10,7 @@ export function EmptyCart() {
       </Typography>
 
       <Typography variant="body" color="secondary">
-        Looks like you haven’t added any books yet.
+        Looks like you haven’t added any books yet
       </Typography>
 
       <Button asChild size="xl">

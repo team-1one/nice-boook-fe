@@ -72,7 +72,7 @@ export function CartItem({ item }: Props) {
             <Plus size={16} strokeWidth={1.5} />
           </button>
         </div>
-        <div className="text-right tabular-nums">
+        <div className="text-right tabular-nums min-w-[110px]">
           <Typography variant="h3">
             ₴ {(item.price * item.quantity).toFixed(2)}
           </Typography>
