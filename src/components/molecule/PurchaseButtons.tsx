@@ -6,6 +6,7 @@ import type { Book } from '@/lib/schemas/book.schema';
 import { cn, withPreventDefault } from '@/lib/utils';
 import { useFavoriteBooksStore } from '@/stores/favorites.store';
 import { Heart } from 'lucide-react';
+import { BadgeToCard } from '../organism/Navbar/molecule/cart-badge';
 
 interface Props {
   book: Book;
@@ -17,6 +18,8 @@ const PurchaseButtons = ({ book }: Props) => {
   const isInCart = items.some((item) => item.slug === book.slug);
 
   const cartButtonLabel = isInCart ? phrases.addedToCart : phrases.addToCart;
+
+  const cartItem = items.find((item) => item.slug === book.slug);
 
   const handleAddToCart = () => {
     addItem({
@@ -33,16 +36,21 @@ const PurchaseButtons = ({ book }: Props) => {
   return (
     <ButtonGroup className="w-full">
       <ButtonGroup className="flex-1">
-        <Button
-          variant={isInCart ? 'outline' : 'default'}
-          size="xl"
-          className={cn('w-full transition-all', {
-            'text-[#27AE60] hover:text-[#27AE60]/80': isInCart,
-          })}
-          onClick={withPreventDefault(handleAddToCart)}
-        >
-          {cartButtonLabel}
-        </Button>
+        <div className="relative w-full">
+          <Button
+            variant={isInCart ? 'outline' : 'default'}
+            size="xl"
+            className={cn('w-full transition-all', {
+              'text-[#27AE60] hover:text-[#27AE60]/80': isInCart,
+            })}
+            onClick={withPreventDefault(handleAddToCart)}
+          >
+            {cartButtonLabel}
+          </Button>
+          {cartItem && (
+            <BadgeToCard  count={cartItem.quantity} />
+          )}
+        </div>
       </ButtonGroup>
 
       <ButtonGroup>

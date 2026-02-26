@@ -1,5 +1,7 @@
+import { useNavigate } from "@tanstack/react-router"
 import { Button } from "../ui/button";
 import { Typography } from "../ui/Typography";
+import { toast } from "sonner"
 import { useCartStore } from "@/stores/cart.store"
 
 
@@ -8,9 +10,18 @@ export function CartSummary() {
   const count = useCartStore((state) => state.totalItems());
   const clear = useCartStore((state) => state.clearCart);
 
+  const navigate = useNavigate()
+
+
   const handleCheckout = () => {
     clear()
-    alert("Order placed successfully!")
+    toast("Order placed successfully", {
+    description: "Your cart has been cleared.",
+    action: {
+      label: "Go to home",
+      onClick: () => navigate({ to: "/" }),
+    },
+  })
   }
 
   return (
