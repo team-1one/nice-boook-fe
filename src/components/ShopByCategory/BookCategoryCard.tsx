@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import type { BookType } from '@/lib/schemas/book.schema';
 import { CatalogSearchSchema } from '@/lib/schemas/route.schema';
 import { Link } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 
 export type Props = {
   type: BookType;
@@ -10,6 +11,8 @@ export type Props = {
 };
 
 export const BookCategoryCard = ({ type, imageUrl, count }: Props) => {
+  const { t } = useTranslation('catalog');
+
   return (
     <Card className="overflow-hidden border pt-0 shadow-none transition-shadow hover:border hover:shadow-lg">
       <Link
@@ -26,10 +29,10 @@ export const BookCategoryCard = ({ type, imageUrl, count }: Props) => {
 
         <CardContent>
           <h3 className="text-color-gray-primary font-sans text-lg leading-[100%] font-semibold tracking-normal capitalize">
-            {type}
+            {t(`titles.${type}`)}
           </h3>
           <p className="text-color-gray-secondary text-muted-foreground mt-0.75 font-sans text-sm leading-5.25 font-medium tracking-normal">
-            {count.toLocaleString('en-US')} books
+            {t('totalBooks', { count })}
           </p>
         </CardContent>
       </Link>

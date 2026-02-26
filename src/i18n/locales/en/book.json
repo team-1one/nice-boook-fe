@@ -1,0 +1,24 @@
+{
+  "inStock": "In Stock",
+  "addToCart": "Add to cart",
+  "addedToCart": "Added",
+  "category": "Category",
+  "selectLanguage": "Select language",
+  "details": {
+    "author": "Author",
+    "narrator": "Narrator",
+    "listeningLength": "Listening Length",
+    "listeningLengthValue": "{{hours}} hours",
+    "publicationYear": "Year of Publication",
+    "publication": "Publication",
+    "language": "Language",
+    "coverType": "Cover Type",
+    "numberOfPages": "Number of Pages",
+    "format": "Format",
+    "illustrations": "Illustrations",
+    "yes": "Yes",
+    "no": "No",
+    "about": "About",
+    "characteristics": "Characteristics"
+  }
+}

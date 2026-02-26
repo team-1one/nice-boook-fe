@@ -10,6 +10,7 @@ import type { Developer } from '@/lib/schemas/contact.schema';
 import { Typography } from '@/components/ui/Typography';
 import { type ComponentProps, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 interface DeveloperCardProps {
   cardProps?: ComponentProps<typeof Card>;
@@ -64,6 +65,8 @@ function SocialLink({ href, icon: Icon, label, ariaLabel }: SocialLinkProps) {
 }
 
 export const DeveloperCard = ({ developer, cardProps }: DeveloperCardProps) => {
+  const { t } = useTranslation('contacts');
+
   const {
     name,
     surname,
@@ -128,7 +131,7 @@ export const DeveloperCard = ({ developer, cardProps }: DeveloperCardProps) => {
         >
           <AccordionItem value="contributions">
             <AccordionTrigger className="text-xs font-semibold tracking-wide uppercase hover:no-underline">
-              Contributions
+              {t('contributions')}
             </AccordionTrigger>
             <AccordionContent>
               {contributions.length === 0 ?
@@ -170,7 +173,7 @@ export const DeveloperCard = ({ developer, cardProps }: DeveloperCardProps) => {
             variant={'body'}
             className="text-muted-foreground text-sm"
           >
-            No links provided
+            {t('noLinks')}
           </Typography>
         }
       </CardFooter>

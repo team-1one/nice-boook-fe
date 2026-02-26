@@ -9,6 +9,7 @@ import {
 } from '../ui/select';
 import { CATALOG_LIMITS } from './constants/catalog';
 import { Typography } from '../ui/Typography';
+import { useTranslation } from 'react-i18next';
 
 export type Props = {
   value: string;
@@ -16,6 +17,8 @@ export type Props = {
 };
 
 export const ItemsOnPage = ({ value, onChange }: Props) => {
+  const { t } = useTranslation('catalog');
+
   return (
     <div className="relative w-33 opacity-100">
       <Field className="flex flex-col gap-0.75">
@@ -24,7 +27,7 @@ export const ItemsOnPage = ({ value, onChange }: Props) => {
             variant="small"
             color="secondary"
           >
-            Items on page
+            {t('itemsOnPage')}
           </Typography>
         </FieldLabel>
 
@@ -33,7 +36,7 @@ export const ItemsOnPage = ({ value, onChange }: Props) => {
           onValueChange={onChange}
         >
           <SelectTrigger id="items-on-page">
-            <SelectValue placeholder="Items on page" />
+            <SelectValue placeholder={t('itemsOnPage')} />
           </SelectTrigger>
 
           <SelectContent>

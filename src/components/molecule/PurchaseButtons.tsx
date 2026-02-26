@@ -1,22 +1,24 @@
 import { useCartStore } from '@/stores/cart.store';
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
-import phrases from '@/constants/phrases';
 import type { Book } from '@/lib/schemas/book.schema';
 import { cn, withPreventDefault } from '@/lib/utils';
 import { useFavoriteBooksStore } from '@/stores/favorites.store';
 import { Heart } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   book: Book;
 }
 
 const PurchaseButtons = ({ book }: Props) => {
+  const { t } = useTranslation('book');
+
   const addItem = useCartStore((state) => state.addItem);
   const items = useCartStore((state) => state.items);
   const isInCart = items.some((item) => item.slug === book.slug);
 
-  const cartButtonLabel = isInCart ? phrases.addedToCart : phrases.addToCart;
+  const cartButtonLabel = isInCart ? t('addedToCart') : t('addToCart');
 
   const handleAddToCart = () => {
     addItem({
