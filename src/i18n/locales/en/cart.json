@@ -2,5 +2,9 @@
   "title": "Cart",
   "totalFor": "Total for {{count}} items",
   "checkout": "Checkout",
-  "back": "Back"
+  "back": "Back",
+  "emptyTitle": "Your cart is empty",
+  "emptySubtitle": "Looks like you haven't added any books yet",
+  "continueShopping": "Continue shopping",
+  "orderSuccessTitle": "Order placed successfully"
 }

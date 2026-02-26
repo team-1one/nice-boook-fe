@@ -1,0 +1,7 @@
+{
+  "title": "Бажане",
+  "items_one": "{{count}} товар",
+  "items_few": "{{count}} товари",
+  "items_many": "{{count}} товарів",
+  "items_other": "{{count}} товарів"
+}

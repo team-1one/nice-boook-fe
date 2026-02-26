@@ -9,7 +9,6 @@ import type { Book } from '@/lib/schemas/book.schema';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
 import type { ComponentProps } from 'react';
-import phrases from '@/constants/phrases';
 import { Van } from 'lucide-react';
 import BookImage from './BookImage';
 
@@ -48,7 +47,7 @@ export const BookCard = ({ cardProps, book }: BookCardProps) => {
             <h3 className="font-semibold">{`₴${book.price_discount ?? book.price_regular}`}</h3>
             {book.price_discount && (
               <h4 className="text-muted-foreground text-sm line-through">
-                ₴ {book.price_regular}`
+                ₴{book.price_regular}
               </h4>
             )}
           </div>
