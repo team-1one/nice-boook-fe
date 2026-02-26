@@ -12,13 +12,9 @@ import type { ComponentProps } from 'react';
 import phrases from '@/constants/phrases';
 import { Heart, Van } from 'lucide-react';
 import BookImage from './BookImage';
-import { useState } from 'react';
 import type { Book } from '@/lib/schemas/book.schema';
+import { useCartStore } from '@/components/cart/cart.store'
 
-interface BookCardState {
-  isInCart: boolean;
-  isWishlisted: boolean;
-}
 
 interface BookCardProps {
   cardProps?: ComponentProps<typeof Card>;
@@ -29,17 +25,22 @@ interface BookCardProps {
 // TODO: Remove hardcoded colors, sizes etc. from classnames
 
 export const BookCard = ({ cardProps, book }: BookCardProps) => {
-  // TODO: use global state management for cart and wishlist status instead of local state in component
-  const [{ isInCart, isWishlisted }, setState] = useState<BookCardState>({
-    isInCart: false,
-    isWishlisted: false,
-  });
+  const addItem = useCartStore((state) => state.addItem)
+  const items = useCartStore((state) => state.items)
 
-  const toggleStatus = (statusKey: keyof BookCardState) => {
-    setState((prev) => ({ ...prev, [statusKey]: !prev[statusKey] }));
-  };
+  const isInCart = items.some((item) => item.slug === book.slug)
 
   const cartButtonLabel = isInCart ? phrases.addedToCart : phrases.addToCart;
+
+  const handleAddToCart = () => {
+  addItem({
+    slug: book.slug,
+    name: book.name,
+    author: book.author,
+    price: book.price_discount ?? book.price_regular,
+    image: book.images[0],
+  });
+};
 
   return (
     <Link
@@ -79,7 +80,7 @@ export const BookCard = ({ cardProps, book }: BookCardProps) => {
                 className={cn('w-full transition-all', {
                   'text-[#27AE60] hover:text-[#27AE60]/80': isInCart,
                 })}
-                onClick={withPreventDefault(() => toggleStatus('isInCart'))}
+                onClick={withPreventDefault(handleAddToCart)}
               >
                 {cartButtonLabel}
               </Button>
@@ -89,11 +90,11 @@ export const BookCard = ({ cardProps, book }: BookCardProps) => {
               <Button
                 variant="outline"
                 size="icon-xl"
-                onClick={withPreventDefault(() => toggleStatus('isWishlisted'))}
+                // onClick={withPreventDefault(() => toggleStatus('isWishlisted'))}
               >
                 <Heart
-                  fill={isWishlisted ? 'red' : 'none'}
-                  strokeWidth={isWishlisted ? 0 : 2}
+                  // fill={isWishlisted ? 'red' : 'none'}
+                  // strokeWidth={isWishlisted ? 0 : 2}
                 />
               </Button>
             </ButtonGroup>
