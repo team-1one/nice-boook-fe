@@ -1,5 +1,6 @@
 import { getRouteApi } from '@tanstack/react-router';
 import { BookCategoryCard } from './BookCategoryCard';
+import { Typography } from '../ui/Typography';
 
 export const BookCategories = () => {
   const { bookTypeCounts } = getRouteApi('/').useLoaderData();
@@ -7,9 +8,9 @@ export const BookCategories = () => {
   return (
     <section className="mx-auto flex max-w-270 justify-center p-0">
       <div className="flex flex-col gap-4">
-        <h2 className="font-sans text-3xl leading-10.25 font-bold tracking-[-0.01em]">
+        <Typography variant="h2" className="mb-6">
           Shop by Category
-        </h2>
+        </Typography>
         <div className="flex flex-col gap-3.75 sm:flex-row">
           {bookTypeCounts.map(({ name, count, imgUrl }) => (
             <BookCategoryCard
