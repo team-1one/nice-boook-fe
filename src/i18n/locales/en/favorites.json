@@ -1,0 +1,5 @@
+{
+  "title": "Favorites",
+  "items_one": "{{count}} item",
+  "items_other": "{{count}} items"
+}

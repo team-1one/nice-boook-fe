@@ -1,0 +1,15 @@
+{
+  "backToTop": "Back to top",
+  "searchPlaceholder": "Find a book or author",
+  "categories": "Categories",
+  "newBooks": "New books",
+  "mightLike": "You might like",
+  "links": {
+    "Home": "Home",
+    "Rights": "Rights & Legal",
+    "Contacts": "Contacts",
+    "audiobook": "Audiobook",
+    "kindle": "Kindle",
+    "paperback": "Paperback"
+  }
+}

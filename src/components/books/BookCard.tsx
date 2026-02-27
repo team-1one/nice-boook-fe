@@ -4,13 +4,13 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
+import PurchaseButtons from '@/components/molecule/PurchaseButtons';
+import type { Book } from '@/lib/schemas/book.schema';
+import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
 import type { ComponentProps } from 'react';
-import phrases from '@/constants/phrases';
 import { Van } from 'lucide-react';
 import BookImage from './BookImage';
-import type { Book } from '@/lib/schemas/book.schema';
-import PurchaseButtons from '@/components/molecule/PurchaseButtons';
 
 interface BookCardProps {
   cardProps?: ComponentProps<typeof Card>;
@@ -21,6 +21,8 @@ interface BookCardProps {
 // TODO: Remove hardcoded colors, sizes etc. from classnames
 
 export const BookCard = ({ cardProps, book }: BookCardProps) => {
+  const { t } = useTranslation('book');
+
   return (
     <Link
       to="/$bookSlug"
@@ -45,7 +47,7 @@ export const BookCard = ({ cardProps, book }: BookCardProps) => {
             <h3 className="font-semibold">{`₴${book.price_discount ?? book.price_regular}`}</h3>
             {book.price_discount && (
               <h4 className="text-muted-foreground text-sm line-through">
-                ₴ {book.price_regular}`
+                ₴{book.price_regular}
               </h4>
             )}
           </div>
@@ -53,7 +55,7 @@ export const BookCard = ({ cardProps, book }: BookCardProps) => {
           <div className="flex items-center gap-1">
             <Van color="#27AE60" />
             <span className="text-sm font-bold text-[#27AE60]">
-              {phrases.inStock}
+              {t('inStock')}
             </span>
           </div>
         </CardContent>

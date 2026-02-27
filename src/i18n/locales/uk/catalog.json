@@ -1,0 +1,23 @@
+{
+  "noBooksFound": "Книжок не знайдено",
+  "sortBy": "Сортувати за",
+  "sortOptions": {
+    "newest": "Новинки",
+    "oldest": "Старі",
+    "priceAsc": "Ціна (за зростанням)",
+    "priceDesc": "Ціна (за спаданням)",
+    "titleAsc": "Назва (A-Z)",
+    "titleDesc": "Назва (Z-A)"
+  },
+  "itemsOnPage": "Товарів на сторінці",
+  "shopByCategory": "Покупки за категорією",
+  "totalBooks_one": "{{count}} книга",
+  "totalBooks_few": "{{count}} книги",
+  "totalBooks_many": "{{count}} книг",
+  "totalBooks_other": "{{count}} книг",
+  "titles": {
+    "audiobook": "Аудіокниги",
+    "kindle": "Ebook",
+    "paperback": "Паперові книги"
+  }
+}
