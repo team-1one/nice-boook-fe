@@ -23,15 +23,28 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
+        // vite.config.ts
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
 
-          if (id.includes('@tanstack')) return 'tanstack';
-          if (id.includes('@supabase')) return 'supabase';
-          if (id.includes('zod')) return 'zod';
-          if (id.includes('radix-ui') || id.includes('@radix-ui'))
-            return 'radix';
-          if (id.includes('lucide-react')) return 'icons';
+          // 1. Isolate Devtools into their own chunk so they never touch production logic
+          if (id.includes('devtools') || id.includes('solid-js')) {
+            return 'devtools';
+          }
+
+          // 2. Group UI Framework together
+          if (
+            id.includes('radix-ui') ||
+            id.includes('@radix-ui') ||
+            id.includes('cmdk')
+          ) {
+            return 'ui';
+          }
+
+          // 3. Keep Tanstack (Query/Router) core separate from UI
+          if (id.includes('@tanstack')) {
+            return 'tanstack';
+          }
 
           return 'vendor';
         },

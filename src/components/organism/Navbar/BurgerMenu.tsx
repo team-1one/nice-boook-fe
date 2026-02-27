@@ -90,7 +90,7 @@ const BurgerMenu = ({ sortedCategories }: Props) => {
             <MobileNavLinks onNavigate={closeMobileMenu} />
 
             <div className="mt-8 space-y-3">
-              <SearchInputControl />
+              <SearchInputControl onNavigate={closeMobileMenu} />
               <CategoriesDropdown
                 categories={sortedCategories}
                 onClick={closeMobileMenu}
