@@ -26,13 +26,21 @@ export default defineConfig({
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
 
+          // Group Core Framework & UI together to avoid cross-chunk circularity
+          if (
+            id.includes('radix-ui') ||
+            id.includes('@radix-ui') ||
+            id.includes('cmdk') ||
+            id.includes('lucide-react')
+          ) {
+            return 'ui-framework';
+          }
+
+          // Keep data/logic separate
           if (id.includes('@tanstack')) return 'tanstack';
           if (id.includes('@supabase')) return 'supabase';
-          if (id.includes('zod')) return 'zod';
-          if (id.includes('radix-ui') || id.includes('@radix-ui'))
-            return 'radix';
-          if (id.includes('lucide-react')) return 'icons';
 
+          // Everything else (zod, etc.) into vendor
           return 'vendor';
         },
       },

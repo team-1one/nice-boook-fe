@@ -331,10 +331,7 @@ export const fetchBookSearchResults = async (
   const { data, error } = await supabase
     .from(TABLES.booksFlat)
     .select('*')
-    .textSearch('search_book', query, {
-      type: 'websearch',
-      config: 'english',
-    })
+    .or(`name.ilike.%${query}%,author.ilike.%${query}%`)
     .limit(10);
 
   if (error) {
