@@ -155,6 +155,7 @@ export type Database = {
           price_regular: number
           publication: string | null
           publication_year: number | null
+          search_book: unknown
           slug: string
           source_id: string | null
           type: Database["public"]["Enums"]["book_type"]
@@ -175,6 +176,7 @@ export type Database = {
           price_regular: number
           publication?: string | null
           publication_year?: number | null
+          search_book?: unknown
           slug: string
           source_id?: string | null
           type: Database["public"]["Enums"]["book_type"]
@@ -195,6 +197,7 @@ export type Database = {
           price_regular?: number
           publication?: string | null
           publication_year?: number | null
+          search_book?: unknown
           slug?: string
           source_id?: string | null
           type?: Database["public"]["Enums"]["book_type"]
@@ -334,6 +337,7 @@ export type Database = {
           price_regular: number | null
           publication: string | null
           publication_year: number | null
+          search_book: unknown
           slug: string | null
           source_id: string | null
           type: Database["public"]["Enums"]["book_type"] | null
@@ -367,6 +371,7 @@ export type Database = {
           price_regular: number | null
           publication: string | null
           publication_year: number | null
+          search_book: unknown
           slug: string | null
           source_id: string | null
           type: Database["public"]["Enums"]["book_type"] | null

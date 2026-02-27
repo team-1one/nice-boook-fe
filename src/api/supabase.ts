@@ -324,3 +324,37 @@ export const fetchContacts = async (): Promise<Developer[]> => {
 
   return parsed.data;
 };
+
+export const fetchBookSearchResults = async (
+  query: string,
+): Promise<Book[]> => {
+  const { data, error } = await supabase
+    .from(TABLES.booksFlat)
+    .select('*')
+    .or(`name.ilike.%${query}%,author.ilike.%${query}%`)
+    .limit(10);
+
+  if (error) {
+    throw new AppError(
+      'fetchBookSearchResults',
+      'Failed to search books. Please try again.',
+      error,
+    );
+  }
+
+  const {
+    data: parsedData,
+    success,
+    error: parsedErr,
+  } = await z.array(BookSchema).safeParseAsync(data);
+
+  if (!success) {
+    throw new AppError(
+      'fetchBookSearchResults.parse',
+      'Failed to process book data. Please try again.',
+      new Error(parsedErr.message),
+    );
+  }
+
+  return parsedData;
+};

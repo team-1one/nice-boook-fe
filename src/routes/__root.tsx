@@ -3,7 +3,7 @@ import { Footer } from '@/components/organism/Footer';
 import { Navbar } from '@/components/organism/Navbar';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { Suspense, lazy } from 'react';
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from '@/components/ui/sonner';
 
 const TanStackRouterDevtools =
   import.meta.env.DEV ?
@@ -21,9 +21,7 @@ const RootLayout = () => (
       <Outlet />
     </main>
     <Footer />
-    <Toaster 
-      position="top-center"
-    />
+    <Toaster position="top-center" />
     <Suspense fallback={null}>
       <TanStackRouterDevtools />
     </Suspense>
