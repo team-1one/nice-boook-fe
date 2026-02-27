@@ -16,6 +16,8 @@ export const badgeVariants = cva(
         link: "text-primary underline-offset-4 [a&]:hover:underline",
         cart:
           "bg-red text-white text-[9px] font-semibold leading-none",
+        counter:
+          "bg-green text-white text-[10px] font-semibold leading-none",
       },
     },
     defaultVariants: {
