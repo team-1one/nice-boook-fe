@@ -8,9 +8,11 @@ import { Route as BookRoute } from '@/routes/$bookSlug';
 import { useLoaderData } from '@tanstack/react-router';
 import { useState } from 'react';
 import { BookSlider } from '@/components/organisms/Books/BookSlider';
-import phrases from '@/constants/phrases';
+import { useTranslation } from 'react-i18next';
 
 const BookDetails = () => {
+  const { t } = useTranslation('nav');
+
   const { book, editions, mightLikeBooks } = useLoaderData({
     from: BookRoute.id,
   });
@@ -54,7 +56,7 @@ const BookDetails = () => {
 
       <BookSlider
         books={mightLikeBooks}
-        title={phrases.mightLike}
+        title={t('mightLike')}
       />
     </article>
   );

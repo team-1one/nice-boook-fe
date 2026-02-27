@@ -2,6 +2,7 @@ import { DeveloperCard } from '@/components/organism/Contact/DeveloperCard';
 import { createFileRoute } from '@tanstack/react-router';
 import { Typography } from '@/components/ui/Typography';
 import { fetchContacts } from '@/api/supabase';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/contacts')({
   component: RouteComponent,
@@ -15,6 +16,8 @@ export const Route = createFileRoute('/contacts')({
 });
 
 function RouteComponent() {
+  const { t } = useTranslation('contacts');
+
   const { contacts } = Route.useLoaderData();
 
   return (
@@ -24,13 +27,13 @@ function RouteComponent() {
           variant={'h1'}
           className="text-3xl font-bold"
         >
-          Meet the Team
+          {t('title')}
         </Typography>
         <Typography
           variant={'body'}
           className="text-muted-foreground mt-2 text-base"
         >
-          The people who built this project
+          {t('description')}
         </Typography>
       </div>
 

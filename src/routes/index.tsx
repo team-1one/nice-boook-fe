@@ -4,7 +4,7 @@ import { createFileRoute, getRouteApi } from '@tanstack/react-router';
 import { fetchBookCount, getBanners, getBooks } from '@/api/supabase';
 import { BookSlider } from '@/components/organisms/Books/BookSlider';
 import { BookTypeSchema } from '@/lib/schemas/book.schema';
-import phrases from '@/constants/phrases';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -54,17 +54,19 @@ function Index() {
   const { newBooks, banners, mightLikeBooks } =
     getRouteApi('/').useLoaderData();
 
+  const { t } = useTranslation('nav');
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-14 xl:gap-22">
       <BannerSlider items={banners} />
       <BookSlider
         books={newBooks}
-        title={phrases.newBooks}
+        title={t('newBooks')}
       />
       <BookCategories />
       <BookSlider
         books={mightLikeBooks}
-        title={phrases.mightLike}
+        title={t('mightLike')}
       />
     </div>
   );

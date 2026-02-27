@@ -4,6 +4,7 @@ import { useNavigate } from '@tanstack/react-router';
 import type { Book } from '@/lib/schemas/book.schema';
 import { DetailList } from '../molecule/DetailList';
 import { getSummaryDetails } from '../lib/helpers';
+import { useTranslation } from 'react-i18next';
 import PurchaseButtons from '@/components/molecule/PurchaseButtons';
 
 type BookPurchasePanelProps = {
@@ -18,12 +19,14 @@ export function BookPurchasePanel({
   categories,
 }: BookPurchasePanelProps) {
   const navigate = useNavigate();
-  const summaryDetails = getSummaryDetails(book);
+  const { t } = useTranslation('book');
+
+  const summaryDetails = getSummaryDetails(book, t);
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-gray-secondary bg mb-5 text-sm">Category</p>
+        <p className="text-gray-secondary bg mb-5 text-sm">{t('category')}</p>
         {categories.map((ctg, i) => (
           <Button
             key={ctg + i}
@@ -50,7 +53,9 @@ export function BookPurchasePanel({
       <Separator />
 
       <div>
-        <p className="text-gray-secondary mb-2 text-sm">Select language</p>
+        <p className="text-gray-secondary mb-2 text-sm">
+          {t('selectLanguage')}
+        </p>
         <div className="flex gap-2">
           {editions.map(({ lang, slug }) => (
             <Button

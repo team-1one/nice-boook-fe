@@ -1,0 +1,24 @@
+{
+  "inStock": "В наявності",
+  "addToCart": "В кошик",
+  "addedToCart": "Додано",
+  "category": "Категорія",
+  "selectLanguage": "Оберіть мову",
+  "details": {
+    "author": "Автор",
+    "narrator": "Оповідач",
+    "listeningLength": "Тривалість прослуховування",
+    "listeningLengthValue": "{{hours}} годин",
+    "publicationYear": "Рік видання",
+    "publication": "Видавництво",
+    "language": "Мова",
+    "coverType": "Тип обкладинки",
+    "numberOfPages": "Кількість сторінок",
+    "format": "Формат",
+    "illustrations": "Ілюстрації",
+    "yes": "Так",
+    "no": "Ні",
+    "about": "Про книгу",
+    "characteristics": "Характеристики"
+  }
+}

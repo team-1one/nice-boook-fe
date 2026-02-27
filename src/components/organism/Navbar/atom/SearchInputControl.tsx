@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/command';
 import { useNavigate } from '@tanstack/react-router';
 import { Typography } from '@/components/ui/Typography';
+import { useTranslation } from 'react-i18next';
 
 interface SearchInputControlProps {
   className?: string;
@@ -31,6 +32,8 @@ const SearchInputControl = ({
   className,
   onNavigate,
 }: SearchInputControlProps) => {
+  const { t } = useTranslation('nav');
+
   const [input, setInput] = useState('');
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -70,7 +73,7 @@ const SearchInputControl = ({
           </InputGroupAddon>
           <InputGroupInput
             type="search"
-            placeholder="Find a book or author"
+            placeholder={t('searchPlaceholder')}
             value={input}
             onChange={handleSearchChange}
           />

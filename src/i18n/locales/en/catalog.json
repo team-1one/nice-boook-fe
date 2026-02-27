@@ -1,0 +1,21 @@
+{
+  "noBooksFound": "No books found",
+  "sortBy": "Sort by",
+  "sortOptions": {
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "priceAsc": "Price (Low to High)",
+    "priceDesc": "Price (High to Low)",
+    "titleAsc": "Title (A-Z)",
+    "titleDesc": "Title (Z-A)"
+  },
+  "itemsOnPage": "Items on page",
+  "shopByCategory": "Shop by Category",
+  "totalBooks_one": "{{count}} book",
+  "totalBooks_other": "{{count}} books",
+  "titles": {
+    "audiobook": "Audiobooks",
+    "kindle": "Kindle books",
+    "paperback": "Paper books"
+  }
+}

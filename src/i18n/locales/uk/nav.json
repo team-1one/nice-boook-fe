@@ -1,0 +1,15 @@
+{
+  "backToTop": "Повернутися вгору",
+  "searchPlaceholder": "Знайти книжку або автора",
+  "categories": "Категорії",
+  "newBooks": "Нові книги",
+  "mightLike": "Можливо вам сподобається",
+  "links": {
+    "Home": "Головна",
+    "Rights": "Права та юридична інформація",
+    "Contacts": "Контакти",
+    "audiobook": "Аудіокниги",
+    "kindle": "Ebook",
+    "paperback": "Паперова книга"
+  }
+}

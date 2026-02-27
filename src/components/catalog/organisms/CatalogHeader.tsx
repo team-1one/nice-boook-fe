@@ -1,6 +1,7 @@
 import { CatalogFilters } from '@/components/catalog/molecules/CatalogFilters';
 import { Typography } from '@/components/ui/Typography';
 import type { SortSearchKey } from '@/types/search';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   title: string;
@@ -19,6 +20,8 @@ export function CatalogHeader({
   onSortChange,
   onItemsPerPageChange,
 }: Props) {
+  const { t } = useTranslation('catalog');
+
   return (
     <section className="mt-8 mb-6 sm:mt-16">
       <Typography
@@ -33,7 +36,7 @@ export function CatalogHeader({
         color="secondary"
         className="mb-10"
       >
-        {total} books
+        {t('totalBooks', { count: total })}
       </Typography>
 
       <CatalogFilters
